@@ -10,9 +10,13 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
+
+  ::selection {
+    background: variables.$color-highlight;
+  }
 }
 
 body {
-  margin: 2rem 15rem;
+  margin: 2rem 16rem;
   background: variables.$color-background;
 }
