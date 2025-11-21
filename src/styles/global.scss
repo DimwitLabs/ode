@@ -15,6 +15,13 @@
     text-shadow: 0.0025em 0 currentColor, 0 0.0025em currentColor, 0 -0.0025em currentColor, -0.0025em 0 currentColor;
   }
 
+  blockquote {
+    margin-left: 2rem;
+    border-left: 0.15rem solid variables.$color-grey;
+    padding-left: 1rem;
+    color: variables.$color-grey;
+  }
+
   ::selection {
     background: variables.$color-highlight;
   }
