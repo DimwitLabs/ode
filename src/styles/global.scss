@@ -7,9 +7,13 @@
   color: variables.$color-text;
   text-transform: lowercase;
   font-family: 'IM Fell DW Pica', serif;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 1.5;
+  text-align: justify;
+  text-align-last: left;
+
+  strong {
+    text-shadow: 0.0025em 0 currentColor, 0 0.0025em currentColor, 0 -0.0025em currentColor, -0.0025em 0 currentColor;
+  }
 
   ::selection {
     background: variables.$color-highlight;

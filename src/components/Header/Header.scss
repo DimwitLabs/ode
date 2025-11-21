@@ -1,11 +1,8 @@
 @use "../../styles/variables";
 
-header .site-title {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
 header {
+  margin-bottom: 2rem;
+  
   .site-title {
     font-size: 2.5rem;
     margin: 0;

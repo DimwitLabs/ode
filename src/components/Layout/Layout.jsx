@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+
 import { loadConfig } from "../../utils/loadConfig";
-import Header from "../Header/Header";
 import { makeAppTitle } from "../../utils/makeAppTitle";
+
+import Header from "../Header/Header";
+import FirstSection from "../FirstSection/FirstSection";
 
 function Layout() {
   const [config, setConfig] = useState(null);
@@ -26,7 +29,7 @@ function Layout() {
   }
 
   if (!config) {
-    return <div style={{ padding: "1rem" }}>Loading…</div>;
+    return <div></div>;
   }
 
   const { site } = config;
@@ -34,6 +37,7 @@ function Layout() {
   return (
     <div>
       <Header site={site} />
+      <FirstSection site={site} />
     </div>
   );
 }
