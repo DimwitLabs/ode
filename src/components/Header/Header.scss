@@ -1,0 +1,26 @@
+@use "../../styles/variables";
+
+header .site-title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+header {
+  .site-title {
+    font-size: 2.5rem;
+    margin: 0;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.25rem;
+    }
+  }
+
+  .site-author {
+    color: variables.$color-primary;
+    margin: 0
+  }
+}

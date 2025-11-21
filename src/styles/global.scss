@@ -1,0 +1,18 @@
+@use "variables";
+@use "breakpoints";
+@use "mixins";
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap');
+
+* {
+  color: variables.$color-text;
+  text-transform: lowercase;
+  font-family: 'IM Fell DW Pica', serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  margin: 2rem 15rem;
+  background: variables.$color-background;
+}
