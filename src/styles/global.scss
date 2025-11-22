@@ -7,6 +7,14 @@ body {
   margin: 2rem 16rem;
   @include mixins.theme(light);
 
+  @include mixins.respond-to-max(md) {
+    margin: 1rem 2rem;
+  }
+
+  @include mixins.respond-to-max(sm) {
+    margin: 1rem 1.5rem;
+  }
+
   * {
     color: var(--color-text, variables.$color-text);
     text-transform: lowercase;
@@ -58,5 +66,16 @@ body {
         background: variables.$color-highlight-dark;
       }
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

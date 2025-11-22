@@ -1,9 +1,10 @@
 @use "breakpoints";
 @use "variables";
+@use "sass:map";
 
 @mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+  @if map.has-key(breakpoints.$breakpoints, $breakpoint) {
+    @media (min-width: map.get(breakpoints.$breakpoints, $breakpoint)) {
       @content;
     }
   } @else {
@@ -12,8 +13,8 @@
 }
 
 @mixin respond-to-max($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (max-width: map-get($breakpoints, $breakpoint) - 1px) {
+  @if map.has-key(breakpoints.$breakpoints, $breakpoint) {
+    @media (max-width: calc(#{map.get(breakpoints.$breakpoints, $breakpoint)} - 1px)) {
       @content;
     }
   } @else {

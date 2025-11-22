@@ -1,4 +1,11 @@
+@use "../../styles/mixins";
+
 div.first-section {
   display: flex;
   gap: 2rem;
+
+  @include mixins.respond-to-max(md) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }

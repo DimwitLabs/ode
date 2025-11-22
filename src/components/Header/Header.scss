@@ -1,10 +1,11 @@
+
 @use "../../styles/variables";
 @use "../../styles/mixins";
 
 header.header-bar {
   margin-bottom: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   position: relative;
 
@@ -17,6 +18,14 @@ header.header-bar {
     font-size: 2.5rem;
     margin: 0;
     text-decoration: none;
+
+    @include mixins.respond-to-max(md) {
+      font-size: 2rem;
+    }
+
+    @include mixins.respond-to-max(sm) {
+      font-size: 1.75rem;
+    }
 
     &:hover,
     &:focus {
@@ -35,24 +44,5 @@ header.header-bar {
     display: flex;
     align-items: center;
     gap: 1rem;
-  }
-
-  .dark-toggle-btn {
-    background: none;
-    border: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    text-transform: lowercase;
-    padding: 0.25em 0.75em;
-    border-radius: 0.25em;
-    transition: background 0.2s;
-    outline: none;
-  }
-
-  .dark-toggle-btn:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 0.05rem;
-    text-underline-offset: 0.5rem;
   }
 }
