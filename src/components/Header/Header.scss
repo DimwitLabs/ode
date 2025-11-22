@@ -13,8 +13,8 @@ header.header-bar {
     flex-direction: column;
   }
 
+
   .site-title {
-    margin: 0;
     text-decoration: none;
 
     @include mixins.respond-to-max(md) {
@@ -35,6 +35,10 @@ header.header-bar {
 
   .site-title.large {
     font-size: 2.5rem;
+  }
+
+  .site-title.medium {
+    font-size: 2rem;
   }
 
   .site-title.small {

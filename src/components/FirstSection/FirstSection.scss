@@ -6,6 +6,10 @@ div.first-section {
   align-items: flex-start;
   margin-top: 3rem;
 
+  @include mixins.respond-to-max(sm) {
+    margin-top: unset;
+  }
+
   @include mixins.respond-to-max(md) {
     flex-direction: column;
     gap: 1.5rem;
@@ -14,10 +18,18 @@ div.first-section {
 
 div.sidebar {
   flex: 1.5;
+  min-width: 14rem;
+  max-width: 20rem;
   margin-top: 0.5rem;
+
+  @include mixins.respond-to-max(sm) {
+    margin-top: unset;
+  }
 
   @include mixins.respond-to-max(md) {
     flex: none;
+    min-width: 0;
+    max-width: 100%;
   }
 
   > p {

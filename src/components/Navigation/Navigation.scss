@@ -7,6 +7,15 @@ nav {
   gap: 0.5rem;
   margin-bottom: 2rem;
 
+  @include mixins.respond-to-max(sm) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   a {
     color: variables.$color-primary;
     text-decoration: none;

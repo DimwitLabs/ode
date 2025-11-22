@@ -60,14 +60,14 @@ function HomepageViewer({ siteTitle }) {
     </>;
   }
 
-  return <>
+  return <div className="homepage-viewer">
     <article>
       {pageContent.frontmatter?.title && (
         <h2>{pageContent.frontmatter.title}</h2>
       )}
       <ReactMarkdown>{pageContent.content}</ReactMarkdown>
     </article>
-  </>;
+  </div>;
 }
 
 export default HomepageViewer;

@@ -28,12 +28,19 @@ body {
     }
 
     blockquote {
-      margin: 4rem;
-      margin-left: 2rem;
+      margin: 3rem auto;
+      margin-left: auto;
+      margin-right: auto;
       border-left: 0.15rem solid var(--color-grey);
       padding-left: 1rem;
       color: var(--color-grey);
-      width: 37.5rem;
+      max-width: 40rem;
+      @include mixins.respond-to-max(sm) {
+        margin: 1.5rem 0;
+        padding-left: 0.75rem;
+        max-width: 100%;
+        font-size: 1rem;
+      }
     }
 
     hr {

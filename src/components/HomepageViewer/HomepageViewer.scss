@@ -1,9 +1,24 @@
 @use "../../styles/variables";
 @use "../../styles/mixins";
 
+
+.homepage-viewer {
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  padding: 0 1rem;
+
+  @include mixins.respond-to-max(sm) {
+    max-width: 100vw;
+    padding: 0;
+  }
+}
+
 article {
   flex: 5;
   font-size: 1.1rem;
+  max-width: 100%;
+  box-sizing: border-box;
 
   h2 {
     margin-top: 0;
