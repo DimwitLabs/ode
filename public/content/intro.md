@@ -1,3 +1,1 @@
-**An Ode To Oddysseys** is a small tribute to the stories behind stories—the quiet threads that weave themselves into every journey. Think of this as a prelude to wanderings you haven’t taken yet, a place where the narrator pauses long enough to admit that even the simplest tale can turn into a history-altering odyssey.
-
-These chronicles don’t claim to be grand; they simply ensure that every detour, misstep, or unexpected turn carries its own echo through time. If oddysseys are known to change the course of history, consider _this_ your invitation to step into one—or at least read about how they begin.
+**This is an ode.** An ode to those who love the craft, an ode to the old internet, an ode to a time before numbers and figures dominated writing, an ode to a time where readers remembered their favourite writers, and an ode to the hope that all of it is still present, somewhere.

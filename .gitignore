@@ -24,7 +24,5 @@ dist-ssr
 *.sw?
 
 # Content and generated files
-public/content/pages/*.md
-public/content/pieces/*.md
 public/index/*json
 

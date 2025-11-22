@@ -1,0 +1,18 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.site-tagline {
+  border-top: 1px solid variables.$color-grey-2;
+  color: variables.$color-secondary;
+  padding-top: 1rem;
+  font-size: 0.75rem;
+  float: right;
+  width: 70%;
+
+  @include mixins.theme(light);
+  .dark & {
+    @include mixins.theme(dark);
+    border-top: 1px solid variables.$color-grey-2-dark;
+    color: variables.$color-secondary-dark;
+  }
+}

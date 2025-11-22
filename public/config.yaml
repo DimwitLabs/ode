@@ -1,11 +1,10 @@
 site:
-  title: "An Ode To Oddysseys"
-  author: "Herodotus"
-  tagline: "Chronicles of a lost time."
-  footer: "Oddysseys have been known to change the course of history."
+  title: "Ode to the Ordinary"
+  author: "John Doe"
+  tagline: "Beauty, memory, and wonder."
 exclude:
   pages:
     - skipped-page.md
     - obscured.md
   pieces:
-    - 
+    -
