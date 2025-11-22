@@ -26,6 +26,5 @@ dist-ssr
 # Content and generated files
 public/content/pages/*.md
 public/content/pieces/*.md
-public/content/pieces.json
-public/content/collections.json
+public/content/*.json
 

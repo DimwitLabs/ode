@@ -5,6 +5,7 @@ import fm from "front-matter";
 const piecesPath = './public/content/pieces/';
 const indexPath = './public/content/pieces.json';
 const collectionsPath = './public/content/collections.json';
+const errorsPath = './public/content/errors.json';
 
 type Piece = {
   slug: string;
@@ -19,6 +20,12 @@ type Collection = {
   pieces: string[];
 };
 
+type FrontMatter = {
+  title?: string;
+  date?: string | Date;
+  categories?: string[];
+};
+
 const files = fs.readdirSync(piecesPath);
 if (files.length === 0) {
   console.log('No files found in the pieces directory.');
@@ -26,6 +33,7 @@ if (files.length === 0) {
 }
 
 const index: Piece[] = [];
+const errors: string[] = [];
 
 files.forEach(file => {
   const filePath = path.join(piecesPath, file);
@@ -33,12 +41,49 @@ files.forEach(file => {
   if (stats.isFile()) {
     console.log(`Indexing: ${file}, Size: ${stats.size} bytes`);
     const raw = fs.readFileSync(filePath, 'utf-8');
-    const parsed = fm<{ title?: string; date?: string; categories?: string[] }>(raw);
+    const parsed = fm<FrontMatter>(raw);
+    
+    const { title, date, categories } = parsed.attributes;
+    const slug = path.basename(file, path.extname(file));
+    
+    if (!title || typeof title !== 'string' || title.trim() === '') {
+      console.warn(`Skipping ${file}: Missing or invalid title`);
+      errors.push(file);
+      return;
+    }
+    
+    if (!date) {
+      console.warn(`Skipping ${file}: Missing date`);
+      errors.push(file);
+      return;
+    }
+    
+    const dateObj = date instanceof Date ? date : new Date(date as string);
+    if (isNaN(dateObj.getTime())) {
+      console.warn(`Skipping ${file}: Invalid date`);
+      errors.push(file);
+      return;
+    }
+
+    const dateString = dateObj.toISOString().split('T')[0];
+    
+    if (!categories || !Array.isArray(categories) || categories.length === 0) {
+      console.warn(`Skipping ${file}: Missing or invalid categories (must be non-empty array)`);
+      errors.push(file);
+      return;
+    }
+    
+    if (!slug || slug.trim() === '') {
+      console.warn(`Skipping ${file}: Invalid filename`);
+      errors.push(file);
+      return;
+    }
+    
     index.push({
-      slug: path.basename(file, path.extname(file)),
-      title: parsed.attributes.title || 'Untitled',
-      date: parsed.attributes.date || 'Unknown',
-      collections: parsed.attributes.categories || []
+      slug,
+      title,
+      date: dateString,
+      collections: categories
     });
   }
 });
@@ -63,3 +108,10 @@ pieces.forEach(piece => {
 const collections = Object.values(collectionsMap);
 fs.writeFileSync(collectionsPath, JSON.stringify(collections, null, 2));
 console.log(`collections.json created successfully with ${collections.length} categories and ${pieces.length} total pieces.`);
+
+fs.writeFileSync(errorsPath, JSON.stringify(errors, null, 2));
+if (errors.length > 0) {
+  console.log(`${errors.length} file(s) skipped due to missing front matter. See errors.json for details.`);
+} else {
+  console.log('All files processed successfully.');
+}
