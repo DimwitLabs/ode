@@ -1,4 +1,3 @@
-
 @use "../../styles/variables";
 @use "../../styles/mixins";
 
@@ -15,7 +14,6 @@ header.header-bar {
   }
 
   .site-title {
-    font-size: 2.5rem;
     margin: 0;
     text-decoration: none;
 
@@ -33,6 +31,14 @@ header.header-bar {
       text-decoration-thickness: 0.05rem;
       text-underline-offset: 0.5rem;
     }
+  }
+
+  .site-title.large {
+    font-size: 2.5rem;
+  }
+
+  .site-title.small {
+    font-size: 1.15rem;
   }
 
   .site-author {

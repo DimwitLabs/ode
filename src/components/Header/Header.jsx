@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LampToggle from "../LampToggle/LampToggle";
 import "./Header.scss";
 
-function Header({ site }) {
-  if (!site) return null;
+function Header({ config }) {
+  const location = useLocation();
+  if (!config?.site) return null;
+  const { site } = config;
+  const isHome = location.pathname === "/";
 
   return (
     <header className="header-bar">
       <div className="header-left">
-        <Link to="/" className="site-title">
+        <Link to="/" className={`site-title ${isHome ? "large" : "small"}`}>
           {site.title}
         </Link>
         <p className="site-author">by {site.author}</p>
