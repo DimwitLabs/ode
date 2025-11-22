@@ -28,16 +28,38 @@ body {
     }
 
     blockquote {
+      margin: 4rem;
       margin-left: 2rem;
       border-left: 0.15rem solid var(--color-grey);
       padding-left: 1rem;
       color: var(--color-grey);
+      width: 37.5rem;
     }
 
     hr {
       height: 1px;
       margin-bottom: 1.5em;
       background: var(--color-grey-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+    }
+
+    h5 {
+      font-size: 1.15rem;
     }
 
     ::selection {
