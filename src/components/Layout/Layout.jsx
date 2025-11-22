@@ -32,12 +32,10 @@ function Layout() {
     return <div></div>;
   }
 
-  const { site } = config;
-
   return (
     <div>
-      <Header site={site} />
-      <FirstSection site={site} />
+      <Header config={config} />
+      <FirstSection config={config} />
     </div>
   );
 }
