@@ -23,7 +23,7 @@ nav {
     width: fit-content;
 
     &:hover {
-      border-bottom: 0.1rem solid currentColor;
+      border-bottom: 0.1rem solid variables.$color-grey-2-dark;
     }
 
     &.active {

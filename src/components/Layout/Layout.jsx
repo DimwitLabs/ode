@@ -6,6 +6,8 @@ import { makeAppTitle } from "../../utils/makeAppTitle";
 import Header from "../Header/Header";
 import FirstSection from "../FirstSection/FirstSection";
 
+import "./Layout.scss";
+
 function Layout() {
   const [config, setConfig] = useState(null);
   const [error, setError] = useState(null);
@@ -36,6 +38,9 @@ function Layout() {
     <div>
       <Header config={config} />
       <FirstSection config={config} />
+      <div className='site-tagline'>
+        {config.site.tagline}
+      </div>
     </div>
   );
 }
