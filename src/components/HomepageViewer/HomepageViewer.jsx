@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { parseMarkdown } from '../../utils/parseMarkdown';
+import { resolveContentPath } from '../../utils/resolveContentPath';
 import './HomepageViewer.scss';
 
-function HomepageViewer() {
+function HomepageViewer({ siteTitle }) {
   const location = useLocation();
   const [pageContent, setPageContent] = useState(null);
   const [error, setError] = useState(null);
@@ -15,33 +16,23 @@ function HomepageViewer() {
       setLoading(true);
       setError(null);
 
-      let isHome = location.pathname === '/';
-      let contentPath = '';
-      if (isHome) {
-        try {
-          const res = await fetch('/index/pieces.json');
-          const pieces = await res.json();
-          if (pieces && pieces.length > 0) {
-            const mostRecent = pieces[0];
-            contentPath = `/content/pieces/${mostRecent.slug}.md`;
-          } else {
-            setError('No posts found');
-            setLoading(false);
-            return;
-          }
-        } catch (err) {
-          setError('Could not load posts index');
-          setLoading(false);
-          return;
-        }
-      } else {
-        const slug = location.pathname.slice(1);
-        contentPath = `/content/pages/${slug}.md`;
+      const contentPath = await resolveContentPath({ pathname: location.pathname });
+      if (!contentPath) {
+        setError('No posts found');
+        setLoading(false);
+        return;
       }
 
       try {
         const { content, frontmatter } = await parseMarkdown(contentPath);
         setPageContent({ content, frontmatter });
+        if (location.pathname === '/') {
+          document.title = siteTitle;
+        } else if (frontmatter?.title) {
+          document.title = `${frontmatter.title} | ${siteTitle}`;
+        } else {
+          document.title = siteTitle;
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -50,13 +41,10 @@ function HomepageViewer() {
     };
 
     loadPage();
-  }, [location.pathname]);
+  }, [location.pathname, siteTitle]);
 
   if (loading) {
     return <>
-      <div className='loading'>
-        <span className='ellipsis'></span>
-      </div>
     </>;
   }
 

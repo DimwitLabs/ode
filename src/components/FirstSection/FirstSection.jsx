@@ -10,7 +10,7 @@ function FirstSection({ config }) {
       <Navigation />
       <Intro />
     </div>
-    <HomepageViewer />
+    <HomepageViewer siteTitle={config?.site?.title || ''} />
   </div>;
 }
 
