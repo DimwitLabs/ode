@@ -104,6 +104,13 @@ files.forEach(file => {
 });
 
 index.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const piecesIndexDir = path.dirname(piecesIndexPath);
+
+if (!fs.existsSync(piecesIndexDir)) {
+  fs.mkdirSync(piecesIndexDir, { recursive: true });
+}
+
 fs.writeFileSync(piecesIndexPath, JSON.stringify(index, null, 2));
 console.log(`pieces.json created successfully with ${index.length} entries.`);
 
