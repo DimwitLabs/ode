@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { loadConfig } from '../../utils/loadConfig';
 import './BookViewer.scss';
+import Spinner from '../Spinner/Spinner';
 
 function BookViewer() {
   const { collection } = useParams();
@@ -178,7 +179,7 @@ function BookViewer() {
     return (
       <div className="book-viewer">
         <div className="book-viewer-content">
-          <p>{config?.ui?.labels?.loading || 'Loading...'}</p>
+          <Spinner />
         </div>
       </div>
     );

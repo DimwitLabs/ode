@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import Spinner from '../Spinner/Spinner';
 
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
@@ -63,8 +64,11 @@ function HomepageViewer({ siteTitle }) {
   }, [location.pathname, siteTitle]);
 
   if (loading) {
-    return <>
-    </>;
+    return (
+      <div className="homepage-viewer">
+        <Spinner />
+      </div>
+    );
   }
 
   if (error) {

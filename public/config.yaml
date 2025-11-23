@@ -7,7 +7,6 @@ ui:
   labels:
     previous: "Previous"
     next: "Next"
-    loading: "Loading..."
     noContent: "No pieces found in this collection."
     errorLoading: "Error loading content."
     page: "Page"
