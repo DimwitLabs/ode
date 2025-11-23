@@ -1,5 +1,5 @@
 import { useParams, useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { loadConfig } from '../../utils/loadConfig';
 import './BookViewer.scss';
@@ -82,7 +82,7 @@ function BookViewer() {
     };
   }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (!collectionsIndex || !pagesIndex) return;
     
     const currentCollection = collectionsIndex.find(c => c.name === collection);
@@ -101,9 +101,9 @@ function BookViewer() {
       const nextPieceSlug = currentCollection.pieces[currentPieceIndex + 1];
       navigate(`/reader/${collection}?piece=${nextPieceSlug}&position=1`);
     }
-  };
+  }, [collectionsIndex, pagesIndex, collection, currentPieceIndex, currentPosition, navigate]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (!collectionsIndex || !pagesIndex) return;
     
     const currentCollection = collectionsIndex.find(c => c.name === collection);
@@ -122,7 +122,22 @@ function BookViewer() {
         navigate(`/reader/${collection}?piece=${prevPieceSlug}&position=${prevPieceData.totalPages}`);
       }
     }
-  };
+  }, [collectionsIndex, pagesIndex, collection, currentPieceIndex, currentPosition, navigate]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowRight') {
+        handleNext();
+      } else if (event.key === 'ArrowLeft') {
+        handlePrevious();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleNext, handlePrevious]);
 
   const getTotalCollectionPositions = () => {
     if (!collectionsIndex || !pagesIndex) return 0;
