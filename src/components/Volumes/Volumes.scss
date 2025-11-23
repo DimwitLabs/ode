@@ -19,6 +19,10 @@
   flex-direction: column;
   gap: 0.5rem;
 
+  @include mixins.respond-to-max(md) {
+    flex-direction: row;
+  }
+
   .volume-link {
     text-decoration: none;
     border-bottom: 0.1rem solid variables.$color-grey;
