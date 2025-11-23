@@ -4,7 +4,7 @@ author: "Ralph Waldo Emerson"
 date: "1841-05-25"
 slug: "self-reliance"
 categories:
-  - essays
+  - Essays
 ---
 
 > "Ne te quæsiveris extra."

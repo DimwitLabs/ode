@@ -20,6 +20,7 @@ ui:
     new: "New"
     rss: "RSS Feed"
     bodyOfWork: "Body of Work"
+  lowercase: false
   wordsWasted: "{words} words wasted across {pieces} pieces."
 pages:
   order:

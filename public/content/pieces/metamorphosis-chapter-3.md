@@ -4,7 +4,7 @@ author: "Franz Kafka"
 date: "1915-01-01"
 slug: "metamorphosis-chapter-3"
 categories:
-  - metamorphosis
+  - Metamorphosis
 ---
 
 No-one dared to remove the apple lodged in Gregor's flesh, so it remained there as a visible reminder of his injury. He had suffered it there for more than a month, and his condition seemed serious enough to remind even his father that Gregor, despite his current sad and revolting form, was a family member who could not be treated as an enemy. On the contrary, as a family there was a duty to swallow any revulsion for him and to be patient, just to be patient.

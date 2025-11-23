@@ -4,7 +4,7 @@ author: "Franz Kafka"
 date: "1915-01-01"
 slug: "metamorphosis-chapter-2"
 categories:
-  - metamorphosis
+  - Metamorphosis
 ---
 
 It was not until it was getting dark that evening that Gregor awoke from his deep and coma-like sleep. He would have woken soon afterwards anyway even if he hadn't been disturbed, as he had had enough sleep and felt fully rested. But he had the impression that some hurried steps and the sound of the door leading into the front room being carefully shut had woken him. The light from the electric street lamps shone palely here and there onto the ceiling and tops of the furniture, but down below, where Gregor was, it was dark. He pushed himself over to the door, feeling his way clumsily with his antennae—of which he was now beginning to learn the value—in order to see what had been happening there. The whole of his left side seemed like one, painfully stretched scar, and he limped badly on his two rows of legs. One of the legs had been badly injured in the events of that morning—it was nearly a miracle that only one of them had been—and dragged along lifelessly.
