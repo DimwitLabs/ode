@@ -48,4 +48,15 @@ nav {
       border-bottom: 0.1rem solid variables.$color-grey-2-dark;
     }
   }
+
+  .rss-link {
+    color: variables.$color-primary;
+    text-decoration: none;
+    border-bottom: 0.1rem solid variables.$color-grey;
+    width: fit-content;
+
+    &:hover {
+      border-bottom: 0.1rem solid variables.$color-grey-2-dark;
+    }
+  }
 }

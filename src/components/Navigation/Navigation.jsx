@@ -47,6 +47,9 @@ function Navigation() {
       <button onClick={handleRandomPiece} className="random-piece-button">
         {config?.ui?.labels?.randomPiece || 'Random Piece'}
       </button>
+      <a href="/feed" target="_blank" rel="noopener noreferrer" className="rss-link">
+        {config?.ui?.labels?.rss || 'RSS'}
+      </a>
     </nav>
   );
 }

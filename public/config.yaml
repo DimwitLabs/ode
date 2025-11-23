@@ -2,6 +2,7 @@ site:
   title: "Ode to the Ordinary"
   author: "John Doe"
   tagline: "Beauty, memory, and wonder."
+  url: "localhost:5713"
 ui:
   labels:
     previous: "Previous"
@@ -11,13 +12,14 @@ ui:
     errorLoading: "Error loading content."
     page: "Page"
     of: "of"
-    volumes: "Volumes"
+    volumes: "Reader"
     dawn: "Dawn"
     dusk: "Dusk"
     lightMode: "Switch to light mode"
     darkMode: "Switch to dark mode"
     randomPiece: "Random Piece"
     new: "New"
+    rss: "RSS Feed"
   wordsWasted: "{words} words wasted across {pieces} pieces."
 exclude:
   pages:
