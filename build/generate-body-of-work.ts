@@ -23,9 +23,6 @@ type Collection = {
 
 const pieces: Piece[] = JSON.parse(fs.readFileSync(piecesJsonPath, 'utf-8'));
 const collections: Collection[] = JSON.parse(fs.readFileSync(collectionsJsonPath, 'utf-8'));
-const configRaw = fs.readFileSync(configPath, 'utf-8');
-const config = yaml.load(configRaw) as any;
-const baseUrl = config?.site?.url || '';
 
 const collectionsMap = new Map<string, string[]>();
 collections.forEach(collection => {

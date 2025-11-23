@@ -26,4 +26,3 @@ dist-ssr
 # Content and generated files
 public/index/*json
 public/feed*
-public/content/pages/body-of-work.md
