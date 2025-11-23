@@ -76,9 +76,13 @@ function HomepageViewer({ siteTitle }) {
 
   return <div className="homepage-viewer">
     <article>
-      {pageContent.frontmatter?.title && (
+      {pageContent.frontmatter?.title && pieceMetadata && pieceMetadata.collections && pieceMetadata.collections.length > 0 ? (
+        <Link to={`/reader/${pieceMetadata.collections[0]}?piece=${pieceMetadata.slug}&position=1`}>
+          <h2>{pageContent.frontmatter.title}</h2>
+        </Link>
+      ) : pageContent.frontmatter?.title ? (
         <h2>{pageContent.frontmatter.title}</h2>
-      )}
+      ) : null}
       {pieceMetadata && (
         <div className="piece-metadata">
           {pieceMetadata.collections && pieceMetadata.collections.length > 0 && (

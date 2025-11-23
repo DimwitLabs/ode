@@ -25,6 +25,18 @@ article {
     margin-bottom: 0.5rem;
   }
 
+  a h2 {
+    color: inherit;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover h2 {
+      text-decoration: underline;
+    }
+  }
+
   .piece-metadata {
     font-size: 0.95rem;
     margin: 1rem 0;
