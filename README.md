@@ -61,6 +61,10 @@ https://github.com/user-attachments/assets/222af674-11f0-4b5a-8232-a31aca8a61b1
 
 ## Getting Started
 
+### From WordPress
+
+If you are coming from WordPress, you can use the awesome [lonekorean/wordpress-export-to-markdown](https://github.com/lonekorean/wordpress-export-to-markdown) to get your content in markdown format. It will mostly be plug and play with this version of Ode.
+
 ### Installation
 
 ```bash
@@ -175,4 +179,3 @@ MIT
 ## Contributing
 
 You are free to use this, break it, customise it. If you have any idea the community will benefit from, raise a PR or an Issue.
-
