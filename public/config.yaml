@@ -17,6 +17,7 @@ ui:
     lightMode: "Switch to light mode"
     darkMode: "Switch to dark mode"
     randomPiece: "Random Piece"
+    new: "New"
   wordsWasted: "{words} words wasted across {pieces} pieces."
 exclude:
   pages:

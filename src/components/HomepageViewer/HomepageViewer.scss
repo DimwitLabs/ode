@@ -20,6 +20,27 @@ article {
   max-width: 100%;
   box-sizing: border-box;
 
+  .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .new-label {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: variables.$color-secondary;
+    }
+
+    a {
+      flex: 1;
+    }
+  }
+
+  body.dark & .title-wrapper .new-label {
+    color: variables.$color-secondary-dark;
+  }
+
   h2 {
     margin-top: 0;
     margin-bottom: 0.5rem;

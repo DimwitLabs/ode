@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { parseMarkdown } from '../../utils/parseMarkdown';
 import { resolveContentPath } from '../../utils/resolveContentPath';
+import { loadConfig } from '../../utils/loadConfig';
 
 import './HomepageViewer.scss';
 
@@ -11,6 +12,7 @@ function HomepageViewer({ siteTitle }) {
   const location = useLocation();
   const [pageContent, setPageContent] = useState(null);
   const [pieceMetadata, setPieceMetadata] = useState(null);
+  const [config, setConfig] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +29,9 @@ function HomepageViewer({ siteTitle }) {
       }
 
       try {
+        const configData = await loadConfig();
+        setConfig(configData);
+        
         const { content, frontmatter } = await parseMarkdown(contentPath);
         setPageContent({ content, frontmatter });
         
@@ -77,11 +82,21 @@ function HomepageViewer({ siteTitle }) {
   return <div className="homepage-viewer">
     <article>
       {pageContent.frontmatter?.title && pieceMetadata && pieceMetadata.collections && pieceMetadata.collections.length > 0 ? (
-        <Link to={`/reader/${pieceMetadata.collections[0]}?piece=${pieceMetadata.slug}&position=1`}>
-          <h2>{pageContent.frontmatter.title}</h2>
-        </Link>
+        <div className="title-wrapper">
+          <Link to={`/reader/${pieceMetadata.collections[0]}?piece=${pieceMetadata.slug}&position=1`}>
+            <h2>{pageContent.frontmatter.title}</h2>
+          </Link>
+          {location.pathname === '/' && config?.ui?.labels?.new && (
+            <span className="new-label">{config.ui.labels.new}</span>
+          )}
+        </div>
       ) : pageContent.frontmatter?.title ? (
-        <h2>{pageContent.frontmatter.title}</h2>
+        <div className="title-wrapper">
+          <h2>{pageContent.frontmatter.title}</h2>
+          {location.pathname === '/' && config?.ui?.labels?.new && (
+            <span className="new-label">{config.ui.labels.new}</span>
+          )}
+        </div>
       ) : null}
       {pieceMetadata && (
         <div className="piece-metadata">
