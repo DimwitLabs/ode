@@ -2,7 +2,7 @@ site:
   title: "Ode to the Ordinary"
   author: "John Doe"
   tagline: "Isn't life just beauty, memory, and wonder?"
-  url: "localhost:5713"
+  url: "https://ode-demo.vercel.app"
 ui:
   labels:
     previous: "Previous"
