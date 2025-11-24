@@ -27,6 +27,7 @@ pages:
   order:
     - about
     - body-of-work
+    - references
     - reach-out
 exclude:
   pages:

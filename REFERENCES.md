@@ -6,6 +6,7 @@
 - William Hazlitt, "On the Pleasure of Hating" (1826). Public domain. Source: Project Gutenberg, https://www.gutenberg.org/ebooks/3020
 - Virginia Woolf, "The Mark on the Wall" (1917). Public domain. Source: Project Gutenberg, https://www.gutenberg.org/ebooks/14522
 - Franz Kafka, "The Metamorphosis" (1915). Public domain. Source: Project Gutenberg, https://www.gutenberg.org/ebooks/5200
+- George Orwell, "Why I Write" (1946). Public domain. Source: Project Gutenberg Australia, https://gutenberg.net.au/ebooks03/0300011h.html#part47
 
 ## Sound Effects
 
