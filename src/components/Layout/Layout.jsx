@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { loadConfig } from "../../utils/loadConfig";
 import { makeAppTitle } from "../../utils/makeAppTitle";
@@ -9,6 +9,16 @@ import HomeView from "../HomeView/HomeView";
 import BookViewer from "../BookViewer/BookViewer";
 
 import "./Layout.scss";
+
+function RemoveTrailingSlash() {
+  const location = useLocation();
+  
+  if (location.pathname.endsWith('/') && location.pathname.length > 1) {
+    return <Navigate to={location.pathname.slice(0, -1)} replace />;
+  }
+  
+  return null;
+}
 
 function Layout() {
   const [config, setConfig] = useState(null);
@@ -65,6 +75,7 @@ function Layout() {
     <BrowserRouter>
       <div>
         <Header config={config} />
+        <RemoveTrailingSlash />
         <Routes>
           <Route path="/reader/:collection" element={<BookViewer />} />
           <Route path="*" element={
