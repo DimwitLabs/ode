@@ -2,9 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import fm from "front-matter";
 
-const piecesPath = './public/content/pieces/';
-const pagesIndexPath = './public/index/pieces-pages.json';
-const piecesIndexPath = './public/index/pieces.json';
+const publicDir = path.join(__dirname, '..', 'public');
+const piecesPath = path.join(publicDir, 'content', 'pieces');
+const pagesIndexPath = path.join(publicDir, 'index', 'pieces-pages.json');
+const piecesIndexPath = path.join(publicDir, 'index', 'pieces.json');
 
 const CHARS_PER_PAGE = 2200;
 

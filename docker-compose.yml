@@ -1,0 +1,8 @@
+services:
+  ode:
+    image: ghcr.io/deepanshkhurana/ode:latest
+    ports:
+      - "8080:4173"
+    restart: unless-stopped
+    volumes:
+      - ./public:/app/public

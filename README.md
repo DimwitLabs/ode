@@ -10,6 +10,9 @@ The theme/idea comes directly from `journal.coffee` which is my Wordpress-based 
 
 Rest assured, I will be using `ode` too!
 
+> [!WARNING]  
+> Like all good things, Ode is currently changing and evolving. Things might break now and then.
+
 ## Live Demo
 
 You can find a live demo of the app [here](https://ode-demo.vercel.app/).
@@ -64,22 +67,62 @@ https://github.com/user-attachments/assets/222af674-11f0-4b5a-8232-a31aca8a61b1
 - **Fully customizable**: All UI labels, site metadata, and page order configurable via `config.yaml`
 - **No tracking, no analytics, no boxes, no search, no media**: Just writing and reading
 
-## Tech Stack
-
-- **React 19** with React Router for client-side navigation
-- **Vite** for blazing fast development and optimized builds
-- **SCSS** for styling with a clean, minimal design
-- **TypeScript** build scripts for content indexing and generation
-- **ReactMarkdown** for rendering markdown content
-- **Front Matter** for parsing markdown metadata
-
 ## Getting Started
 
-### Deployment Gotchas!
+> [!TIP]
+> For detailed notes on how to setup a **content repository** with sync, look into the [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)
+
+### Docker Compose (Recommended)
+
+If you want to self-host, use the public Docker image. Create a directory with your content:
+
+```
+my-site/
+  public/
+    config.yaml
+    content/
+      intro.md
+      pieces/
+      pages/
+  docker-compose.yml
+```
+
+Create a `docker-compose.yml`:
+
+```yaml
+services:
+  ode:
+    image: ghcr.io/deepanshkhurana/ode:latest
+    ports:
+      - "8080:4173"
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/public:/app/public
+```
+
+> [!TIP]  
+> Use an absolute path for the volume mount (e.g., `/home/user/my-site/public`). Relative paths may not work correctly with tools like Portainer.
+
+Run:
+
+```bash
+docker compose up -d
+```
+
+Your site will be available at `http://localhost:8080`. Restart the container to rebuild after content changes:
+
+```bash
+docker compose restart
+```
+
+### Other Deployment Options
+
+> [!NOTE]  
+> In this case, you need to replace the content in `public/` with your own.
 
 Once you have your Fork or branch ready, you can deploy the app but the reader position Permalinks as well as the Body of Work links will fail. This is due to SPA handling of paths and (from my understanding) how React works. But this can be fixed.
 
-#### Easy Mode: Deploy to Vercel
+#### Deploy to Vercel
 
 You can directly to Vercel below. `vercel.json` already has the fixes Vercel will need.
 
@@ -87,7 +130,7 @@ https://github.com/DeepanshKhurana/ode/blob/46873b31df3d4b02bbb375d4389173a1b6ac
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDeepanshKhurana%2Fode)
 
-#### Pro Mode: nginx Configuration
+#### nginx Configuration
 
 If you are like me, you probably have your own server where you will need to handle SPA routing. If you are using nginx, a template is already provided.
 
@@ -97,56 +140,10 @@ https://github.com/DeepanshKhurana/ode/blob/81c9c2916c5fade480a017b277be7eb1dc79
 
 If you are coming from WordPress, you can use the awesome [lonekorean/wordpress-export-to-markdown](https://github.com/lonekorean/wordpress-export-to-markdown) to get your content in markdown format. It will mostly be plug and play with this version of Ode.
 
-### Installation
-
-```bash
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Runs the app in development mode at `http://localhost:5173`
-
-### Building
-
-```bash
-npm run build
-```
-
-This will:
-1. Index all pieces from `public/content/pieces/`
-2. Index all pages from `public/content/pages/`
-3. Paginate pieces for reader mode
-4. Calculate word/piece statistics
-5. Generate RSS feed
-6. Generate body of work archive
-7. Build the production bundle
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## Configuration
-
-Edit `public/config.yaml` to customize your site. You can handle quite a few things here:
-
-- Change your site’s name, author, and vibe at the top.
-- Tweak button text and messages to sound how you want.
-- Pick which pages show up first in the menu.
-- Hide any pages or pieces you don’t want public.
-- Set how collections are sorted—oldest first or newest first.
-- Rename the light/dark mode switches.
-- Edit the “words wasted” summary to your liking.
-
-https://github.com/DeepanshKhurana/ode/blob/2e61bbe7eadcc36ff9b05c13e4e4d71ab4c885b1/public/config.yaml#L1-L41
-
 ## Writing Content
+
+> [!TIP]
+> A longer guide is in [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)
 
 ### Pieces
 
@@ -179,7 +176,58 @@ date: 2021-06-14
 Tell everyone everything!
 ```
 
-## Build Scripts
+## Configuration
+
+Edit `public/config.yaml` to customize your site. You can handle quite a few things here:
+
+- Change your site's name, author, and vibe at the top.
+- Tweak button text and messages to sound how you want.
+- Pick which pages show up first in the menu.
+- Hide any pages or pieces you don't want public.
+- Set how collections are sorted—oldest first or newest first.
+- Rename the light/dark mode switches.
+- Edit the "words wasted" summary to your liking.
+
+https://github.com/DeepanshKhurana/ode/blob/2e61bbe7eadcc36ff9b05c13e4e4d71ab4c885b1/public/config.yaml#L1-L41
+
+## Development
+
+### Installation
+
+```bash
+npm install
+```
+
+### Dev Server
+
+```bash
+npm run dev
+```
+
+Runs the app in development mode at `http://localhost:5173`
+
+### Building
+
+```bash
+npm run build
+```
+
+This will:
+1. Index all pieces from `public/content/pieces/`
+2. Index all pages from `public/content/pages/`
+3. Paginate pieces for reader mode
+4. Calculate word/piece statistics
+5. Generate RSS feed
+6. Generate body of work archive
+7. Build the production bundle
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Build Scripts
 
 Run individual build scripts:
 
@@ -189,6 +237,15 @@ Run individual build scripts:
 - `npm run build:stats` - Calculate statistics
 - `npm run build:rss` - Generate RSS feed
 - `npm run build:sitemap` - Generate Sitemap
+
+## Tech Stack
+
+- **React 19** with React Router for client-side navigation
+- **Vite** for blazing fast development and optimized builds
+- **SCSS** for styling with a clean, minimal design
+- **TypeScript** build scripts for content indexing and generation
+- **ReactMarkdown** for rendering markdown content
+- **Front Matter** for parsing markdown metadata
 
 ## License
 

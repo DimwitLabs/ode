@@ -3,10 +3,11 @@ import path from 'path';
 import fm from "front-matter";
 import yaml from 'js-yaml';
 
-const pagesPath = './public/content/pages/';
-const indexPath = './public/index/pages.json';
-const errorsPath = './public/index/page-errors.json';
-const configPath = './public/config.yaml';
+const publicDir = path.join(__dirname, '..', 'public');
+const pagesPath = path.join(publicDir, 'content', 'pages');
+const indexPath = path.join(publicDir, 'index', 'pages.json');
+const errorsPath = path.join(publicDir, 'index', 'page-errors.json');
+const configPath = path.join(publicDir, 'config.yaml');
 
 type Page = {
   slug: string;

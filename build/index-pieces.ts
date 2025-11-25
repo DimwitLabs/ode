@@ -3,11 +3,12 @@ import path from 'path';
 import fm from "front-matter";
 import yaml from 'js-yaml';
 
-const piecesPath = './public/content/pieces/';
-const piecesIndexPath = './public/index/pieces.json';
-const collectionsPath = './public/index/pieces-collections.json';
-const errorsPath = './public/index/pieces-errors.json';
-const configPath = './public/config.yaml';
+const publicDir = path.join(__dirname, '..', 'public');
+const piecesPath = path.join(publicDir, 'content', 'pieces');
+const piecesIndexPath = path.join(publicDir, 'index', 'pieces.json');
+const collectionsPath = path.join(publicDir, 'index', 'pieces-collections.json');
+const errorsPath = path.join(publicDir, 'index', 'pieces-errors.json');
+const configPath = path.join(publicDir, 'config.yaml');
 
 type Piece = {
   slug: string;
