@@ -39,3 +39,5 @@ reader:
   order:
     default: descending
     Metamorphosis: ascending
+rss:
+  piecesLimit: 10

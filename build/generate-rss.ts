@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import fm from 'front-matter';
-import { marked } from 'marked'; // Correct the import
+import { marked } from 'marked';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,11 +34,28 @@ interface FrontMatter {
   try {
     const configFile = fs.readFileSync(configPath, 'utf-8');
     const config: any = yaml.load(configFile);
-    
-    const baseUrl = config.site?.url || 'https://example.com';
-    const siteTitle = config.site?.title || 'Site';
-    const siteAuthor = config.site?.author || '';
+
+    const baseUrl = config.site?.url.replace(/\/+$/, '');;
+    if (!baseUrl) {
+      throw new Error('Site URL is not defined in config.yaml');
+    }
+
+    const siteTitle = config.site?.title;
+    if (!siteTitle) {
+      throw new Error('Site title is not defined in config.yaml');
+    }
+
+    const siteAuthor = config.site?.author;
+    if (!siteAuthor) {
+      throw new Error('Site author is not defined in config.yaml');
+    }
+
     const siteTagline = config.site?.tagline || '';
+    if (!siteTagline) {
+      throw new Error('Site tagline is not defined in config.yaml');
+    }
+
+    const rssPieceLimit = config.rss?.piecesLimit || 10;
     
     const piecesData: Piece[] = JSON.parse(fs.readFileSync(piecesJsonPath, 'utf-8'));
     
@@ -69,8 +86,10 @@ interface FrontMatter {
       rssLines.push(`  <managingEditor>${escapeXml(siteAuthor)}</managingEditor>`);
     }
     rssLines.push('');
+
+    const piecesToInclude = sortedPieces.slice(0, rssPieceLimit);
     
-    for (const piece of sortedPieces) {
+    for (const piece of piecesToInclude) {
       const pieceUrl = `${baseUrl}/${piece.slug}`;
       const pubDate = piece.date ? new Date(piece.date).toUTCString() : buildDate;
 
