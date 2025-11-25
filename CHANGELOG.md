@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2025-11-26
+
+### Added
+
+- Defaults are now initialised if the public directory is empty or has any files missing from the required structure. Helpful links will directly appear on the UI and the app will not break. 
+- A build badge is added to the README to ensure Docker image status is always easy to find.
+- New `pages.notFound` config option to specify a custom 404 page (defaults to `obscured`).
+- Exclusions in `exclude.pages` and `exclude.pieces` now accept slugs without `.md` extension.
+
 ## [1.1.1] - 2025-11-26
 
 ### Added
