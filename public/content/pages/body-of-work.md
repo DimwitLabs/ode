@@ -1,16 +1,16 @@
 ---
 title: "Body of Work"
 slug: "body-of-work"
-date: 2025-11-24T16:25:15.545Z
+date: 2025-11-25T10:04:15.010Z
 ---
 
-### January 1945
+### January 1826
 
-- [Why I Write](/why-i-write) | Essays
+- [On the Pleasure of Hating](/on-the-pleasure-of-hating) | Essays
 
-### January 1917
+### May 1841
 
-- [The Mark on the Wall](/the-mark-on-the-wall) | Essays
+- [Self-Reliance](/self-reliance) | Essays
 
 ### January 1915
 
@@ -18,11 +18,11 @@ date: 2025-11-24T16:25:15.545Z
 - [Metamorphosis: Part II](/metamorphosis-chapter-2) | Metamorphosis
 - [Metamorphosis: Part III](/metamorphosis-chapter-3) | Metamorphosis
 
-### May 1841
+### January 1917
 
-- [Self-Reliance](/self-reliance) | Essays
+- [The Mark on the Wall](/the-mark-on-the-wall) | Essays
 
-### January 1826
+### January 1945
 
-- [On the Pleasure of Hating](/on-the-pleasure-of-hating) | Essays
+- [Why I Write](/why-i-write) | Essays
 

@@ -41,3 +41,5 @@ reader:
     Metamorphosis: ascending
 rss:
   piecesLimit: 10
+bodyOfWork:
+  order: ascending

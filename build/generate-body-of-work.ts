@@ -1,10 +1,18 @@
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesJsonPath = path.join(publicDir, 'index', 'pieces.json');
 const collectionsJsonPath = path.join(publicDir, 'index', 'pieces-collections.json');
 const bodyOfWorkPath = path.join(publicDir, 'content', 'pages', 'body-of-work.md');
+const configPath = path.join(publicDir, 'config.yaml');
+
+const config = yaml.load(fs.readFileSync(configPath, 'utf-8')) as {
+  bodyOfWork?: {
+    order?: string;
+  };
+};
 
 type Piece = {
   slug: string;
@@ -49,10 +57,18 @@ pieces.forEach(piece => {
   grouped[monthYear].push(piece);
 });
 
+const bodyOfWorkOrder = config?.bodyOfWork?.order || 'descending';
+
+if (bodyOfWorkOrder !== 'ascending' && bodyOfWorkOrder !== 'descending') {
+  throw new Error(`Invalid order "${bodyOfWorkOrder}" in config.yaml bodyOfWork.order. Must be "ascending" or "descending".`);
+}
+
+console.log(`Sorting body of work in ${bodyOfWorkOrder} order.`);
+
 const sortedKeys = Object.keys(grouped).sort((a, b) => {
   const dateA = new Date(a);
   const dateB = new Date(b);
-  return dateB.getTime() - dateA.getTime();
+  return bodyOfWorkOrder === 'ascending' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
 });
 
 let markdown = '---\n';
