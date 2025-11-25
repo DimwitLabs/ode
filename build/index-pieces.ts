@@ -32,7 +32,11 @@ type FrontMatter = {
 
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
-const excludedPieces = config?.exclude?.pieces || [];
+const rawExcludedPieces = (config?.exclude?.pieces || []).filter(Boolean);
+
+const excludedPieces = rawExcludedPieces.map((piece: string) => 
+  piece.endsWith('.md') ? piece : `${piece}.md`
+);
 
 const files = fs.readdirSync(piecesPath);
 if (files.length === 0) {
