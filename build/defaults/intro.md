@@ -1,0 +1,1 @@
+Not all those who wander are lost, but you just might be. Help is always [available](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md). No one is ever alone.

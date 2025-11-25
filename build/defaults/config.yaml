@@ -1,0 +1,40 @@
+site:
+  title: "My Ode"
+  author: "Anonymous"
+  tagline: "A place for words."
+  url: "https://example.com"
+  description: "A personal writing space."
+ui:
+  labels:
+    previous: "Previous"
+    next: "Next"
+    noContent: "No pieces found in this collection."
+    errorLoading: "Error loading content."
+    page: "Page"
+    of: "of"
+    volumes: "Reader"
+    dawn: "Dawn"
+    dusk: "Dusk"
+    lightMode: "Switch to light mode"
+    darkMode: "Switch to dark mode"
+    randomPiece: "Random Piece"
+    new: "New"
+    rss: "RSS Feed"
+    close: "Close"
+  lowercase: false
+  wordsWasted: "{words} words wasted across {pieces} pieces."
+pages:
+  order:
+    - about
+exclude:
+  pages:
+    -
+  pieces:
+    -
+reader:
+  order:
+    default: descending
+rss:
+  piecesLimit: 10
+bodyOfWork:
+  order: descending

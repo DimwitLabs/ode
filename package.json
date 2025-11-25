@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build:index && vite build",
-    "build:index": "vite-node build/index-pieces.ts && vite-node build/index-pages.ts && vite-node build/paginate-pieces.ts && vite-node build/calculate-stats.ts && vite-node build/generate-rss.ts && vite-node build/generate-sitemap.ts && vite-node build/generate-body-of-work.ts",
+    "build:index": "vite-node build/ensure-defaults.ts && vite-node build/index-pieces.ts && vite-node build/index-pages.ts && vite-node build/paginate-pieces.ts && vite-node build/calculate-stats.ts && vite-node build/generate-rss.ts && vite-node build/generate-sitemap.ts && vite-node build/generate-body-of-work.ts",
     "build:pieces": "vite-node build/index-pieces.ts",
     "build:pages": "vite-node build/index-pages.ts",
     "build:paginate": "vite-node build/paginate-pieces.ts",
