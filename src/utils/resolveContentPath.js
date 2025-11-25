@@ -1,3 +1,5 @@
+import { loadConfig } from './loadConfig';
+
 export async function resolveContentPath({ pathname }) {
   if (pathname === '/') {
     try {
@@ -38,7 +40,9 @@ export async function resolveContentPath({ pathname }) {
     } else if (isPiece) {
       return `/content/pieces/${slug}.md`;
     } else {
-      return '/content/pages/obscured.md';
+      const config = await loadConfig();
+      const notFoundSlug = config?.pages?.notFound || 'obscured';
+      return `/content/pages/${notFoundSlug}.md`;
     }
   }
 }

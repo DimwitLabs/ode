@@ -23,7 +23,17 @@ type FrontMatter = {
 
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
-const excludedPages = config?.exclude?.pages || [];
+const rawNotFound = config?.pages?.notFound || 'obscured';
+const notFoundFile = rawNotFound.endsWith('.md') ? rawNotFound : `${rawNotFound}.md`;
+const rawExcludedPages = config?.exclude?.pages || [];
+
+const excludedPages = rawExcludedPages.map((page: string) => 
+  page.endsWith('.md') ? page : `${page}.md`
+);
+
+if (!excludedPages.includes(notFoundFile)) {
+  excludedPages.push(notFoundFile);
+}
 
 const files = fs.readdirSync(pagesPath);
 if (files.length === 0) {

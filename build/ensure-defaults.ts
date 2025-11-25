@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const defaultsDir = path.join(__dirname, 'defaults');
@@ -31,6 +32,17 @@ if (!fs.existsSync(configPath)) {
   fs.writeFileSync(configPath, defaultConfig);
 }
 
+const configRaw = fs.readFileSync(configPath, 'utf-8');
+const config = yaml.load(configRaw) as any;
+const notFoundSlug = config?.pages?.notFound || 'obscured';
+const notFoundPath = path.join(pagesDir, `${notFoundSlug}.md`);
+
+if (!fs.existsSync(notFoundPath)) {
+  console.warn(`WARNING: 404 page "${notFoundSlug}.md" missing — using default`);
+  const defaultNotFound = fs.readFileSync(path.join(defaultsDir, 'obscured.md'), 'utf-8');
+  fs.writeFileSync(notFoundPath, defaultNotFound);
+}
+
 const pieceFiles = fs.existsSync(piecesDir) 
   ? fs.readdirSync(piecesDir).filter(f => f.endsWith('.md'))
   : [];
@@ -46,7 +58,10 @@ const pageFiles = fs.existsSync(pagesDir)
   ? fs.readdirSync(pagesDir).filter(f => f.endsWith('.md'))
   : [];
 
-if (pageFiles.length === 0) {
+// Check for pages excluding the 404 page
+const nonNotFoundPages = pageFiles.filter(f => f !== `${notFoundSlug}.md`);
+
+if (nonNotFoundPages.length === 0) {
   console.warn('WARNING: No pages found — creating default "About" page');
   const defaultPage = fs.readFileSync(path.join(defaultsDir, 'about.md'), 'utf-8');
   const defaultPagePath = path.join(pagesDir, 'about.md');

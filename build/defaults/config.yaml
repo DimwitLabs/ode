@@ -26,6 +26,7 @@ ui:
 pages:
   order:
     - about
+  notFound: obscured
 exclude:
   pages:
     -

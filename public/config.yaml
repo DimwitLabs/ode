@@ -29,10 +29,10 @@ pages:
     - body-of-work
     - references
     - reach-out
+  notFound: obscured
 exclude:
   pages:
-    - skipped-page.md
-    - obscured.md
+    - skipped-page
   pieces:
     -
 reader:
