@@ -1,3 +1,5 @@
+[![Build and Publish](https://github.com/DeepanshKhurana/ode/actions/workflows/publish.yml/badge.svg)](https://github.com/DeepanshKhurana/ode/actions/workflows/publish.yml)
+
 # Ode
 
 > An ode to those who love the craft, an ode to the old internet, an ode to a time before numbers and figures dominated writing, an ode to a time where readers remembered their favourite writers, and an ode to the hope that all of it is still present, somewhere.
