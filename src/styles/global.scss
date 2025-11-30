@@ -1,7 +1,6 @@
 @use "variables";
 @use "breakpoints";
 @use "mixins";
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap');
 
 body {
   margin: 2rem 16rem;
@@ -16,83 +15,111 @@ body {
   }
 
   * {
-    color: variables.$color-text;
-    font-family: 'IM Fell DW Pica', serif;
+    color: var(--color-text);
+    font-family: var(--font-family);
     line-height: 1.5;
     text-align: justify;
     text-align-last: left;
-    text-transform: inherit; // Ensure text-transform is inherited globally
+    text-transform: inherit;
 
     strong {
-      text-shadow: 0.0025em 0 currentColor, 0 0.0025em currentColor, 0 -0.0025em currentColor, -0.0025em 0 currentColor;
+      text-shadow: 0.0025rem 0 currentColor, 0 0.0025rem currentColor, 0 -0.0025rem currentColor, -0.0025rem 0 currentColor;
     }
 
     blockquote {
       margin: 3rem auto;
       margin-left: auto;
       margin-right: auto;
-      border-left: 0.15rem solid variables.$color-grey;
+      border-left: 0.15rem solid var(--color-grey);
       padding-left: 1rem;
-      color: variables.$color-grey;
+      color: var(--color-grey);
       max-width: 40rem;
       @include mixins.respond-to-max(sm) {
         margin: 1.5rem 0;
         padding-left: 0.75rem;
         max-width: 100%;
-        font-size: 1rem;
+        font-size: calc(1rem * var(--font-scale, 1));
+      }
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      background: var(--color-highlight);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.2rem;
+      font-size: calc(0.9rem * var(--font-scale, 1));
+    }
+
+    pre {
+      background: var(--color-highlight);
+      padding: 1rem;
+      border-radius: 0.3rem;
+      overflow-x: auto;
+      
+      code {
+        background: none !important;
+        padding: 0;
       }
     }
 
     hr {
       height: 0.0025rem;
-      margin-bottom: 1.5em;
-      background: variables.$color-grey-2;
+      margin-bottom: 1.5rem;
+      background: var(--color-grey2);
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: calc(2rem * var(--font-scale, 1));
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: calc(1.5rem * var(--font-scale, 1));
     }
 
     h3 {
-      font-size: 1.3rem;
+      font-size: calc(1.3rem * var(--font-scale, 1));
     }
 
     h4 {
-      font-size: 1.2rem;
+      font-size: calc(1.2rem * var(--font-scale, 1));
     }
 
     h5 {
-      font-size: 1.15rem;
+      font-size: calc(1.15rem * var(--font-scale, 1));
     }
 
     ::selection {
-      background: variables.$color-highlight;
+      background: var(--color-highlight);
     }
   }
 
   &.dark {
     @include mixins.theme(dark);
 
-    background: variables.$color-background-dark;
+    background: var(--color-background-dark);
 
     * {
-      color: variables.$color-text-dark;
+      color: var(--color-text-dark);
 
       blockquote {
-        border-left: 0.15rem solid variables.$color-grey-dark;
-        color: variables.$color-text-dark;
+        border-left: 0.15rem solid var(--color-grey-dark);
+        color: var(--color-text-dark);
+      }
+
+      code {
+        background: var(--color-highlight-dark);
+      }
+
+      pre {
+        background: var(--color-highlight-dark);
       }
 
       hr {
-        background: variables.$color-grey-2-dark;
+        background: var(--color-grey2-dark);
       }
 
       ::selection {
-        background: variables.$color-highlight-dark;
+        background: var(--color-highlight-dark);
       }
     }
   }

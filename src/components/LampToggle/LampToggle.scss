@@ -17,7 +17,7 @@
   .lamp-cord {
     width: 0.08rem;
     height: 1rem;
-    background: variables.$color-grey;
+    background: var(--color-grey);
     margin-bottom: 0.25rem;
     transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
     flex-shrink: 0;
@@ -47,17 +47,17 @@
   }
 
   .lamp-bulb {
-    font-size: 1.1rem;
+    font-size: calc(1.1rem * var(--font-scale, 1));
     font-family: inherit;
     margin: 0;
     padding: 0;
     transition: color 0.3s, transform 0.3s;
     order: 2;
     pointer-events: none;
-    color: variables.$color-secondary;
+    color: var(--color-secondary);
 
     &.dark {
-      color: variables.$color-secondary-dark;
+      color: var(--color-secondary-dark);
     }
 
     &.swing {

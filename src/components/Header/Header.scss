@@ -26,21 +26,21 @@ header.header-bar {
   }
 
   .collection-title {
-    color: variables.$color-primary;
-    font-size: 1rem;
+    color: var(--color-primary);
+    font-size: calc(1rem * var(--font-scale, 1));
   }
 
   body.dark & .collection-title {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .separator {
-    font-size: 1rem;
-    color: variables.$color-grey;
+    font-size: calc(1rem * var(--font-scale, 1));
+    color: var(--color-grey);
   }
 
   body.dark & .separator {
-    color: variables.$color-grey-dark;
+    color: var(--color-grey-dark);
   }
 
 
@@ -48,11 +48,11 @@ header.header-bar {
     text-decoration: none;
 
     @include mixins.respond-to-max(md) {
-      font-size: 2rem;
+      font-size: calc(2rem * var(--font-scale, 1));
     }
 
     @include mixins.respond-to-max(sm) {
-      font-size: 1.75rem;
+      font-size: calc(1.75rem * var(--font-scale, 1));
     }
 
     &:hover,
@@ -64,24 +64,24 @@ header.header-bar {
   }
 
   .site-title.large {
-    font-size: 2.5rem;
+    font-size: calc(2.5rem * var(--font-scale, 1));
   }
 
   .site-title.medium {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-scale, 1));
   }
 
   .site-title.small {
-    font-size: 1.15rem;
+    font-size: calc(1.15rem * var(--font-scale, 1));
   }
 
   .site-author {
-    color: variables.$color-primary;
+    color: var(--color-primary);
     margin: 0;
   }
 
   body.dark & .site-author {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .close-button {
@@ -90,13 +90,13 @@ header.header-bar {
     background: none;
     padding: 0;
     display: inline-block;
-    font-size: 1rem;
+    font-size: calc(1rem * var(--font-scale, 1));
     font-family: inherit;
     cursor: pointer;
     flex-shrink: 0;
     pointer-events: auto;
     transition: transform 0.3s;
-    color: variables.$color-primary;
+    color: var(--color-primary);
 
     &:hover {
       text-decoration: underline;
@@ -107,7 +107,7 @@ header.header-bar {
   }
 
   body.dark & .close-button {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .header-right {

@@ -6,11 +6,11 @@
 
   h4 {
     margin-bottom: 0.75rem;
-    color: variables.$color-primary;
+    color: var(--color-primary);
   }
 
   body.dark & h4 {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 }
 
@@ -25,9 +25,9 @@
 
   .volume-link {
     text-decoration: none;
-    border-bottom: 0.1rem solid variables.$color-grey;
+    border-bottom: 0.1rem solid var(--color-grey);
     width: fit-content;
-    color: variables.$color-secondary;
+    color: var(--color-secondary);
 
     &:hover {
       border-bottom: 0.1rem solid currentColor;
@@ -35,7 +35,7 @@
   }
 
   body.dark & .volume-link {
-    color: variables.$color-secondary-dark;
-    border-bottom: 0.1rem solid variables.$color-grey-dark;
+    color: var(--color-secondary-dark);
+    border-bottom: 0.1rem solid var(--color-grey-dark);
   }
 }

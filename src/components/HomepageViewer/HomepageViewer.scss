@@ -16,7 +16,7 @@
 
 article {
   flex: 5;
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--font-scale, 1));
   max-width: 100%;
   box-sizing: border-box;
 
@@ -27,9 +27,9 @@ article {
     margin-bottom: 0.5rem;
 
     .new-label {
-      font-size: 0.9rem;
+      font-size: calc(0.9rem * var(--font-scale, 1));
       margin-bottom: 0.5rem;
-      color: variables.$color-secondary;
+      color: var(--color-secondary);
     }
 
     a {
@@ -38,7 +38,7 @@ article {
   }
 
   body.dark & .title-wrapper .new-label {
-    color: variables.$color-secondary-dark;
+    color: var(--color-secondary-dark);
   }
 
   h2 {
@@ -59,9 +59,9 @@ article {
   }
 
   .piece-metadata {
-    font-size: 0.95rem;
+    font-size: calc(0.95rem * var(--font-scale, 1));
     margin: 1rem 0;
-    color: variables.$color-grey;
+    color: var(--color-grey);
 
     .piece-date {
       display: none;
@@ -71,7 +71,7 @@ article {
       .collection-link {
         text-decoration: none;
         padding-bottom: 0.1rem;
-        color: variables.$color-primary;
+        color: var(--color-primary);
 
         &:hover {
           border-bottom-color: currentColor;
@@ -81,10 +81,10 @@ article {
   }
 
   body.dark & .piece-metadata {
-    color: variables.$color-grey-dark;
+    color: var(--color-grey-dark);
 
     .collection-link {
-      color: variables.$color-primary-dark;
+      color: var(--color-primary-dark);
     }
   }
 

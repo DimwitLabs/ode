@@ -17,13 +17,13 @@ nav {
   }
 
   a {
-    color: variables.$color-primary;
+    color: var(--color-primary);
     text-decoration: none;
-    border-bottom: 0.1rem solid variables.$color-grey;
+    border-bottom: 0.1rem solid var(--color-grey);
     width: fit-content;
 
     &:hover {
-      border-bottom: 0.1rem solid variables.$color-grey-2-dark;
+      border-bottom: 0.1rem solid var(--color-grey2-dark);
     }
 
     &.active {
@@ -39,24 +39,24 @@ nav {
     font-size: inherit;
     text-align: left;
     cursor: pointer;
-    color: variables.$color-primary;
+    color: var(--color-primary);
     text-decoration: none;
-    border-bottom: 0.1rem solid variables.$color-grey;
+    border-bottom: 0.1rem solid var(--color-grey);
     width: fit-content;
 
     &:hover {
-      border-bottom: 0.1rem solid variables.$color-grey-2-dark;
+      border-bottom: 0.1rem solid var(--color-grey2-dark);
     }
   }
 
   .rss-link {
-    color: variables.$color-primary;
+    color: var(--color-primary);
     text-decoration: none;
-    border-bottom: 0.1rem solid variables.$color-grey;
+    border-bottom: 0.1rem solid var(--color-grey);
     width: fit-content;
 
     &:hover {
-      border-bottom: 0.1rem solid variables.$color-grey-2-dark;
+      border-bottom: 0.1rem solid var(--color-grey2-dark);
     }
   }
 }
