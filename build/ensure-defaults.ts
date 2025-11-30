@@ -58,7 +58,6 @@ const pageFiles = fs.existsSync(pagesDir)
   ? fs.readdirSync(pagesDir).filter(f => f.endsWith('.md'))
   : [];
 
-// Check for pages excluding the 404 page
 const nonNotFoundPages = pageFiles.filter(f => f !== `${notFoundSlug}.md`);
 
 if (nonNotFoundPages.length === 0) {
