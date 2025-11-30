@@ -2,7 +2,8 @@ export default {
   font: {
     family: "IM Fell DW Pica, serif",
     url: "https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap",
-    fallback: "Georgia, serif"
+    fallback: "Georgia, serif",
+    scale: 1.1
   },
   colors: {
     light: {
