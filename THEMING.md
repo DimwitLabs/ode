@@ -14,7 +14,7 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
 - **journal** - Classic literary aesthetic with IM Fell DW Pica
 - **manuscript** - Publishing aesthetic with Literata
 - **recipe** - Handwritten cooking vibes with Indie Flower
-- **scripture** - Warm sepia tones with Crimson Text
+- **screenplay** - Film screenplay style with Courier Prime
 - **sketch** - Monochrome pencil aesthetic with Klee One
 
 <table>
@@ -100,12 +100,12 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/scripture_light.png" alt="Scripture - Light Mode">
-      <p align="center"><strong>scripture</strong> - light</p>
+      <img src=".github/media/themes/screenplay_light.png" alt="Screenplay - Light Mode">
+      <p align="center"><strong>screenplay</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/scripture_dark.png" alt="Scripture - Dark Mode">
-      <p align="center"><strong>scripture</strong> - dark</p>
+      <img src=".github/media/themes/screenplay_dark.png" alt="Screenplay - Dark Mode">
+      <p align="center"><strong>screenplay</strong> - dark</p>
     </td>
   </tr>
   <tr>

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Dynamic theme engine with 10 built-in presets (`almanac`, `blueprint`, `comic`, `doodle`, `exploit`, `journal` (default), `manuscript`, `recipe`, `scripture`, `sketch`).
+- Dynamic theme engine with 10 built-in presets (`almanac`, `blueprint`, `comic`, `doodle`, `exploit`, `journal` (default), `manuscript`, `recipe`, `screenplay`, `sketch`).
 - Theme configuration via `ui.theme.preset`, `ui.theme.overrides`, and `ui.theme.defaultMode` in `config.yaml` (fully backwards compatible; not having the sections does not break anything).
 - Support for local font files with automatic format detection.
 - Font scaling system with proportional sizing using `--font-scale` CSS variable.
