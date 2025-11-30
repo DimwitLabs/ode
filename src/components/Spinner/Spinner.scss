@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: calc(2rem * var(--font-scale, 1));
   color: var(--color-primary);
   height: 100%;
 

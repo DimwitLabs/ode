@@ -17,14 +17,13 @@ body {
   * {
     color: var(--color-text);
     font-family: var(--font-family);
-    font-size: calc(1rem * var(--font-scale, 1));
     line-height: 1.5;
     text-align: justify;
     text-align-last: left;
     text-transform: inherit;
 
     strong {
-      text-shadow: 0.0025em 0 currentColor, 0 0.0025em currentColor, 0 -0.0025em currentColor, -0.0025em 0 currentColor;
+      text-shadow: 0.0025rem 0 currentColor, 0 0.0025rem currentColor, 0 -0.0025rem currentColor, -0.0025rem 0 currentColor;
     }
 
     blockquote {
@@ -39,22 +38,22 @@ body {
         margin: 1.5rem 0;
         padding-left: 0.75rem;
         max-width: 100%;
-        font-size: 1rem;
+        font-size: calc(1rem * var(--font-scale, 1));
       }
     }
 
     code {
       font-family: 'Courier New', monospace;
       background: var(--color-highlight);
-      padding: 0.2em 0.4em;
-      border-radius: 0.2em;
-      font-size: 0.9em;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.2rem;
+      font-size: calc(0.9rem * var(--font-scale, 1));
     }
 
     pre {
       background: var(--color-highlight);
       padding: 1rem;
-      border-radius: 0.3em;
+      border-radius: 0.3rem;
       overflow-x: auto;
       
       code {
@@ -65,28 +64,28 @@ body {
 
     hr {
       height: 0.0025rem;
-      margin-bottom: 1.5em;
+      margin-bottom: 1.5rem;
       background: var(--color-grey2);
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: calc(2rem * var(--font-scale, 1));
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: calc(1.5rem * var(--font-scale, 1));
     }
 
     h3 {
-      font-size: 1.3rem;
+      font-size: calc(1.3rem * var(--font-scale, 1));
     }
 
     h4 {
-      font-size: 1.2rem;
+      font-size: calc(1.2rem * var(--font-scale, 1));
     }
 
     h5 {
-      font-size: 1.15rem;
+      font-size: calc(1.15rem * var(--font-scale, 1));
     }
 
     ::selection {

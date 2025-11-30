@@ -113,7 +113,7 @@
 
     .piece-title {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: calc(1.25rem * var(--font-scale, 1));
       color: var(--color-secondary);
 
       body.dark & {
@@ -122,7 +122,7 @@
     }
 
     .piece-meta {
-      font-size: 0.85rem;
+      font-size: calc(0.85rem * var(--font-scale, 1));
       white-space: nowrap;
       flex-shrink: 0;
       color: var(--color-grey2);
@@ -133,7 +133,7 @@
     }
   }
 
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--font-scale, 1));
   line-height: 1.6;
 
   > :first-child {
@@ -197,7 +197,7 @@
     text-decoration: none;
     padding: 0;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: calc(1rem * var(--font-scale, 1));
     cursor: pointer;
     transition: transform 0.3s;
     color: var(--color-primary);
@@ -226,7 +226,7 @@
   .page-counter {
     grid-column: 2;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: calc(0.9rem * var(--font-scale, 1));
     white-space: nowrap;
     color: var(--color-grey);
     

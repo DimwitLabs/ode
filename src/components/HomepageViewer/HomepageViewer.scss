@@ -16,7 +16,7 @@
 
 article {
   flex: 5;
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--font-scale, 1));
   max-width: 100%;
   box-sizing: border-box;
 
@@ -27,7 +27,7 @@ article {
     margin-bottom: 0.5rem;
 
     .new-label {
-      font-size: 0.9rem;
+      font-size: calc(0.9rem * var(--font-scale, 1));
       margin-bottom: 0.5rem;
       color: var(--color-secondary);
     }
@@ -59,7 +59,7 @@ article {
   }
 
   .piece-metadata {
-    font-size: 0.95rem;
+    font-size: calc(0.95rem * var(--font-scale, 1));
     margin: 1rem 0;
     color: var(--color-grey);
 

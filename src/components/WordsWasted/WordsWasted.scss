@@ -5,6 +5,6 @@
 
   p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: calc(0.9rem * var(--font-scale, 1));
   }
 }

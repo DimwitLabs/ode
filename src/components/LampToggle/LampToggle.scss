@@ -47,7 +47,7 @@
   }
 
   .lamp-bulb {
-    font-size: 1.1rem;
+    font-size: calc(1.1rem * var(--font-scale, 1));
     font-family: inherit;
     margin: 0;
     padding: 0;
