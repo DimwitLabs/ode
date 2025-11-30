@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-12-01
+
+### Added
+
+- Dynamic theme engine with 10 built-in presets (`almanac`, `blueprint`, `comic`, `doodle`, `exploit`, `journal` (default), `manuscript`, `recipe`, `scripture`, `sketch`).
+- Theme configuration via `ui.theme.preset`, `ui.theme.overrides`, and `ui.theme.defaultMode` in `config.yaml` (fully backwards compatible; not having the sections does not break anything).
+- Support for local font files with automatic format detection.
+- Font scaling system with proportional sizing using `--font-scale` CSS variable.
+- Comprehensive theming documentation in [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md) with screenshots of all presets.
+- Theme presets automatically register from `src/assets/themes/` directory.
+
 ## [1.1.2] - 2025-11-26
 
 ### Added

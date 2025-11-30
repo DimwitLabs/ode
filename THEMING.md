@@ -6,46 +6,26 @@ Ode supports themes. I wanted to make sure that reading experiences could vary b
 
 Ode comes with 10 built-in themes, each is named and carefully designed after a thing you can create. I feel these will fit most people's requirements from the get-go.
 
-- **journal** - Classic literary aesthetic with IM Fell DW Pica
-- **scripture** - Warm sepia tones with Crimson Text
-- **exploit** - Terminal green on black with Fira Code monospace
-- **blueprint** - Technical blue with IBM Plex Sans
-- **recipe** - Handwritten cooking vibes with Indie Flower
-- **sketch** - Monochrome pencil aesthetic with Klee One
-- **doodle** - Vibrant purple doodles with Amatic SC
-- **comic** - Bold comic book style with Lilita One
-- **manuscript** - Publishing aesthetic with Literata
 - **almanac** - Earthy greens with Lora
+- **blueprint** - Technical blue with IBM Plex Sans
+- **comic** - Bold comic book style with Lilita One
+- **doodle** - Vibrant purple doodles with Amatic SC
+- **exploit** - Terminal green on black with Fira Code monospace
+- **journal** - Classic literary aesthetic with IM Fell DW Pica
+- **manuscript** - Publishing aesthetic with Literata
+- **recipe** - Handwritten cooking vibes with Indie Flower
+- **scripture** - Warm sepia tones with Crimson Text
+- **sketch** - Monochrome pencil aesthetic with Klee One
 
 <table>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/journal_light.png" alt="Journal - Light Mode">
-      <p align="center"><strong>journal</strong> - light</p>
+      <img src=".github/media/themes/almanac_light.png" alt="Almanac - Light Mode">
+      <p align="center"><strong>almanac</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/journal_dark.png" alt="Journal - Dark Mode">
-      <p align="center"><strong>journal</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src=".github/media/themes/scripture_light.png" alt="Scripture - Light Mode">
-      <p align="center"><strong>scripture</strong> - light</p>
-    </td>
-    <td width="50%">
-      <img src=".github/media/themes/scripture_dark.png" alt="Scripture - Dark Mode">
-      <p align="center"><strong>scripture</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src=".github/media/themes/exploit_light.png" alt="Exploit - Light Mode">
-      <p align="center"><strong>exploit</strong> - light</p>
-    </td>
-    <td width="50%">
-      <img src=".github/media/themes/exploit_dark.png" alt="Exploit - Dark Mode">
-      <p align="center"><strong>exploit</strong> - dark</p>
+      <img src=".github/media/themes/almanac_dark.png" alt="Almanac - Dark Mode">
+      <p align="center"><strong>almanac</strong> - dark</p>
     </td>
   </tr>
   <tr>
@@ -60,22 +40,12 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/recipe_light.png" alt="Recipe - Light Mode">
-      <p align="center"><strong>recipe</strong> - light</p>
+      <img src=".github/media/themes/comic_light.png" alt="Comic - Light Mode">
+      <p align="center"><strong>comic</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/recipe_dark.png" alt="Recipe - Dark Mode">
-      <p align="center"><strong>recipe</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src=".github/media/themes/sketch_light.png" alt="Sketch - Light Mode">
-      <p align="center"><strong>sketch</strong> - light</p>
-    </td>
-    <td width="50%">
-      <img src=".github/media/themes/sketch_dark.png" alt="Sketch - Dark Mode">
-      <p align="center"><strong>sketch</strong> - dark</p>
+      <img src=".github/media/themes/comic_dark.png" alt="Comic - Dark Mode">
+      <p align="center"><strong>comic</strong> - dark</p>
     </td>
   </tr>
   <tr>
@@ -90,12 +60,22 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/comic_light.png" alt="Comic - Light Mode">
-      <p align="center"><strong>comic</strong> - light</p>
+      <img src=".github/media/themes/exploit_light.png" alt="Exploit - Light Mode">
+      <p align="center"><strong>exploit</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/comic_dark.png" alt="Comic - Dark Mode">
-      <p align="center"><strong>comic</strong> - dark</p>
+      <img src=".github/media/themes/exploit_dark.png" alt="Exploit - Dark Mode">
+      <p align="center"><strong>exploit</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/journal_light.png" alt="Journal - Light Mode">
+      <p align="center"><strong>journal</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/journal_dark.png" alt="Journal - Dark Mode">
+      <p align="center"><strong>journal</strong> - dark</p>
     </td>
   </tr>
   <tr>
@@ -110,12 +90,32 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/almanac_light.png" alt="Almanac - Light Mode">
-      <p align="center"><strong>almanac</strong> - light</p>
+      <img src=".github/media/themes/recipe_light.png" alt="Recipe - Light Mode">
+      <p align="center"><strong>recipe</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/almanac_dark.png" alt="Almanac - Dark Mode">
-      <p align="center"><strong>almanac</strong> - dark</p>
+      <img src=".github/media/themes/recipe_dark.png" alt="Recipe - Dark Mode">
+      <p align="center"><strong>recipe</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/scripture_light.png" alt="Scripture - Light Mode">
+      <p align="center"><strong>scripture</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/scripture_dark.png" alt="Scripture - Dark Mode">
+      <p align="center"><strong>scripture</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/sketch_light.png" alt="Sketch - Light Mode">
+      <p align="center"><strong>sketch</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/sketch_dark.png" alt="Sketch - Dark Mode">
+      <p align="center"><strong>sketch</strong> - dark</p>
     </td>
   </tr>
 </table>
