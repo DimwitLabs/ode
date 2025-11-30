@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { loadConfig } from "../../utils/loadConfig";
+import { loadTheme } from "../../utils/loadTheme";
 import { makeAppTitle } from "../../utils/makeAppTitle";
 
 import Header from "../Header/Header";
@@ -26,7 +27,10 @@ function Layout() {
 
   useEffect(() => {
     loadConfig()
-      .then(setConfig)
+      .then(config => {
+        setConfig(config);
+        loadTheme(config);
+      })
       .catch(setError);
   }, []);
 
