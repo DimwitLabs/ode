@@ -19,7 +19,7 @@ export default {
       secondary: "#4ade80",
       grey: "#78716c",
       grey2: "#57534e",
-      background: "#1c1917",
+      background: "#403634",
       text: "#ecfccb",
       highlight: "#14532d40"
     }

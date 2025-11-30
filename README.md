@@ -19,7 +19,18 @@ Rest assured, I will be using `ode` too!
 
 You can find a live demo of the app [here](https://ode-demo.vercel.app/).
 
+## Documentation
+
+- **[README.md](https://github.com/DeepanshKhurana/ode/blob/main/README.md)**: Overview, features, and getting started
+- **[WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)**: Content repository, auto-deployment, and GitHub Actions
+- **[THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)**: Theme presets, customization, local fonts, and visual examples
+- **[CHANGELOG.md](https://github.com/DeepanshKhurana/ode/blob/main/CHANGELOG.md)**: Version history and release notes
+- **[REFERENCES.md](https://github.com/DeepanshKhurana/ode/blob/main/REFERENCES.md)**: Credits and inspirations
+
 ## Screenshots
+
+> [!NOTE]  
+> For theme-specific screenshots, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
 
 <table>
   <tr>
@@ -58,11 +69,11 @@ https://github.com/user-attachments/assets/222af674-11f0-4b5a-8232-a31aca8a61b1
 
 - **Markdown-based content**: Write your pieces and pages in simple markdown files with front matter; push to publish
 - **Reader mode**: Beautiful paginated reading experience with keyboard navigation (arrow keys)
-  - **Checkpointing:** URLs for the reader mode track piece and position so even if you publish more and the collection gets updated, a bookmarked link will always send the reader to the right place in the "book".
-  - **Gestures:** The Reader supports both swipe and trackpad gestures as of `v1.0.2`.
+  - **Checkpointing:** URLs for the reader mode track piece and position so even if you publish more and the collection gets updated, a bookmarked link will always send the reader to the right place in the "book"
+  - **Gestures:** The Reader supports both swipe and trackpad gestures
 - **Collections/Volumes**: Automatically organize your pieces into themed collections for curated reading
 - **Dark/Light mode**: Automatic theme switching with user preference persistence with a nice lamp reminiscent of olden times
-- **Theming**: 10 built-in themes with full customization support via config.yaml
+- **Theming**: 10 built-in themes with full customization support via `config.yaml`
 - **RSS feed**: Auto-generated RSS feed with full content for your readers to use
 - **Body of Work**: Chronological archive of all your pieces, organized by month/year; order is up to you
 - **Random piece**: Let readers discover content serendipitously and the continue reading

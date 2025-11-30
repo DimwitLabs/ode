@@ -17,6 +17,109 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
 - **manuscript** - Publishing aesthetic with Literata
 - **almanac** - Earthy greens with Lora
 
+<table>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/journal_light.png" alt="Journal - Light Mode">
+      <p align="center"><strong>journal</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/journal_dark.png" alt="Journal - Dark Mode">
+      <p align="center"><strong>journal</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/scripture_light.png" alt="Scripture - Light Mode">
+      <p align="center"><strong>scripture</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/scripture_dark.png" alt="Scripture - Dark Mode">
+      <p align="center"><strong>scripture</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/exploit_light.png" alt="Exploit - Light Mode">
+      <p align="center"><strong>exploit</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/exploit_dark.png" alt="Exploit - Dark Mode">
+      <p align="center"><strong>exploit</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/blueprint_light.png" alt="Blueprint - Light Mode">
+      <p align="center"><strong>blueprint</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/blueprint_dark.png" alt="Blueprint - Dark Mode">
+      <p align="center"><strong>blueprint</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/recipe_light.png" alt="Recipe - Light Mode">
+      <p align="center"><strong>recipe</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/recipe_dark.png" alt="Recipe - Dark Mode">
+      <p align="center"><strong>recipe</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/sketch_light.png" alt="Sketch - Light Mode">
+      <p align="center"><strong>sketch</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/sketch_dark.png" alt="Sketch - Dark Mode">
+      <p align="center"><strong>sketch</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/doodle_light.png" alt="Doodle - Light Mode">
+      <p align="center"><strong>doodle</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/doodle_dark.png" alt="Doodle - Dark Mode">
+      <p align="center"><strong>doodle</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/comic_light.png" alt="Comic - Light Mode">
+      <p align="center"><strong>comic</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/comic_dark.png" alt="Comic - Dark Mode">
+      <p align="center"><strong>comic</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/manuscript_light.png" alt="Manuscript - Light Mode">
+      <p align="center"><strong>manuscript</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/manuscript_dark.png" alt="Manuscript - Dark Mode">
+      <p align="center"><strong>manuscript</strong> - dark</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src=".github/media/themes/almanac_light.png" alt="Almanac - Light Mode">
+      <p align="center"><strong>almanac</strong> - light</p>
+    </td>
+    <td width="50%">
+      <img src=".github/media/themes/almanac_dark.png" alt="Almanac - Dark Mode">
+      <p align="center"><strong>almanac</strong> - dark</p>
+    </td>
+  </tr>
+</table>
+
 ## Using a Preset
 
 In your `config.yaml`:
