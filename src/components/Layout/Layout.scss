@@ -2,8 +2,8 @@
 @use "../../styles/mixins";
 
 .site-tagline {
-  border-top: 1px solid variables.$color-grey-2;
-  color: variables.$color-grey-2 !important;
+  border-top: 1px solid var(--color-grey2);
+  color: variables.$color-grey2 !important;
   padding-top: 1rem;
   font-size: 0.75rem;
   float: right;

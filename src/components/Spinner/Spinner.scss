@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: variables.$color-primary;
+  color: var(--color-primary);
   height: 100%;
 
   span {

@@ -26,21 +26,21 @@ header.header-bar {
   }
 
   .collection-title {
-    color: variables.$color-primary;
+    color: var(--color-primary);
     font-size: 1rem;
   }
 
   body.dark & .collection-title {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .separator {
     font-size: 1rem;
-    color: variables.$color-grey;
+    color: var(--color-grey);
   }
 
   body.dark & .separator {
-    color: variables.$color-grey-dark;
+    color: var(--color-grey-dark);
   }
 
 
@@ -76,12 +76,12 @@ header.header-bar {
   }
 
   .site-author {
-    color: variables.$color-primary;
+    color: var(--color-primary);
     margin: 0;
   }
 
   body.dark & .site-author {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .close-button {
@@ -96,7 +96,7 @@ header.header-bar {
     flex-shrink: 0;
     pointer-events: auto;
     transition: transform 0.3s;
-    color: variables.$color-primary;
+    color: var(--color-primary);
 
     &:hover {
       text-decoration: underline;
@@ -107,7 +107,7 @@ header.header-bar {
   }
 
   body.dark & .close-button {
-    color: variables.$color-primary-dark;
+    color: var(--color-primary-dark);
   }
 
   .header-right {

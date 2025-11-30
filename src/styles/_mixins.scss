@@ -24,10 +24,10 @@
 
 @mixin theme($mode: light) {
   @if $mode == light {
-    color: variables.$color-text;
-    background: variables.$color-background;
+    color: var(--color-text);
+    background: var(--color-background);
   } @else if $mode == dark {
-    color: variables.$color-text-dark;
-    background: variables.$color-background-dark;
+    color: var(--color-text-dark);
+    background: var(--color-background-dark);
   }
 }
