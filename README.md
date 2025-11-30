@@ -62,6 +62,7 @@ https://github.com/user-attachments/assets/222af674-11f0-4b5a-8232-a31aca8a61b1
   - **Gestures:** The Reader supports both swipe and trackpad gestures as of `v1.0.2`.
 - **Collections/Volumes**: Automatically organize your pieces into themed collections for curated reading
 - **Dark/Light mode**: Automatic theme switching with user preference persistence with a nice lamp reminiscent of olden times
+- **Theming**: 10 built-in themes with full customization support via config.yaml
 - **RSS feed**: Auto-generated RSS feed with full content for your readers to use
 - **Body of Work**: Chronological archive of all your pieces, organized by month/year; order is up to you
 - **Random piece**: Let readers discover content serendipitously and the continue reading
@@ -177,6 +178,13 @@ date: 2021-06-14
 
 Tell everyone everything!
 ```
+
+## Theming
+
+> [!NOTE]  
+> For complete theming documentation, including all available presets, customization options, and local font support, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
+
+Ode comes with 10 built-in themes that you can use and customize. Switch between presets, override colors and fonts, or build your own theme from scratch.
 
 ## Configuration
 
