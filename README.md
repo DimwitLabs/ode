@@ -22,6 +22,7 @@ You can find a live demo of the app [here](https://ode-demo.vercel.app/).
 ## Documentation
 
 - **[README.md](https://github.com/DeepanshKhurana/ode/blob/main/README.md)**: Overview, features, and getting started
+- **[ETHOS.md](https://github.com/DeepanshKhurana/ode/blob/main/ETHOS.md)**: Core principles and philosophy behind Ode
 - **[WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)**: Content repository, auto-deployment, and GitHub Actions
 - **[THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)**: Theme presets, customization, local fonts, and visual examples
 - **[CHANGELOG.md](https://github.com/DeepanshKhurana/ode/blob/main/CHANGELOG.md)**: Version history and release notes

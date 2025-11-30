@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Font scaling system with proportional sizing using `--font-scale` CSS variable.
 - Comprehensive theming documentation in [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md) with screenshots of all presets.
 - Theme presets automatically register from `src/assets/themes/` directory.
+- New [ETHOS.md](https://github.com/DeepanshKhurana/ode/blob/main/ETHOS.md) documenting core principles and philosophy.
 
 ## [1.1.2] - 2025-11-26
 
