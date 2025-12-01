@@ -4,13 +4,13 @@
 
 > An ode to those who love the craft, an ode to the old internet, an ode to a time before numbers and figures dominated writing, an ode to a time where readers remembered their favourite writers, and an ode to the hope that all of it is still present, somewhere.
 
-Ode is an opinionated, minimal and easy to use application set up for writers who do not care about the bells and whistles of the modern internet, who want to publish in an aesthetically pleasing website, and create a better experience for their readers.
+Ode is for writers who want to publish in an aesthetically pleasing website, who ignore the bells and whistles of the modern internet, and who want to create a better experience for their readers. It is opinionated, minimal, and easy to use, guided by its own [ethos](https://github.com/DeepanshKhurana/ode/blob/main/ETHOS.md).
 
 ## Inspiration
 
-The theme/idea comes directly from `journal.coffee` which is my Wordpress-based website where I've written prose for years now. I improved it a bit further. Wordpress is great but it became quite bloated over the years and I wanted a lightweight, faster place. Plus, the reading mode and ease of markdown publishing has been on my mind for ages.
+The theme/idea comes directly from `journal.coffee` which was my Wordpress-based website where I've written prose for years now. Its styling and design evolved with significant manual effort over the years. Wordpress was great but it became quite bloated over the years and I wanted a lightweight, faster place to write in. Plus, the reading mode and ease of markdown publishing has been on my mind for ages.
 
-Rest assured, I will be using `ode` too!
+Rest assured, as of the very first release, I am using `ode` too!
 
 > [!WARNING]  
 > Like all good things, Ode is currently changing and evolving. Things might break now and then.
