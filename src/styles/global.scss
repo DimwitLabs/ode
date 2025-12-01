@@ -6,6 +6,14 @@ body {
   margin: 2rem 16rem;
   @include mixins.theme(light);
 
+  @include mixins.respond-to-max(xl) {
+    margin: 2rem 8rem;
+  }
+
+  @include mixins.respond-to-max(lg) {
+    margin: 2rem 4rem;
+  }
+
   @include mixins.respond-to-max(md) {
     margin: 1rem 2rem;
   }
