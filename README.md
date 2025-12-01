@@ -212,8 +212,9 @@ Edit `public/config.yaml` to customize your site. You can handle quite a few thi
 - Rename the light/dark mode switches.
 - Edit the "words wasted" summary to your liking.
 - Control the number of entries in the RSS feed.
+- Select theme presets and control overrides.
 
-https://github.com/DeepanshKhurana/ode/blob/0e63910dabdb460c1e1e39623983869ad10c3a6b/public/config.yaml#L1-L45
+https://github.com/DeepanshKhurana/ode/blob/fcc6d2b7b0b825e07cc07e94a43596e716dd8b79/public/config.yaml#L1-L49
 
 ## Development
 
