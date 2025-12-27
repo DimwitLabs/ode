@@ -33,32 +33,17 @@ You can find a live demo of the app [here](https://demo.ode.dimwit.me/).
 > [!NOTE]
 > For theme-specific screenshots, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
 
-<table>
-  <tr>
-    <td width="50%">
-      ![Homepage - Light Mode](.github/media/homepage_light.png)
-    </td>
-    <td width="50%">
-      ![Homepage - Dark Mode](.github/media/homepage_dark.png)
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Reader Mode - Light](.github/media/reader_light.png)
-    </td>
-    <td width="50%">
-      ![Reader Mode - Dark](.github/media/reader_dark.png)
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Default case - Light](.github/media/caps_light.png)
-    </td>
-    <td width="50%">
-      ![Default case - Dark](.github/media/caps_dark.png)
-    </td>
-  </tr>
-</table>
+### Homepage
+![Homepage - Light Mode](.github/media/homepage_light.png)
+![Homepage - Dark Mode](.github/media/homepage_dark.png)
+
+### Reader Mode
+![Reader Mode - Light](.github/media/reader_light.png)
+![Reader Mode - Dark](.github/media/reader_dark.png)
+
+### Default Case
+![Default case - Light](.github/media/caps_light.png)
+![Default case - Dark](.github/media/caps_dark.png)
 
 ### Lamp Demo with Sound
 

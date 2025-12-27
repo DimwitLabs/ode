@@ -17,108 +17,47 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
 - **screenplay** - Film screenplay style with Courier Prime
 - **sketch** - Monochrome pencil aesthetic with Klee One
 
-<table>
-  <tr>
-    <td width="50%">
-      ![Almanac - Light Mode](.github/media/themes/almanac_light.png)
-      <p align="center"><strong>almanac</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Almanac - Dark Mode](.github/media/themes/almanac_dark.png)
-      <p align="center"><strong>almanac</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Blueprint - Light Mode](.github/media/themes/blueprint_light.png)
-      <p align="center"><strong>blueprint</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Blueprint - Dark Mode](.github/media/themes/blueprint_dark.png)
-      <p align="center"><strong>blueprint</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Comic - Light Mode](.github/media/themes/comic_light.png)
-      <p align="center"><strong>comic</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Comic - Dark Mode](.github/media/themes/comic_dark.png)
-      <p align="center"><strong>comic</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Doodle - Light Mode](.github/media/themes/doodle_light.png)
-      <p align="center"><strong>doodle</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Doodle - Dark Mode](.github/media/themes/doodle_dark.png)
-      <p align="center"><strong>doodle</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Exploit - Light Mode](.github/media/themes/exploit_light.png)
-      <p align="center"><strong>exploit</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Exploit - Dark Mode](.github/media/themes/exploit_dark.png)
-      <p align="center"><strong>exploit</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Journal - Light Mode](.github/media/themes/journal_light.png)
-      <p align="center"><strong>journal</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Journal - Dark Mode](.github/media/themes/journal_dark.png)
-      <p align="center"><strong>journal</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Manuscript - Light Mode](.github/media/themes/manuscript_light.png)
-      <p align="center"><strong>manuscript</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Manuscript - Dark Mode](.github/media/themes/manuscript_dark.png)
-      <p align="center"><strong>manuscript</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Recipe - Light Mode](.github/media/themes/recipe_light.png)
-      <p align="center"><strong>recipe</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Recipe - Dark Mode](.github/media/themes/recipe_dark.png)
-      <p align="center"><strong>recipe</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Screenplay - Light Mode](.github/media/themes/screenplay_light.png)
-      <p align="center"><strong>screenplay</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Screenplay - Dark Mode](.github/media/themes/screenplay_dark.png)
-      <p align="center"><strong>screenplay</strong> - dark</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      ![Sketch - Light Mode](.github/media/themes/sketch_light.png)
-      <p align="center"><strong>sketch</strong> - light</p>
-    </td>
-    <td width="50%">
-      ![Sketch - Dark Mode](.github/media/themes/sketch_dark.png)
-      <p align="center"><strong>sketch</strong> - dark</p>
-    </td>
-  </tr>
-</table>
+## Visual Examples
+
+### almanac
+![Almanac - Light Mode](.github/media/themes/almanac_light.png)
+![Almanac - Dark Mode](.github/media/themes/almanac_dark.png)
+
+### blueprint
+![Blueprint - Light Mode](.github/media/themes/blueprint_light.png)
+![Blueprint - Dark Mode](.github/media/themes/blueprint_dark.png)
+
+### comic
+![Comic - Light Mode](.github/media/themes/comic_light.png)
+![Comic - Dark Mode](.github/media/themes/comic_dark.png)
+
+### doodle
+![Doodle - Light Mode](.github/media/themes/doodle_light.png)
+![Doodle - Dark Mode](.github/media/themes/doodle_dark.png)
+
+### exploit
+![Exploit - Light Mode](.github/media/themes/exploit_light.png)
+![Exploit - Dark Mode](.github/media/themes/exploit_dark.png)
+
+### journal
+![Journal - Light Mode](.github/media/themes/journal_light.png)
+![Journal - Dark Mode](.github/media/themes/journal_dark.png)
+
+### manuscript
+![Manuscript - Light Mode](.github/media/themes/manuscript_light.png)
+![Manuscript - Dark Mode](.github/media/themes/manuscript_dark.png)
+
+### recipe
+![Recipe - Light Mode](.github/media/themes/recipe_light.png)
+![Recipe - Dark Mode](.github/media/themes/recipe_dark.png)
+
+### screenplay
+![Screenplay - Light Mode](.github/media/themes/screenplay_light.png)
+![Screenplay - Dark Mode](.github/media/themes/screenplay_dark.png)
+
+### sketch
+![Sketch - Light Mode](.github/media/themes/sketch_light.png)
+![Sketch - Dark Mode](.github/media/themes/sketch_dark.png)
 
 ## Using a Preset
 
