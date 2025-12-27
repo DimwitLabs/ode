@@ -1,0 +1,10 @@
+node_modules
+dist
+build
+docsite
+.git
+.github
+.vscode
+.eslintcache
+*.log
+.DS_Store
