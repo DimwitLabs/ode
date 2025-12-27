@@ -5,12 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.4] - 2025-12-27
+## [1.2.5] - 2025-12-27
 
 ### Added
 
 - New landing page at [ode.dimwit.me](https://ode.dimwit.me) with links to live demo, documentation, and repository.
 - Official documentation site powered by Docusaurus, featuring automated root markdown synchronization and search for easy access.
+
+### Changed
+
+- Image galleries in the `README.md` and `THEMING.md` have a slightly different layout now to make them better appear in the documentation.
 
 ## [1.2.2] - 2025-12-01
 
