@@ -20,101 +20,101 @@ Ode comes with 10 built-in themes, each is named and carefully designed after a 
 <table>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/almanac_light.png" alt="Almanac - Light Mode">
+      ![Almanac - Light Mode](.github/media/themes/almanac_light.png)
       <p align="center"><strong>almanac</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/almanac_dark.png" alt="Almanac - Dark Mode">
+      ![Almanac - Dark Mode](.github/media/themes/almanac_dark.png)
       <p align="center"><strong>almanac</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/blueprint_light.png" alt="Blueprint - Light Mode">
+      ![Blueprint - Light Mode](.github/media/themes/blueprint_light.png)
       <p align="center"><strong>blueprint</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/blueprint_dark.png" alt="Blueprint - Dark Mode">
+      ![Blueprint - Dark Mode](.github/media/themes/blueprint_dark.png)
       <p align="center"><strong>blueprint</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/comic_light.png" alt="Comic - Light Mode">
+      ![Comic - Light Mode](.github/media/themes/comic_light.png)
       <p align="center"><strong>comic</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/comic_dark.png" alt="Comic - Dark Mode">
+      ![Comic - Dark Mode](.github/media/themes/comic_dark.png)
       <p align="center"><strong>comic</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/doodle_light.png" alt="Doodle - Light Mode">
+      ![Doodle - Light Mode](.github/media/themes/doodle_light.png)
       <p align="center"><strong>doodle</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/doodle_dark.png" alt="Doodle - Dark Mode">
+      ![Doodle - Dark Mode](.github/media/themes/doodle_dark.png)
       <p align="center"><strong>doodle</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/exploit_light.png" alt="Exploit - Light Mode">
+      ![Exploit - Light Mode](.github/media/themes/exploit_light.png)
       <p align="center"><strong>exploit</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/exploit_dark.png" alt="Exploit - Dark Mode">
+      ![Exploit - Dark Mode](.github/media/themes/exploit_dark.png)
       <p align="center"><strong>exploit</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/journal_light.png" alt="Journal - Light Mode">
+      ![Journal - Light Mode](.github/media/themes/journal_light.png)
       <p align="center"><strong>journal</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/journal_dark.png" alt="Journal - Dark Mode">
+      ![Journal - Dark Mode](.github/media/themes/journal_dark.png)
       <p align="center"><strong>journal</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/manuscript_light.png" alt="Manuscript - Light Mode">
+      ![Manuscript - Light Mode](.github/media/themes/manuscript_light.png)
       <p align="center"><strong>manuscript</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/manuscript_dark.png" alt="Manuscript - Dark Mode">
+      ![Manuscript - Dark Mode](.github/media/themes/manuscript_dark.png)
       <p align="center"><strong>manuscript</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/recipe_light.png" alt="Recipe - Light Mode">
+      ![Recipe - Light Mode](.github/media/themes/recipe_light.png)
       <p align="center"><strong>recipe</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/recipe_dark.png" alt="Recipe - Dark Mode">
+      ![Recipe - Dark Mode](.github/media/themes/recipe_dark.png)
       <p align="center"><strong>recipe</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/screenplay_light.png" alt="Screenplay - Light Mode">
+      ![Screenplay - Light Mode](.github/media/themes/screenplay_light.png)
       <p align="center"><strong>screenplay</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/screenplay_dark.png" alt="Screenplay - Dark Mode">
+      ![Screenplay - Dark Mode](.github/media/themes/screenplay_dark.png)
       <p align="center"><strong>screenplay</strong> - dark</p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/themes/sketch_light.png" alt="Sketch - Light Mode">
+      ![Sketch - Light Mode](.github/media/themes/sketch_light.png)
       <p align="center"><strong>sketch</strong> - light</p>
     </td>
     <td width="50%">
-      <img src=".github/media/themes/sketch_dark.png" alt="Sketch - Dark Mode">
+      ![Sketch - Dark Mode](.github/media/themes/sketch_dark.png)
       <p align="center"><strong>sketch</strong> - dark</p>
     </td>
   </tr>
@@ -131,7 +131,7 @@ ui:
     defaultMode: "dark"
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > The `defaultMode` only applies on first visit. After that, the user's lamp toggle preference is saved.
 
 ## Partial Customization
