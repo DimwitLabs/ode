@@ -121,7 +121,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://ode-demo.vercel.app/',
+          href: 'https://demo.ode.dimwit.me/',
           label: 'Live Demo',
           position: 'right',
         },

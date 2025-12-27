@@ -2,7 +2,7 @@ site:
   title: "Ode to the Ordinary"
   author: "John Doe"
   tagline: "Isn't life just beauty, memory, and wonder?"
-  url: "https://ode-demo.vercel.app"
+  url: "https://demo.ode.dimwit.me"
   description: "An ode to those who love the craft, an ode to the old internet, an ode to a time before numbers and figures dominated writing, an ode to a time where readers remembered their favourite writers, and an ode to the hope that all of it is still present, somewhere."
 ui:
   theme:

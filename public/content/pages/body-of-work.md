@@ -1,7 +1,7 @@
 ---
 title: "Body of Work"
 slug: "body-of-work"
-date: 2025-12-01T06:26:47.137Z
+date: 2025-12-27T13:41:06.410Z
 ---
 
 ### January 1826

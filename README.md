@@ -17,7 +17,7 @@ Rest assured, as of the very first release, I am using `ode` too!
 
 ## Live Demo
 
-You can find a live demo of the app [here](https://ode-demo.vercel.app/).
+You can find a live demo of the app [here](https://demo.ode.dimwit.me/).
 
 ## Documentation
 
