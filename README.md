@@ -30,32 +30,32 @@ You can find a live demo of the app [here](https://ode-demo.vercel.app/).
 
 ## Screenshots
 
-> [!NOTE]  
+> [!NOTE]
 > For theme-specific screenshots, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
 
 <table>
   <tr>
     <td width="50%">
-      <img src=".github/media/homepage_light.png" alt="Homepage - Light Mode">
+      ![Homepage - Light Mode](.github/media/homepage_light.png)
     </td>
     <td width="50%">
-      <img src=".github/media/homepage_dark.png" alt="Homepage - Dark Mode">
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src=".github/media/reader_light.png" alt="Reader Mode - Light">
-    </td>
-    <td width="50%">
-      <img src=".github/media/reader_dark.png" alt="Reader Mode - Dark">
+      ![Homepage - Dark Mode](.github/media/homepage_dark.png)
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src=".github/media/caps_light.png" alt="Default case - Light">
+      ![Reader Mode - Light](.github/media/reader_light.png)
     </td>
     <td width="50%">
-      <img src=".github/media/caps_dark.png" alt="Default case - Dark">
+      ![Reader Mode - Dark](.github/media/reader_dark.png)
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      ![Default case - Light](.github/media/caps_light.png)
+    </td>
+    <td width="50%">
+      ![Default case - Dark](.github/media/caps_dark.png)
     </td>
   </tr>
 </table>
@@ -115,7 +115,7 @@ services:
       - /path/to/your/public:/app/public
 ```
 
-> [!TIP]  
+> [!TIP]
 > Use an absolute path for the volume mount (e.g., `/home/user/my-site/public`). Relative paths may not work correctly with tools like Portainer.
 
 Run:
@@ -132,7 +132,7 @@ docker compose restart
 
 ### Other Deployment Options
 
-> [!NOTE]  
+> [!NOTE]
 > In this case, you need to replace the content in `public/` with your own.
 
 Once you have your Fork or branch ready, you can deploy the app but the reader position Permalinks as well as the Body of Work links will fail. This is due to SPA handling of paths and (from my understanding) how React works. But this can be fixed.
@@ -193,7 +193,7 @@ Tell everyone everything!
 
 ## Theming
 
-> [!NOTE]  
+> [!NOTE]
 > For complete theming documentation, including all available presets, customization options, and local font support, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
 
 Ode comes with 10 built-in themes that you can use and customize. Switch between presets, override colors and fonts, or build your own theme from scratch.

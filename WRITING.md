@@ -4,7 +4,7 @@ Ode separates **code** and **content** so you can keep your writing clean, porta
 
 ## 1. What This Repository Contains
 
-> [!NOTE]  
+> [!NOTE]
 > For theming and visual customization, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
 
 Your content repo mirrors the `public/` directory structure:
