@@ -7,6 +7,14 @@
     {
       "source": "/feed/",
       "destination": "/feed.xml"
+    },
+    {
+      "source": "/sitemap/",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
     }
   ]
 }
