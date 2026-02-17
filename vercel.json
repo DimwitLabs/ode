@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build && npm run build:docs",
+  "buildCommand": "npm run build",
   "rewrites": [
     {
       "source": "/feed/",
