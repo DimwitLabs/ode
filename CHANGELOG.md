@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.7] - 2026-02-17
+
+### Added
+
+- Development workflow with `:development` Docker tag for testing changes without affecting `:latest` users.
+- Automatic `robots.txt` generation during build process with sitemap URL from `config.yaml`. ([#12](https://github.com/DeepanshKhurana/ode/pull/12))
+- Support for `description` field in piece frontmatter for RSS feed descriptions (with fallback to first line of content). ([#11](https://github.com/DeepanshKhurana/ode/pull/11))
+- Routing support for `/feed/`, `/sitemap/`, `/robots`, and `/robots.txt` in both nginx and Vercel configurations. ([#12](https://github.com/DeepanshKhurana/ode/pull/12))
+- Version badge (v1.2.7) in documentation site navbar.
+
+### Changed
+
+- RSS feed `<link rel="self">` now correctly points to `/feed.xml` instead of `/feed`. ([#11](https://github.com/DeepanshKhurana/ode/pull/11))
+- Footer styling restructured for better alignment on large displays - border now on article element with footer integrated into `HomepageViewer` component. ([#13](https://github.com/DeepanshKhurana/ode/pull/13))
+- Vercel rewrite rules optimized with specific routes ordered before catch-all pattern.
+
+### Fixed
+
+- RSS feed validation errors: removed invalid `managingEditor` field (was not in email format). ([#11](https://github.com/DeepanshKhurana/ode/pull/11))
+- RSS feed item structure: `<description>` now appears before `<content:encoded>` per RSS 2.0 best practices. ([#11](https://github.com/DeepanshKhurana/ode/pull/11))
+- Footer border extending beyond content on larger displays due to float-based alignment. ([#13](https://github.com/DeepanshKhurana/ode/pull/13))
+
+### Removed
+
+- `managingEditor` field from RSS feed generation (optional field causing validation warnings). ([#11](https://github.com/DeepanshKhurana/ode/pull/11))
+
 ## [1.2.5] - 2025-12-27
 
 ### Added
