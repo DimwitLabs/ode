@@ -23,6 +23,7 @@ interface Piece {
 
 interface FrontMatter {
   attributes: {
+    description?: string;
     title?: string;
     date?: string;
     collections?: string[];
@@ -82,9 +83,6 @@ interface FrontMatter {
     rssLines.push(`  <lastBuildDate>${buildDate}</lastBuildDate>`);
     rssLines.push(`  <language>en</language>`);
     
-    if (siteAuthor) {
-      rssLines.push(`  <managingEditor>${escapeXml(siteAuthor)}</managingEditor>`);
-    }
     rssLines.push('');
 
     const piecesToInclude = sortedPieces.slice(0, rssPieceLimit);
@@ -96,10 +94,21 @@ interface FrontMatter {
       const mdPath = path.join(contentDir, `${piece.slug}.md`);
       let content = '';
 
+      let description = '';
+      let firstLine = '';
+      let parsed: FrontMatter | undefined = undefined;
       if (fs.existsSync(mdPath)) {
         const mdFile = fs.readFileSync(mdPath, 'utf-8');
-        const parsed = fm<FrontMatter['attributes']>(mdFile);
+        parsed = fm<FrontMatter['attributes']>(mdFile);
         content = await marked.parse(parsed.body.trim());
+        const bodyLines = parsed.body.trim().split(/\r?\n/).filter(line => line.trim());
+        firstLine = bodyLines[0] ? bodyLines[0].trim() : '';
+      }
+
+      if (parsed && parsed.attributes && parsed.attributes.description) {
+        description = parsed.attributes.description.trim();
+      } else {
+        description = `A piece from ${siteTitle}${firstLine ? ' | ' + firstLine : ''}`;
       }
 
       rssLines.push('  <item>');
@@ -120,6 +129,7 @@ interface FrontMatter {
       rssLines.push(`    <guid isPermaLink="true">${pieceUrl}</guid>`);
       rssLines.push('');
 
+      rssLines.push(`    <description>${escapeXml(description)}</description>`);
       if (content) {
         rssLines.push(`    <content:encoded><![CDATA[${content}]]></content:encoded>`);
       }
