@@ -82,14 +82,7 @@ function Layout() {
         <RemoveTrailingSlash />
         <Routes>
           <Route path="/reader/:collection" element={<BookViewer />} />
-          <Route path="*" element={
-            <>
-              <HomeView config={config} />
-              <div className='site-tagline'>
-                {config.site.tagline}
-              </div>
-            </>
-          } />
+          <Route path="*" element={<HomeView config={config} />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -9,6 +9,7 @@ import './HomeView.scss';
 function HomeView({ config }) {
   const siteTitle = config?.site?.title || '';
   const author = config?.site?.author || '';
+  const siteTagline = config?.site?.tagline || '';
   const fullTitle = author ? `${siteTitle} by ${author}` : siteTitle;
   
   return <div className='home-view'>
@@ -18,7 +19,7 @@ function HomeView({ config }) {
       <WordsWasted />
       <Volumes />
     </div>
-    <HomepageViewer siteTitle={fullTitle} />
+    <HomepageViewer siteTitle={fullTitle} siteTagline={siteTagline} />
   </div>;
 }
 
