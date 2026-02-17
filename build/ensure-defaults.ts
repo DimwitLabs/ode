@@ -67,4 +67,13 @@ if (nonNotFoundPages.length === 0) {
   fs.writeFileSync(defaultPagePath, defaultPage);
 }
 
+const robotsPath = path.join(publicDir, 'robots.txt');
+const siteUrl = config.site?.url?.replace(/\/+$/, '') || 'https://example.com';
+const robotsContent = `User-agent: *
+Disallow:
+Sitemap: ${siteUrl}/sitemap.xml
+`;
+fs.writeFileSync(robotsPath, robotsContent);
+console.log('Generated robots.txt');
+
 console.log('\nDefaults check complete.\n');
