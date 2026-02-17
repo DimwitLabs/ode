@@ -77,7 +77,7 @@ interface FrontMatter {
     rssLines.push('');
     rssLines.push('<channel>');
     rssLines.push(`  <title>${escapeXml(siteTitle)}</title>`);
-    rssLines.push(`  <atom:link href="${baseUrl}/feed" rel="self" type="application/rss+xml" />`);
+    rssLines.push(`  <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml" />`);
     rssLines.push(`  <link>${baseUrl}/</link>`);
     rssLines.push(`  <description>${escapeXml(siteTagline)}</description>`);
     rssLines.push(`  <lastBuildDate>${buildDate}</lastBuildDate>`);
