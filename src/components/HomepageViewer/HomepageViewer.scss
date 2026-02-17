@@ -19,6 +19,12 @@ article {
   font-size: calc(1.1rem * var(--font-scale, 1));
   max-width: 100%;
   box-sizing: border-box;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-grey2);
+
+  @include mixins.respond-to-max(sm) {
+    padding-bottom: 1rem;
+  }
 
   .title-wrapper {
     display: flex;
@@ -94,5 +100,16 @@ article {
 
   .loading {
     padding: 2rem;
+  }
+}
+
+.site-tagline {
+  color: var(--color-grey2);
+  font-size: calc(0.75rem * var(--font-scale, 1));
+  margin-top: 2rem;
+  text-align: right;
+
+  @include mixins.respond-to-max(sm) {
+    margin-top: 1.5rem;
   }
 }

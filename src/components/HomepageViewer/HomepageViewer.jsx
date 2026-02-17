@@ -9,7 +9,7 @@ import { loadConfig } from '../../utils/loadConfig';
 
 import './HomepageViewer.scss';
 
-function HomepageViewer({ siteTitle }) {
+function HomepageViewer({ siteTitle, siteTagline }) {
   const location = useLocation();
   const [pageContent, setPageContent] = useState(null);
   const [pieceMetadata, setPieceMetadata] = useState(null);
@@ -123,6 +123,11 @@ function HomepageViewer({ siteTitle }) {
       )}
       <ReactMarkdown>{pageContent.content}</ReactMarkdown>
     </article>
+    {siteTagline && (
+      <div className='site-tagline'>
+        {siteTagline}
+      </div>
+    )}
   </div>;
 }
 
