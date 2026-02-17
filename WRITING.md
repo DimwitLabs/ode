@@ -60,8 +60,8 @@ services:
       - /srv/my-ode-site:/app/public
 ```
 
-[!NOTE]
-Use an absolute path for the volume mount. Relative paths may not work correctly with tools like Portainer.
+> [!NOTE]
+> Use an absolute path for the volume mount. Relative paths may not work correctly with tools like Portainer.
 
 Start the container:
 
