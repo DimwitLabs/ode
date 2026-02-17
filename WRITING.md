@@ -25,15 +25,11 @@ Example `content/pieces/example.md`:
 title: "Example Piece"
 slug: "example-piece"
 date: 2025-01-01
-description: "A description... that can be left blank"
 collections: ["essays"]
 ---
 
 Your writing here.
 ```
-
-> [!INFO]
-> The `description` key in frontmatter is optional. If provided, it will be used as the RSS feed description for this piece or page. If not, a default will be generated automatically with the syntax: A piece from `siteTitle` | (first line of your piece)
 
 ## 2. Clone the Content Repo on Your Server
 
@@ -183,4 +179,4 @@ docker logs YOUR_CONTAINER_NAME --tail 50
 - Keep content in a separate repo mirroring `public/` structure
 - Mount the entire repo to `/app/public` in the container
 - Use GitHub Actions for auto-deploy on push
-- Restart the container to rebuild with new content
+- Restart the container to rebuild with new content  
