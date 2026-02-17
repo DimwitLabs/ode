@@ -121,6 +121,11 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          type: 'html',
+          position: 'right',
+          value: '<span style="padding: 0.25rem 0.5rem; background: var(--ifm-color-primary); color: white; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">v1.2.7</span>',
+        },
+        {
           href: 'https://demo.ode.dimwit.me/',
           label: 'Live Demo',
           position: 'right',
