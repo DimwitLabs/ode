@@ -1,9 +1,6 @@
 {
+  "buildCommand": "npm run build && npm run build:docs",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    },
     {
       "source": "/feed/",
       "destination": "/feed.xml"
@@ -13,8 +10,16 @@
       "destination": "/sitemap.xml"
     },
     {
+      "source": "/robots",
+      "destination": "/robots.txt"
+    },
+    {
       "source": "/robots.txt",
       "destination": "/robots.txt"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

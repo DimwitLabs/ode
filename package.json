@@ -13,6 +13,7 @@
     "build:stats": "vite-node build/calculate-stats.ts",
     "build:rss": "vite-node build/generate-rss.ts",
     "build:sitemap": "vite-node build/generate-sitemap.ts",
+    "build:docs": "cd docsite && npm install && npm run build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
