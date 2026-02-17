@@ -32,7 +32,7 @@ collections: ["essays"]
 Your writing here.
 ```
 
-> [!INFO]
+> [!NOTE]
 > The `description` key in frontmatter is optional. If provided, it will be used as the RSS feed description for this piece or page. If not, a default will be generated automatically with the syntax: A piece from `siteTitle` | (first line of your piece)
 
 ## 2. Clone the Content Repo on Your Server
