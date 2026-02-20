@@ -81,8 +81,26 @@ h1 {
     border-bottom: 1px solid var(--primary-color);
 }
 
+.text-link.secondary {
+    color: var(--secondary-color);
+}
+
+.text-link.secondary:hover {
+    border-bottom-color: var(--secondary-color);
+}
+
+.sister-project {
+    font-size: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.sister-project .text-link {
+    font-size: inherit;
+}
+
 .footer {
-    margin-top: 4rem;
+    margin-top: 0;
     font-size: 0.9rem;
     color: #999;
     display: flex;

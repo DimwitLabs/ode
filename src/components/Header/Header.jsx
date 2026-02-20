@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import LampToggle from "../LampToggle/LampToggle";
+import { makeAppTitle } from "../../utils/makeAppTitle";
 
 import "./Header.scss";
 
@@ -39,7 +40,7 @@ function Header({ config }) {
   return (
     <>
       <Helmet>
-        <title>{site.title}</title>
+        <title>{makeAppTitle(site)}</title>
         <meta name="description" content={site.description} />
         <meta property="og:title" content={site.title} />
         <meta property="og:description" content={site.description} />
