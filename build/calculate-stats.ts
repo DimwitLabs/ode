@@ -6,8 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const publicDir = path.join(__dirname, '..', 'public');
-const piecesPagesJsonPath = path.join(publicDir, 'index', 'pieces-pages.json');
-const statsJsonPath = path.join(publicDir, 'index', 'stats.json');
+const piecesPagesJsonPath = path.join(publicDir, 'generated', 'index', 'pieces-pages.json');
+const statsJsonPath = path.join(publicDir, 'generated', 'index', 'stats.json');
 
 try {
   const piecesPagesData = JSON.parse(fs.readFileSync(piecesPagesJsonPath, 'utf-8'));

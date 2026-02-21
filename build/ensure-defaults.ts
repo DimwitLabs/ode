@@ -9,11 +9,12 @@ const contentDir = path.join(publicDir, 'content');
 const introPath = path.join(contentDir, 'intro.md');
 const piecesDir = path.join(contentDir, 'pieces');
 const pagesDir = path.join(contentDir, 'pages');
-const indexDir = path.join(publicDir, 'index');
+const generatedDir = path.join(publicDir, 'generated');
+const indexDir = path.join(generatedDir, 'index');
 
 console.log('\nChecking for missing content...\n');
 
-[contentDir, piecesDir, pagesDir, indexDir].forEach(dir => {
+[contentDir, piecesDir, pagesDir, generatedDir, indexDir].forEach(dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
     console.warn(`WARNING: Directory missing: ${path.basename(dir)}/ — created`);
@@ -71,7 +72,7 @@ const robotsPath = path.join(publicDir, 'robots.txt');
 const siteUrl = config.site?.url?.replace(/\/+$/, '') || 'https://example.com';
 const robotsContent = `User-agent: *
 Disallow:
-Sitemap: ${siteUrl}/sitemap.xml
+Sitemap: ${siteUrl}/generated/sitemap.xml
 `;
 fs.writeFileSync(robotsPath, robotsContent);
 console.log('Generated robots.txt');

@@ -37,7 +37,7 @@ function HomepageViewer({ siteTitle, siteTagline }) {
         setPageContent({ content, frontmatter });
         
         if (contentPath.includes('/pieces/')) {
-          const piecesResponse = await fetch('/index/pieces.json');
+          const piecesResponse = await fetch('/generated/index/pieces.json');
           const pieces = await piecesResponse.json();
           const slug = contentPath.split('/pieces/')[1].replace('.md', '');
           const metadata = pieces.find(p => p.slug === slug);

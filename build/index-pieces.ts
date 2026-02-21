@@ -5,9 +5,9 @@ import yaml from 'js-yaml';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesPath = path.join(publicDir, 'content', 'pieces');
-const piecesIndexPath = path.join(publicDir, 'index', 'pieces.json');
-const collectionsPath = path.join(publicDir, 'index', 'pieces-collections.json');
-const errorsPath = path.join(publicDir, 'index', 'pieces-errors.json');
+const piecesIndexPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
+const collectionsPath = path.join(publicDir, 'generated', 'index', 'pieces-collections.json');
+const errorsPath = path.join(publicDir, 'generated', 'index', 'pieces-errors.json');
 const configPath = path.join(publicDir, 'config.yaml');
 
 type Piece = {

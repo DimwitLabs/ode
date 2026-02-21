@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://demo.ode.dimwit.me/generated/sitemap.xml

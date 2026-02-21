@@ -3,7 +3,7 @@ import { loadConfig } from './loadConfig';
 export async function resolveContentPath({ pathname }) {
   if (pathname === '/') {
     try {
-      const res = await fetch('/index/pieces.json');
+      const res = await fetch('/generated/index/pieces.json');
       const pieces = await res.json();
       if (pieces && pieces.length > 0) {
         const mostRecent = pieces[0];
@@ -18,7 +18,7 @@ export async function resolveContentPath({ pathname }) {
     let isPage = false;
     let isPiece = false;
     try {
-      const pagesRes = await fetch('/index/pages.json');
+      const pagesRes = await fetch('/generated/index/pages.json');
       const pages = await pagesRes.json();
       isPage = pages.some(page => page.slug === slug);
     } catch (error) {
@@ -27,7 +27,7 @@ export async function resolveContentPath({ pathname }) {
     }
     if (!isPage) {
       try {
-        const piecesRes = await fetch('/index/pieces.json');
+        const piecesRes = await fetch('/generated/index/pieces.json');
         const pieces = await piecesRes.json();
         isPiece = pieces.some(piece => piece.slug === slug);
       } catch (error) {

@@ -5,8 +5,8 @@ import { loadConfig } from '../../utils/loadConfig';
 
 
 function Navigation() {
-  const pagesIndexPath = '/index/pages.json';
-  const piecesIndexPath = '/index/pieces.json';
+  const pagesIndexPath = '/generated/index/pages.json';
+  const piecesIndexPath = '/generated/index/pieces.json';
   const [pages, setPages] = React.useState([]);
   const [pieces, setPieces] = React.useState([]);
   const [config, setConfig] = React.useState(null);
@@ -47,7 +47,7 @@ function Navigation() {
       <button onClick={handleRandomPiece} className="random-piece-button">
         {config?.ui?.labels?.randomPiece || 'Random Piece'}
       </button>
-      <a href="/feed.xml" target="_blank" rel="noopener noreferrer" className="rss-link">
+      <a href="/generated/feed.xml" target="_blank" rel="noopener noreferrer" className="rss-link">
         {config?.ui?.labels?.rss || 'RSS'}
       </a>
     </nav>
