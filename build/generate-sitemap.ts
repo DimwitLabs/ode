@@ -8,10 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const publicDir = path.join(__dirname, '..', 'public');
 const configPath = path.join(publicDir, 'config.yaml');
-const piecesJsonPath = path.join(publicDir, 'index', 'pieces.json');
-const pagesJsonPath = path.join(publicDir, 'index', 'pages.json');
-const collectionsJsonPath = path.join(publicDir, 'index', 'pieces-collections.json');
-const sitemapPath = path.join(publicDir, 'sitemap.xml');
+const piecesJsonPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
+const pagesJsonPath = path.join(publicDir, 'generated', 'index', 'pages.json');
+const collectionsJsonPath = path.join(publicDir, 'generated', 'index', 'pieces-collections.json');
+const sitemapPath = path.join(publicDir, 'generated', 'sitemap.xml');
 
 interface Piece {
   slug: string;
@@ -47,7 +47,6 @@ interface Collection {
     sitemapLines.push('<?xml version="1.0" encoding="UTF-8"?>');
     sitemapLines.push('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
     
-    // Homepage
     sitemapLines.push('  <url>');
     sitemapLines.push(`    <loc>${baseUrl}/</loc>`);
     sitemapLines.push(`    <lastmod>${currentDate}</lastmod>`);
@@ -55,7 +54,6 @@ interface Collection {
     sitemapLines.push('    <priority>1.0</priority>');
     sitemapLines.push('  </url>');
     
-    // Pages
     for (const page of pages) {
       sitemapLines.push('  <url>');
       sitemapLines.push(`    <loc>${baseUrl}/${page.slug}</loc>`);
@@ -65,7 +63,6 @@ interface Collection {
       sitemapLines.push('  </url>');
     }
     
-    // Collections/Reader pages
     for (const collection of collections) {
       sitemapLines.push('  <url>');
       sitemapLines.push(`    <loc>${baseUrl}/reader/${encodeURIComponent(collection.name)}</loc>`);
@@ -75,7 +72,6 @@ interface Collection {
       sitemapLines.push('  </url>');
     }
     
-    // Individual pieces
     for (const piece of pieces) {
       sitemapLines.push('  <url>');
       sitemapLines.push(`    <loc>${baseUrl}/${piece.slug}</loc>`);

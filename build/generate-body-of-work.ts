@@ -3,8 +3,8 @@ import path from 'path';
 import yaml from 'js-yaml';
 
 const publicDir = path.join(__dirname, '..', 'public');
-const piecesJsonPath = path.join(publicDir, 'index', 'pieces.json');
-const collectionsJsonPath = path.join(publicDir, 'index', 'pieces-collections.json');
+const piecesJsonPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
+const collectionsJsonPath = path.join(publicDir, 'generated', 'index', 'pieces-collections.json');
 const bodyOfWorkPath = path.join(publicDir, 'content', 'pages', 'body-of-work.md');
 const configPath = path.join(publicDir, 'config.yaml');
 

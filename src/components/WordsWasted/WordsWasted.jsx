@@ -9,7 +9,7 @@ function WordsWasted() {
   useEffect(() => {
     Promise.all([
       loadConfig(),
-      fetch('/index/stats.json').then(r => r.json())
+      fetch('/generated/index/stats.json').then(r => r.json())
     ])
       .then(([configData, statsData]) => {
         setConfig(configData);

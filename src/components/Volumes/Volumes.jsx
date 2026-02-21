@@ -9,7 +9,7 @@ function Volumes() {
 
   useEffect(() => {
     Promise.all([
-      fetch('/index/pieces-collections.json').then(r => r.json()),
+      fetch('/generated/index/pieces-collections.json').then(r => r.json()),
       loadConfig()
     ])
       .then(([collectionsData, configData]) => {

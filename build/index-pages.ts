@@ -5,8 +5,8 @@ import yaml from 'js-yaml';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const pagesPath = path.join(publicDir, 'content', 'pages');
-const indexPath = path.join(publicDir, 'index', 'pages.json');
-const errorsPath = path.join(publicDir, 'index', 'page-errors.json');
+const indexPath = path.join(publicDir, 'generated', 'index', 'pages.json');
+const errorsPath = path.join(publicDir, 'generated', 'index', 'page-errors.json');
 const configPath = path.join(publicDir, 'config.yaml');
 
 type Page = {

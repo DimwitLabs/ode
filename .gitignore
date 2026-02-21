@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # Content and generated files
-public/index/*json
-public/feed*
+public/generated/

@@ -11,8 +11,8 @@ const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, '..', 'public');
 const contentDir = path.join(publicDir, 'content', 'pieces');
 const configPath = path.join(publicDir, 'config.yaml');
-const piecesJsonPath = path.join(publicDir, 'index', 'pieces.json');
-const rssPath = path.join(publicDir, 'feed.xml');
+const piecesJsonPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
+const rssPath = path.join(publicDir, 'generated', 'feed.xml');
 
 interface Piece {
   slug: string;
@@ -77,7 +77,7 @@ interface FrontMatter {
     rssLines.push('');
     rssLines.push('<channel>');
     rssLines.push(`  <title>${escapeXml(siteTitle)}</title>`);
-    rssLines.push(`  <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml" />`);
+    rssLines.push(`  <atom:link href="${baseUrl}/generated/feed.xml" rel="self" type="application/rss+xml" />`);
     rssLines.push(`  <link>${baseUrl}/</link>`);
     rssLines.push(`  <description>${escapeXml(siteTagline)}</description>`);
     rssLines.push(`  <lastBuildDate>${buildDate}</lastBuildDate>`);

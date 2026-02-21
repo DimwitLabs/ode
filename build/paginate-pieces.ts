@@ -4,8 +4,8 @@ import fm from "front-matter";
 
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesPath = path.join(publicDir, 'content', 'pieces');
-const pagesIndexPath = path.join(publicDir, 'index', 'pieces-pages.json');
-const piecesIndexPath = path.join(publicDir, 'index', 'pieces.json');
+const pagesIndexPath = path.join(publicDir, 'generated', 'index', 'pieces-pages.json');
+const piecesIndexPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
 
 const CHARS_PER_PAGE = 2200;
 

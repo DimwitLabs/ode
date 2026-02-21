@@ -24,9 +24,9 @@ function BookViewer() {
       setLoading(true);
       try {
         const [pagesRes, collectionsRes, piecesRes, configData] = await Promise.all([
-          fetch('/index/pieces-pages.json'),
-          fetch('/index/pieces-collections.json'),
-          fetch('/index/pieces.json'),
+          fetch('/generated/index/pieces-pages.json'),
+          fetch('/generated/index/pieces-collections.json'),
+          fetch('/generated/index/pieces.json'),
           loadConfig()
         ]);
         
