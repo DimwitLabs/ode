@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
+import fm from 'front-matter';
 import { loadTheme, applyOverrides, ThemeConfig, ThemeOverrides } from './utils/theme-loader';
 
 interface Piece {
@@ -31,6 +32,9 @@ interface Config {
       defaultMode?: 'light' | 'dark';
       overrides?: ThemeOverrides;
     };
+  };
+  bodyOfWork?: {
+    description?: string;
   };
 }
 
@@ -68,6 +72,31 @@ const siteUrl = config.site.url || '';
 const siteTitle = config.site.title;
 const siteAuthor = config.site.author;
 const siteDescription = config.site.description || config.site.tagline || '';
+
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^#+\s+/gm, '')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/_(.+?)_/g, '$1')
+    .replace(/`(.+?)`/g, '$1')
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+    .replace(/!\[.*?\]\(.+?\)/g, '')
+    .replace(/>\s+/g, '')
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getContentDescription(filePath: string): string {
+  if (!fs.existsSync(filePath)) {
+    return '';
+  }
+  const raw = fs.readFileSync(filePath, 'utf-8');
+  const parsed = fm(raw);
+  const body = stripMarkdown(parsed.body);
+  return body.substring(0, 160);
+}
 
 function generateMetaPage(
   slug: string,
@@ -154,7 +183,7 @@ function generateMetaPage(
 </body>
 </html>`;
 
-  fs.writeFileSync(path.join(metaDir, `${slug}.html`), html);
+  fs.writeFileSync(path.join(metaDir, `${slug}.html`), html, { mode: 0o644 });
 }
 
 function main() {
@@ -172,9 +201,11 @@ function main() {
     const pieces: Piece[] = JSON.parse(fs.readFileSync(piecesPath, 'utf-8'));
     
     for (const piece of pieces) {
-      const description = piece.collections?.length 
-        ? `${piece.collections.join(', ')} by ${siteAuthor}`
-        : `A piece by ${siteAuthor}`;
+      const pieceFilePath = path.join(publicDir, 'content', 'pieces', `${piece.slug}.md`);
+      const description = getContentDescription(pieceFilePath) || 
+        (piece.collections?.length 
+          ? `${piece.collections.join(', ')} by ${siteAuthor}`
+          : `A piece by ${siteAuthor}`);
       
       generateMetaPage(
         piece.slug,
@@ -192,10 +223,19 @@ function main() {
     const pages: Page[] = JSON.parse(fs.readFileSync(pagesPath, 'utf-8'));
     
     for (const page of pages) {
+      let description: string;
+      
+      if (page.slug === 'body-of-work' && config.bodyOfWork?.description) {
+        description = config.bodyOfWork.description;
+      } else {
+        const pageFilePath = path.join(publicDir, 'content', 'pages', `${page.slug}.md`);
+        description = getContentDescription(pageFilePath) || `${page.title} - ${siteTitle}`;
+      }
+      
       generateMetaPage(
         page.slug,
         page.title,
-        `${page.title} - ${siteTitle}`,
+        description,
         page.slug,
         `/${page.slug}`
       );

@@ -203,7 +203,7 @@ async function generateOgImage(
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  fs.writeFileSync(path.join(ogDir, `${slug}.png`), pngBuffer);
+  fs.writeFileSync(path.join(ogDir, `${slug}.png`), pngBuffer, { mode: 0o644 });
 }
 
 async function main() {
