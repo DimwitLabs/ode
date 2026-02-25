@@ -67,3 +67,21 @@ export function getAvailableThemes(): string[] {
     .filter(file => file.endsWith('.js'))
     .map(file => file.replace('.js', ''));
 }
+
+export interface ThemeOverrides {
+  font?: Partial<ThemeConfig['font']>;
+  colors?: {
+    light?: Partial<ThemeConfig['colors']['light']>;
+    dark?: Partial<ThemeConfig['colors']['dark']>;
+  };
+}
+
+export function applyOverrides(theme: ThemeConfig, overrides: ThemeOverrides): ThemeConfig {
+  return {
+    font: { ...theme.font, ...overrides.font },
+    colors: {
+      light: { ...theme.colors.light, ...overrides.colors?.light },
+      dark: { ...theme.colors.dark, ...overrides.colors?.dark }
+    }
+  };
+}
