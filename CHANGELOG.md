@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-26
+
+### Added
+
+- Themed 502 error page generation with customizable text via `config.yaml`'s `redeployPage` section.
+- Theme loader utility for build scripts.
+
+### Changed
+
+- Improved GitHub Actions deployment documentation in `WRITING.md` with SSH key setup guide.
+- 502 page served from persistent host location (survives container restarts).
+
+### Fixed
+
+- Numeric values in `config.yaml` (e.g., `404`) now handled correctly.
+
+### Removed
+
+- `react-helmet` dependency (using React 19 native meta tags).
+
 ## [1.2.9] - 2026-02-22
 
 ### Changed
