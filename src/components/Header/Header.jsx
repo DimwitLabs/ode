@@ -1,6 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 
 import LampToggle from "../LampToggle/LampToggle";
 import { makeAppTitle } from "../../utils/makeAppTitle";
@@ -39,14 +38,12 @@ function Header({ config }) {
 
   return (
     <>
-      <Helmet>
-        <title>{makeAppTitle(site)}</title>
-        <meta name="description" content={site.description} />
-        <meta property="og:title" content={site.title} />
-        <meta property="og:description" content={site.description} />
-        <meta property="og:url" content={site.url} />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <title>{makeAppTitle(site)}</title>
+      <meta name="description" content={site.description} />
+      <meta property="og:title" content={site.title} />
+      <meta property="og:description" content={site.description} />
+      <meta property="og:url" content={site.url} />
+      <meta property="og:type" content="website" />
       {isCollection ? (
         <header className="header-bar">
           <div className="header-left collection-view">

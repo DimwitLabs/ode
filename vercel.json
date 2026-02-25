@@ -2,12 +2,20 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/feed.xml",
+      "destination": "/generated/feed.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/generated/sitemap.xml"
+    },
+    {
       "source": "/feed/",
-      "destination": "/feed.xml"
+      "destination": "/generated/feed.xml"
     },
     {
       "source": "/sitemap/",
-      "destination": "/sitemap.xml"
+      "destination": "/generated/sitemap.xml"
     },
     {
       "source": "/robots",
@@ -20,6 +28,39 @@
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/generated/meta-images/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/svg+xml"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/generated/feed.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
+    },
+    {
+      "source": "/generated/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
     }
   ]
 }

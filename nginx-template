@@ -2,8 +2,26 @@ server {
     listen 80;
     server_name your-domain.com;
 
+    # RSS feed
+    location = /feed.xml {
+        proxy_pass http://localhost:PORT/generated/feed.xml;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
     location = /feed/ {
-        proxy_pass http://localhost:PORT/feed.xml;
+        proxy_pass http://localhost:PORT/generated/feed.xml;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Sitemap
+    location = /sitemap.xml {
+        proxy_pass http://localhost:PORT/generated/sitemap.xml;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -11,21 +29,14 @@ server {
     }
 
     location = /sitemap/ {
-        proxy_pass http://localhost:PORT/sitemap.xml;
+        proxy_pass http://localhost:PORT/generated/sitemap.xml;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    location = /robots {
-        proxy_pass http://localhost:PORT/robots.txt;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
+    # Robots
     location = /robots.txt {
         proxy_pass http://localhost:PORT/robots.txt;
         proxy_set_header Host $host;
@@ -34,6 +45,32 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    location = /robots/ {
+        proxy_pass http://localhost:PORT/robots.txt;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Generated assets (meta images, 502 page, etc.)
+    location /generated/ {
+        proxy_pass http://localhost:PORT/generated/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Custom 502 error page (served from persistent location outside container)
+    # Replace YOUR_PROJECT_NAME with your project name
+    error_page 502 /502.html;
+    location = /502.html {
+        root /var/www/YOUR_PROJECT_NAME-static;
+        internal;
+    }
+
+    # Everything else
     location / {
         proxy_pass http://localhost:PORT;
         proxy_set_header Host $host;
@@ -41,11 +78,11 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # SPA routing:
         proxy_intercept_errors on;
         error_page 404 = /index.html;
     }
 
+    # SPA fallback
     location = /index.html {
         proxy_pass http://localhost:PORT;
         proxy_set_header Host $host;
