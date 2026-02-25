@@ -69,11 +69,8 @@ async function loadFont(): Promise<ArrayBuffer | null> {
   const fontUrl = theme.font.url;
   
   if (fontUrl.startsWith('http')) {
-    // Google Fonts URL - we need the raw font file (TTF, not WOFF2)
-    // Satori doesn't support WOFF2, so request TTF
     const cssResponse = await fetch(fontUrl, {
       headers: {
-        // Request TTF format by using an older user agent
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36'
       }
     });
@@ -86,7 +83,6 @@ async function loadFont(): Promise<ArrayBuffer | null> {
       return fontResponse.arrayBuffer();
     }
     
-    // Try any format if TTF not found
     const anyFontMatch = css.match(/src:\s*url\(([^)]+\.ttf)\)/);
     if (anyFontMatch) {
       const fontResponse = await fetch(anyFontMatch[1]);
@@ -97,16 +93,17 @@ async function loadFont(): Promise<ArrayBuffer | null> {
     return null;
   }
   
-  // Local font file
   if (fs.existsSync(fontUrl) && fontUrl.match(/\.(ttf|otf)$/i)) {
     const buffer = fs.readFileSync(fontUrl);
     return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
   }
   
-  // Can't use WOFF/WOFF2 with satori
   console.warn(`[og-images]: font format not supported by satori: ${fontUrl}`);
   return null;
 }
+
+const BATCH_SIZE = 5;
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function generateOgImage(
   title: string,
@@ -227,31 +224,40 @@ async function main() {
   const siteAuthor = config.site.author;
   const siteTagline = config.site.tagline || '';
 
-  // Generate OG image for homepage
   await generateOgImage(siteTitle, siteTagline, 'index', fontData);
   console.log('[og-images]: generated og/index.png');
 
-  // Generate OG images for pieces
   const piecesPath = path.join(generatedDir, 'index', 'pieces.json');
   if (fs.existsSync(piecesPath)) {
     const pieces: Piece[] = JSON.parse(fs.readFileSync(piecesPath, 'utf-8'));
     
-    for (const piece of pieces) {
-      const subtitle = piece.collections?.length 
-        ? `${piece.collections[0]} · ${siteAuthor}`
-        : siteAuthor;
-      await generateOgImage(piece.title, subtitle, piece.slug, fontData);
+    for (let i = 0; i < pieces.length; i += BATCH_SIZE) {
+      const batch = pieces.slice(i, i + BATCH_SIZE);
+      for (const piece of batch) {
+        const subtitle = piece.collections?.length 
+          ? `${piece.collections[0]} · ${siteAuthor}`
+          : siteAuthor;
+        await generateOgImage(piece.title, subtitle, piece.slug, fontData);
+      }
+      if (i + BATCH_SIZE < pieces.length) {
+        await delay(50);
+      }
     }
     console.log(`[og-images]: generated ${pieces.length} piece images`);
   }
 
-  // Generate OG images for pages
   const pagesPath = path.join(generatedDir, 'index', 'pages.json');
   if (fs.existsSync(pagesPath)) {
     const pages: Page[] = JSON.parse(fs.readFileSync(pagesPath, 'utf-8'));
     
-    for (const page of pages) {
-      await generateOgImage(page.title, siteTitle, `page-${page.slug}`, fontData);
+    for (let i = 0; i < pages.length; i += BATCH_SIZE) {
+      const batch = pages.slice(i, i + BATCH_SIZE);
+      for (const page of batch) {
+        await generateOgImage(page.title, siteTitle, page.slug, fontData);
+      }
+      if (i + BATCH_SIZE < pages.length) {
+        await delay(50);
+      }
     }
     console.log(`[og-images]: generated ${pages.length} page images`);
   }

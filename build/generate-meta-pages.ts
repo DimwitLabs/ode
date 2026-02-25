@@ -158,7 +158,6 @@ function generateMetaPage(
 }
 
 function main() {
-  // Generate meta page for homepage
   generateMetaPage(
     'index',
     siteTitle,
@@ -168,7 +167,6 @@ function main() {
   );
   console.log('[meta]: generated meta/index.html');
 
-  // Generate meta pages for pieces
   const piecesPath = path.join(generatedDir, 'index', 'pieces.json');
   if (fs.existsSync(piecesPath)) {
     const pieces: Piece[] = JSON.parse(fs.readFileSync(piecesPath, 'utf-8'));
@@ -188,18 +186,17 @@ function main() {
     }
     console.log(`[meta]: generated ${pieces.length} piece meta pages`);
   }
-
-  // Generate meta pages for pages
+  
   const pagesPath = path.join(generatedDir, 'index', 'pages.json');
   if (fs.existsSync(pagesPath)) {
     const pages: Page[] = JSON.parse(fs.readFileSync(pagesPath, 'utf-8'));
     
     for (const page of pages) {
       generateMetaPage(
-        `page-${page.slug}`,
+        page.slug,
         page.title,
         `${page.title} - ${siteTitle}`,
-        `page-${page.slug}`,
+        page.slug,
         `/${page.slug}`
       );
     }

@@ -48,6 +48,33 @@
       "destination": "/generated/meta/:slug.html"
     },
     {
+      "source": "/reader/:collection",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        },
+        {
+          "type": "query",
+          "key": "piece",
+          "value": "(?<piece>.*)"
+        }
+      ],
+      "destination": "/generated/meta/:piece.html"
+    },
+    {
+      "source": "/reader/:collection",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
