@@ -23,13 +23,14 @@ type FrontMatter = {
 
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
-const rawNotFound = config?.pages?.notFound || 'obscured';
+const rawNotFound = String(config?.pages?.notFound || 'obscured');
 const notFoundFile = rawNotFound.endsWith('.md') ? rawNotFound : `${rawNotFound}.md`;
 const rawExcludedPages = (config?.exclude?.pages || []).filter(Boolean);
 
-const excludedPages = rawExcludedPages.map((page: string) => 
-  page.endsWith('.md') ? page : `${page}.md`
-);
+const excludedPages = rawExcludedPages.map((page: string | number) => {
+  const pageStr = String(page);
+  return pageStr.endsWith('.md') ? pageStr : `${pageStr}.md`;
+});
 
 if (!excludedPages.includes(notFoundFile)) {
   excludedPages.push(notFoundFile);
@@ -37,7 +38,7 @@ if (!excludedPages.includes(notFoundFile)) {
 
 const files = fs.readdirSync(pagesPath);
 if (files.length === 0) {
-  console.log('No files found in the pages directory.');
+  console.log('[pages]: no files found in pages directory');
   process.exit(0);
 }
 
@@ -50,33 +51,33 @@ files.forEach(file => {
   }
   
   if (excludedPages.includes(file)) {
-    console.log(`Excluding: ${file} (listed in config.yaml)`);
+    console.log(`[pages]: excluding ${file} (listed in config.yaml)`);
     return;
   }
   
   const filePath = path.join(pagesPath, file);
   const stats = fs.statSync(filePath);
   if (stats.isFile()) {
-    console.log(`Indexing: ${file}, Size: ${stats.size} bytes`);
+    console.log(`[pages]: indexing ${file} (${stats.size} bytes)`);
     const raw = fs.readFileSync(filePath, 'utf-8');
     const parsed = fm<FrontMatter>(raw);
     
     const { title, date, slug } = parsed.attributes;
     
     if (!title || typeof title !== 'string' || title.trim() === '') {
-      console.warn(`Skipping ${file}: Missing or invalid title`);
+      console.warn(`[pages]: skipping ${file}: missing or invalid title`);
       errors.push(file);
       return;
     }
     
     if (!date) {
-      console.warn(`Skipping ${file}: Missing date`);
+      console.warn(`[pages]: skipping ${file}: missing date`);
       errors.push(file);
       return;
     }
     
     if (!slug || typeof slug !== 'string' || slug.trim() === '') {
-      console.warn(`Skipping ${file}: Missing or invalid slug`);
+      console.warn(`[pages]: skipping ${file}: missing or invalid slug`);
       errors.push(file);
       return;
     }
@@ -108,9 +109,9 @@ if (pagesOrder.length > 0) {
 }
 
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
-console.log(`pages.json created successfully with ${index.length} entries.`);
+console.log(`[pages]: created pages.json with ${index.length} entries`);
 
 if (errors.length > 0) {
   fs.writeFileSync(errorsPath, JSON.stringify(errors, null, 2));
-  console.log(`Errors logged for ${errors.length} files.`);
+  console.log(`[pages]: ${errors.length} files had errors`);
 }

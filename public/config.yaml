@@ -47,3 +47,10 @@ rss:
   piecesLimit: 10
 bodyOfWork:
   order: ascending
+  description: "A chronological archive of all pieces, organized by month and year."
+redeployPage:
+  title: "Just a moment..."
+  message: "Something new is coming along."
+  submessage: "Please refresh in a few seconds."
+  refreshInterval: 10
+  refreshNotice: "This page will refresh automatically in {interval} seconds."

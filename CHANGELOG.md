@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-02-26
+
+### Added
+
+#### Metadata ([#14](https://github.com/DeepanshKhurana/ode/issues/14))
+- Social card preview system with OG image generation using `satori` and `@resvg/resvg-js`.
+- Pre-rendered meta pages for bots (WhatsApp, LinkedIn, Twitter, Facebook, etc.) with full `og:*` and `twitter:*` tags. Note that the tags work according to bot lists and would not be readily available on an online checker. However, `curl`ing the bots with a `User-Agent` e.g. `curl -H "User-Agent: WhatsApp/2.0"...` can be a good way to test. This works across `nginx` as well as `Vercel`. Configurations for both are provided in the repository as `nginx/` and `vercel.json`.
+- Content-based meta descriptions: first 160 characters extracted from markdown content with formatting stripped.
+- Reader URL bot support: `/reader/:collection?piece=:slug` serves appropriate meta pages to bots. The page is selected to be the piece the reader is currently reading.
+- Custom `bodyOfWork.description` field in `config.yaml` for `body-of-work` page social preview.
+- `nginx` configuration templates in `nginx/` directory with setup instructions.
+- OG images generated at 1200x630px with theme-specific styling.
+
+#### 502 Error Page for `nginx` ([#19](https://github.com/DeepanshKhurana/ode/issues/19))
+- Themed 502 error page generation with customizable text via `config.yaml`'s `redeployPage` section.
+- The theme respects all settings e.g. `defaultMode`, `lowercase` and overrides enabled in `config.yaml`.
+- 502 page served from persistent host location (survives container restarts).
+- Configuration settings are available in the `nginx/` directory's base template.
+
+<img width="640" alt="Ode's 502 error page template" src="https://github.com/user-attachments/assets/fae3f129-bb98-40d5-ab1e-5c96e0a524cd" />
+
+_Here's what it looks like for my own site, fully customised. No more ugly 502 pages!_
+
+### Changed
+
+- Improved GitHub Actions deployment documentation in `WRITING.md` with SSH key setup guide. ([#18](https://github.com/DeepanshKhurana/ode/issues/18))
+
+### Fixed
+
+- Numeric values in `config.yaml` (e.g., `404`) now handled correctly. ([#17](https://github.com/DeepanshKhurana/ode/issues/17))
+
+### Removed
+
+- `react-helmet` dependency (using React 19 native meta tags).
+
 ## [1.2.9] - 2026-02-22
 
 ### Changed

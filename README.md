@@ -132,9 +132,7 @@ https://github.com/DeepanshKhurana/ode/blob/46873b31df3d4b02bbb375d4389173a1b6ac
 
 #### nginx Configuration
 
-If you are like me, you probably have your own server where you will need to handle SPA routing. If you are using nginx, a template is already provided.
-
-https://github.com/DeepanshKhurana/ode/blob/81c9c2916c5fade480a017b277be7eb1dc799cb4/nginx-template#L1-L32
+If you are like me, you probably have your own server where you will need to handle SPA routing. If you are using nginx, configuration templates are provided in the [nginx/](https://github.com/DeepanshKhurana/ode/tree/main/nginx) directory.
 
 ### From WordPress
 

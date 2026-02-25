@@ -22,7 +22,7 @@ export async function resolveContentPath({ pathname }) {
       const pages = await pagesRes.json();
       isPage = pages.some(page => page.slug === slug);
     } catch (error) {
-      console.log('Error fetching pages index:', error);
+      console.error('[router]: error fetching pages index:', error);
       isPage = false;
     }
     if (!isPage) {
@@ -31,7 +31,7 @@ export async function resolveContentPath({ pathname }) {
         const pieces = await piecesRes.json();
         isPiece = pieces.some(piece => piece.slug === slug);
       } catch (error) {
-        console.log('Error fetching pieces index:', error);
+        console.error('[router]: error fetching pieces index:', error);
         isPiece = false;
       }
     }

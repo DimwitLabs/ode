@@ -2,12 +2,20 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/feed.xml",
+      "destination": "/generated/feed.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/generated/sitemap.xml"
+    },
+    {
       "source": "/feed/",
-      "destination": "/feed.xml"
+      "destination": "/generated/feed.xml"
     },
     {
       "source": "/sitemap/",
-      "destination": "/sitemap.xml"
+      "destination": "/generated/sitemap.xml"
     },
     {
       "source": "/robots",
@@ -18,8 +26,103 @@
       "destination": "/robots.txt"
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/index.html"
+    },
+    {
+      "source": "/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/:slug.html"
+    },
+    {
+      "source": "/reader/:collection",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        },
+        {
+          "type": "query",
+          "key": "piece",
+          "value": "(?<piece>.*)"
+        }
+      ],
+      "destination": "/generated/meta/:piece.html"
+    },
+    {
+      "source": "/reader/:collection",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/generated/og/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/generated/meta/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/generated/feed.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
+    },
+    {
+      "source": "/generated/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
     }
   ]
 }

@@ -16,7 +16,7 @@ function Volumes() {
         setCollections(collectionsData);
         setConfig(configData);
       })
-      .catch(error => console.error('Error loading data:', error));
+      .catch(error => console.error('[volumes]: error loading data:', error));
   }, []);
 
   if (collections.length === 0) {

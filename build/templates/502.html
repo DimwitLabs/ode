@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} | {{siteName}}</title>
+  <link rel="stylesheet" href="{{fontUrl}}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: {{bgColor}};
+      color: {{fgColor}};
+      font-family: {{fontFamily}};
+      padding: 2rem;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-family: {{fontFamily}};
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: {{accentColor}};
+    }
+
+    p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: {{fgColor}};
+      margin-bottom: 0.5rem;
+    }
+
+    .submessage {
+      color: {{mutedColor}};
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .refresh-notice {
+      color: {{mutedColor}};
+      font-size: 0.75rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+    }
+
+    .accent-line {
+      width: 60px;
+      height: 3px;
+      background-color: {{accentColor}};
+      margin: 2rem auto;
+    }
+  </style>
+  <meta http-equiv="refresh" content="{{refreshInterval}}">
+</head>
+<body>
+  <div class="container">
+    <h1>{{title}}</h1>
+    <div class="accent-line"></div>
+    <p>{{message}}</p>
+    <p class="submessage">{{submessage}}</p>
+    <p class="refresh-notice">{{refreshNotice}}</p>
+  </div>
+</body>
+</html>

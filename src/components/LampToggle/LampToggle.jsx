@@ -19,7 +19,7 @@ function LampToggle() {
   const audioOffRef = useRef(null);
 
   useEffect(() => {
-    loadConfig().then(setConfig).catch(console.error);
+    loadConfig().then(setConfig).catch(e => console.error('[lamp]:', e));
   }, []);
 
   useEffect(() => {

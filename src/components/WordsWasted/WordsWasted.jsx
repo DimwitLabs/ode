@@ -15,7 +15,7 @@ function WordsWasted() {
         setConfig(configData);
         setStats(statsData);
       })
-      .catch(console.error);
+      .catch(e => console.error('[stats]:', e));
   }, []);
 
   if (!config || !stats) {

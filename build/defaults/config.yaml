@@ -38,4 +38,5 @@ reader:
 rss:
   piecesLimit: 10
 bodyOfWork:
-  order: descending
+  order: descending 
+  description: "A chronological archive of all writings, organized by month and year."

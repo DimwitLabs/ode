@@ -84,9 +84,9 @@ interface Collection {
     sitemapLines.push('</urlset>');
     
     fs.writeFileSync(sitemapPath, sitemapLines.join('\n'));
-    console.log(`Sitemap generated successfully with ${1 + pages.length + collections.length + pieces.length} URLs`);
+    console.log(`[sitemap]: generated with ${1 + pages.length + collections.length + pieces.length} URLs`);
   } catch (error) {
-    console.error('Error generating sitemap:', error);
+    console.error('[sitemap]: error generating:', error);
     process.exit(1);
   }
 })();

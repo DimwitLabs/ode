@@ -34,13 +34,14 @@ const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
 const rawExcludedPieces = (config?.exclude?.pieces || []).filter(Boolean);
 
-const excludedPieces = rawExcludedPieces.map((piece: string) => 
-  piece.endsWith('.md') ? piece : `${piece}.md`
-);
+const excludedPieces = rawExcludedPieces.map((piece: string | number) => {
+  const pieceStr = String(piece);
+  return pieceStr.endsWith('.md') ? pieceStr : `${pieceStr}.md`;
+});
 
 const files = fs.readdirSync(piecesPath);
 if (files.length === 0) {
-  console.log('No files found in the pieces directory.');
+  console.log('[pieces]: no files found in pieces directory');
   process.exit(0);
 }
 
@@ -53,34 +54,34 @@ files.forEach(file => {
   }
   
   if (excludedPieces.includes(file)) {
-    console.log(`Excluding: ${file} (listed in config.yaml)`);
+    console.log(`[pieces]: excluding ${file} (listed in config.yaml)`);
     return;
   }
   
   const filePath = path.join(piecesPath, file);
   const stats = fs.statSync(filePath);
   if (stats.isFile()) {
-    console.log(`Indexing: ${file}, Size: ${stats.size} bytes`);
+    console.log(`[pieces]: indexing ${file} (${stats.size} bytes)`);
     const raw = fs.readFileSync(filePath, 'utf-8');
     const parsed = fm<FrontMatter>(raw);
     
     const { title, date, categories, slug } = parsed.attributes;
     
     if (!title || typeof title !== 'string' || title.trim() === '') {
-      console.warn(`Skipping ${file}: Missing or invalid title`);
+      console.warn(`[pieces]: skipping ${file}: missing or invalid title`);
       errors.push(file);
       return;
     }
     
     if (!date) {
-      console.warn(`Skipping ${file}: Missing date`);
+      console.warn(`[pieces]: skipping ${file}: missing date`);
       errors.push(file);
       return;
     }
     
     const dateObj = date instanceof Date ? date : new Date(date as string);
     if (isNaN(dateObj.getTime())) {
-      console.warn(`Skipping ${file}: Invalid date`);
+      console.warn(`[pieces]: skipping ${file}: invalid date`);
       errors.push(file);
       return;
     }
@@ -88,13 +89,13 @@ files.forEach(file => {
     const dateString = dateObj.toISOString().split('T')[0];
     
     if (!categories || !Array.isArray(categories) || categories.length === 0) {
-      console.warn(`Skipping ${file}: Missing or invalid categories (must be non-empty array)`);
+      console.warn(`[pieces]: skipping ${file}: missing or invalid categories`);
       errors.push(file);
       return;
     }
     
     if (!slug || typeof slug !== 'string' || slug.trim() === '') {
-      console.warn(`Skipping ${file}: Missing or invalid slug`);
+      console.warn(`[pieces]: skipping ${file}: missing or invalid slug`);
       errors.push(file);
       return;
     }
@@ -117,7 +118,7 @@ if (!fs.existsSync(piecesIndexDir)) {
 }
 
 fs.writeFileSync(piecesIndexPath, JSON.stringify(index, null, 2));
-console.log(`pieces.json created successfully with ${index.length} entries.`);
+console.log(`[pieces]: created pieces.json with ${index.length} entries`);
 
 const pieces: Piece[] = index;
 const collectionsMap: { [key: string]: Collection } = {};
@@ -150,7 +151,7 @@ collections.forEach(collection => {
     throw new Error(`Invalid order "${order}" for collection "${collection.name}". Must be "ascending" or "descending".`);
   }
 
-  console.log(`Sorting collection "${collection.name}" ${order} order, using ${readerOrderConfig[collection.name] ? 'custom' : 'default'} setting.`);
+  console.log(`[pieces]: sorting collection "${collection.name}" ${order} (${readerOrderConfig[collection.name] ? 'custom' : 'default'})`);
   collection.pieces.sort((a, b) => {
     const pieceA = pieces.find(p => p.slug === a);
     const pieceB = pieces.find(p => p.slug === b);
@@ -162,11 +163,11 @@ collections.forEach(collection => {
 });
 
 fs.writeFileSync(collectionsPath, JSON.stringify(collections, null, 2));
-console.log(`collections.json created successfully with ${collections.length} categories and ${pieces.length} total pieces.`);
+console.log(`[pieces]: created collections.json with ${collections.length} categories`);
 
 fs.writeFileSync(errorsPath, JSON.stringify(errors, null, 2));
 if (errors.length > 0) {
-  console.log(`${errors.length} file(s) skipped due to missing front matter. See errors.json for details.`);
+  console.log(`[pieces]: ${errors.length} files skipped (see errors.json)`);
 } else {
-  console.log('All files processed successfully.');
+  console.log('[pieces]: all files processed successfully');
 }
