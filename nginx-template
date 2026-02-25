@@ -1,3 +1,22 @@
+# Bot detection for serving pre-rendered meta pages
+# This map checks if the user agent is a known crawler/bot
+map $http_user_agent $is_bot {
+    default 0;
+    ~*bot 1;
+    ~*crawl 1;
+    ~*spider 1;
+    ~*slurp 1;
+    ~*facebookexternalhit 1;
+    ~*Facebot 1;
+    ~*Twitterbot 1;
+    ~*LinkedInBot 1;
+    ~*Pinterest 1;
+    ~*Telegram 1;
+    ~*WhatsApp 1;
+    ~*Discord 1;
+    ~*Slack 1;
+}
+
 server {
     listen 80;
     server_name your-domain.com;
@@ -70,8 +89,27 @@ server {
         internal;
     }
 
-    # Everything else
+    # Serve pre-rendered meta pages to bots for social card previews
+    # Homepage for bots
+    location = / {
+        if ($is_bot) {
+            rewrite ^ /generated/meta/index.html break;
+        }
+        proxy_pass http://localhost:PORT;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Everything else (with bot detection for piece/page meta pages)
     location / {
+        # For bots: try to serve pre-rendered meta page
+        # The meta pages are at /generated/meta/{slug}.html
+        if ($is_bot) {
+            rewrite ^/([^/]+)/?$ /generated/meta/$1.html break;
+        }
+        
         proxy_pass http://localhost:PORT;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
