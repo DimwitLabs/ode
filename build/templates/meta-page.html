@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{fullTitle}}</title>
+  
+  <meta name="title" content="{{fullTitle}}">
+  <meta name="description" content="{{description}}">
+  <meta name="author" content="{{author}}">
+  
+  <link rel="canonical" href="{{canonicalUrl}}">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{ogImageUrl}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="{{siteName}}">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{canonicalUrl}}">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="{{ogImageUrl}}">
+  
+  <meta name="theme-color" content="{{themeColor}}">
+  
+  <script>
+    if (!/bot|crawl|spider|slurp|facebook|twitter|linkedin|pinterest|telegram|whatsapp|discord/i.test(navigator.userAgent)) {
+      window.location.replace('{{canonicalUrl}}');
+    }
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url={{canonicalUrl}}">
+  </noscript>
+  
+  <style>
+    body {
+      font-family: {{fontFamily}}, {{fontFallback}};
+      background: {{backgroundColor}};
+      color: {{textColor}};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    a {
+      color: {{primaryColor}};
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
+    <p><a href="{{canonicalUrl}}">Continue to {{siteName}}</a></p>
+  </div>
+</body>
+</html>

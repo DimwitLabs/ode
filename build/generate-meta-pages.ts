@@ -41,6 +41,7 @@ interface Config {
 const publicDir = path.join(process.cwd(), 'public');
 const generatedDir = path.join(publicDir, 'generated');
 const metaDir = path.join(generatedDir, 'meta');
+const templatePath = path.join(__dirname, 'templates', 'meta-page.html');
 
 if (!fs.existsSync(metaDir)) {
   fs.mkdirSync(metaDir, { recursive: true });
@@ -111,77 +112,22 @@ function generateMetaPage(
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const ogImageUrl = `${siteUrl}/generated/og/${ogImageSlug}.png`;
 
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${fullTitle}</title>
+  const template = fs.readFileSync(templatePath, 'utf-8');
   
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="${fullTitle}">
-  <meta name="description" content="${displayDescription}">
-  <meta name="author" content="${siteAuthor}">
-  
-  <!-- Canonical -->
-  <link rel="canonical" href="${canonicalUrl}">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="${canonicalUrl}">
-  <meta property="og:title" content="${displayTitle}">
-  <meta property="og:description" content="${displayDescription}">
-  <meta property="og:image" content="${ogImageUrl}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="${applyCase(siteTitle)}">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="${canonicalUrl}">
-  <meta name="twitter:title" content="${displayTitle}">
-  <meta name="twitter:description" content="${displayDescription}">
-  <meta name="twitter:image" content="${ogImageUrl}">
-  
-  <!-- Theme Color -->
-  <meta name="theme-color" content="${colors.primary}">
-  
-  <!-- Redirect for humans -->
-  <script>
-    if (!/bot|crawl|spider|slurp|facebook|twitter|linkedin|pinterest|telegram|whatsapp|discord/i.test(navigator.userAgent)) {
-      window.location.replace('${canonicalUrl}');
-    }
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=${canonicalUrl}">
-  </noscript>
-  
-  <style>
-    body {
-      font-family: ${theme.font.family}, ${theme.font.fallback};
-      background: ${colors.background};
-      color: ${colors.text};
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 2rem;
-      text-align: center;
-    }
-    a {
-      color: ${colors.primary};
-    }
-  </style>
-</head>
-<body>
-  <div>
-    <h1>${displayTitle}</h1>
-    <p>${displayDescription}</p>
-    <p><a href="${canonicalUrl}">Continue to ${applyCase(siteTitle)}</a></p>
-  </div>
-</body>
-</html>`;
+  const html = template
+    .replace(/\{\{fullTitle\}\}/g, fullTitle)
+    .replace(/\{\{title\}\}/g, displayTitle)
+    .replace(/\{\{description\}\}/g, displayDescription)
+    .replace(/\{\{author\}\}/g, siteAuthor)
+    .replace(/\{\{canonicalUrl\}\}/g, canonicalUrl)
+    .replace(/\{\{ogImageUrl\}\}/g, ogImageUrl)
+    .replace(/\{\{siteName\}\}/g, applyCase(siteTitle))
+    .replace(/\{\{themeColor\}\}/g, colors.primary)
+    .replace(/\{\{fontFamily\}\}/g, theme.font.family)
+    .replace(/\{\{fontFallback\}\}/g, theme.font.fallback)
+    .replace(/\{\{backgroundColor\}\}/g, colors.background)
+    .replace(/\{\{textColor\}\}/g, colors.text)
+    .replace(/\{\{primaryColor\}\}/g, colors.primary);
 
   fs.writeFileSync(path.join(metaDir, `${slug}.html`), html, { mode: 0o644 });
 }
