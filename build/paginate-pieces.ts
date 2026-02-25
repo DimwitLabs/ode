@@ -76,7 +76,7 @@ piecesIndex.forEach((piece: any) => {
   const filePath = path.join(piecesPath, `${slug}.md`);
   
   if (!fs.existsSync(filePath)) {
-    console.warn(`File not found for slug: ${slug}`);
+    console.warn(`[pagination]: file not found for slug: ${slug}`);
     return;
   }
   
@@ -99,8 +99,8 @@ piecesIndex.forEach((piece: any) => {
     pages
   };
   
-  console.log(`Paginated ${slug}: ${totalPages} page(s)`);
+  console.log(`[pagination]: ${slug}: ${totalPages} page(s)`);
 });
 
 fs.writeFileSync(pagesIndexPath, JSON.stringify(pageIndex, null, 2));
-console.log(`\nCreated pieces-pages.json with ${Object.keys(pageIndex).length} pieces.`);
+console.log(`[pagination]: created pieces-pages.json with ${Object.keys(pageIndex).length} pieces`);

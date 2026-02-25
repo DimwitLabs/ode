@@ -33,8 +33,8 @@ try {
   };
   
   fs.writeFileSync(statsJsonPath, JSON.stringify(stats, null, 2));
-  console.log(`Stats calculated: ${wordsCount.toLocaleString()} words across ${piecesCount} pieces`);
+  console.log(`[stats]: ${wordsCount.toLocaleString()} words across ${piecesCount} pieces`);
 } catch (error) {
-  console.error('Error calculating stats:', error);
+  console.error('[stats]: error calculating stats:', error);
   process.exit(1);
 }

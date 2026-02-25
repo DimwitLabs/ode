@@ -35,7 +35,7 @@ export function loadTheme(themeName: string): ThemeConfig | null {
   const themePath = path.join(themesDir, `${themeName}.js`);
   
   if (!fs.existsSync(themePath)) {
-    console.error(`Theme file not found: ${themePath}`);
+    console.error(`[theme]: file not found: ${themePath}`);
     return null;
   }
 
@@ -44,7 +44,7 @@ export function loadTheme(themeName: string): ThemeConfig | null {
     
     const defaultExportMatch = themeContent.match(/export\s+default\s+({[\s\S]*});?\s*$/);
     if (!defaultExportMatch) {
-      console.error(`Could not parse theme export in: ${themePath}`);
+      console.error(`[theme]: could not parse export in: ${themePath}`);
       return null;
     }
 
@@ -53,7 +53,7 @@ export function loadTheme(themeName: string): ThemeConfig | null {
     
     return theme;
   } catch (error) {
-    console.error(`Error loading theme ${themeName}:`, error);
+    console.error(`[theme]: error loading ${themeName}:`, error);
     return null;
   }
 }

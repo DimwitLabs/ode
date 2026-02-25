@@ -15,7 +15,7 @@ export async function loadConfig() {
 
     return config;
   } catch (error) {
-    console.error('Error loading configuration:', error);
+    console.error('[config]: error loading configuration:', error);
     throw error;
   }
 }

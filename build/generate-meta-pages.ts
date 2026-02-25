@@ -50,7 +50,7 @@ const themeName = config.ui?.theme?.preset || 'journal';
 const baseTheme = loadTheme(themeName);
 
 if (!baseTheme) {
-  console.error(`Could not load theme: ${themeName}`);
+  console.error(`[meta]: could not load theme: ${themeName}`);
   process.exit(1);
 }
 
@@ -166,7 +166,7 @@ function main() {
     'index',
     '/'
   );
-  console.log('Generated meta/index.html');
+  console.log('[meta]: generated meta/index.html');
 
   // Generate meta pages for pieces
   const piecesPath = path.join(generatedDir, 'index', 'pieces.json');
@@ -186,7 +186,7 @@ function main() {
         `/${piece.slug}`
       );
     }
-    console.log(`Generated ${pieces.length} piece meta pages`);
+    console.log(`[meta]: generated ${pieces.length} piece meta pages`);
   }
 
   // Generate meta pages for pages
@@ -203,10 +203,10 @@ function main() {
         `/${page.slug}`
       );
     }
-    console.log(`Generated ${pages.length} page meta pages`);
+    console.log(`[meta]: generated ${pages.length} page meta pages`);
   }
 
-  console.log('Meta page generation complete');
+  console.log('[meta]: generation complete');
 }
 
 main();

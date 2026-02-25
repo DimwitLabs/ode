@@ -141,9 +141,9 @@ interface FrontMatter {
     rssLines.push('</rss>');
     
     fs.writeFileSync(rssPath, rssLines.join('\n'));
-    console.log(`RSS feed generated successfully with ${sortedPieces.length} pieces`);
+    console.log(`[rss]: generated feed with ${sortedPieces.length} pieces`);
   } catch (error) {
-    console.error('Error generating RSS feed:', error);
+    console.error('[rss]: error generating feed:', error);
     process.exit(1);
   }
 })();

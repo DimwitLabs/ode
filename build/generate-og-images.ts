@@ -51,7 +51,7 @@ const themeName = config.ui?.theme?.preset || 'journal';
 const baseTheme = loadTheme(themeName);
 
 if (!baseTheme) {
-  console.error(`Could not load theme: ${themeName}`);
+  console.error(`[og-images]: could not load theme: ${themeName}`);
   process.exit(1);
 }
 
@@ -93,7 +93,7 @@ async function loadFont(): Promise<ArrayBuffer | null> {
       return fontResponse.arrayBuffer();
     }
     
-    console.warn('Could not find TTF font in Google Fonts CSS, using fallback');
+    console.warn('[og-images]: could not find TTF font in Google Fonts CSS, using fallback');
     return null;
   }
   
@@ -104,7 +104,7 @@ async function loadFont(): Promise<ArrayBuffer | null> {
   }
   
   // Can't use WOFF/WOFF2 with satori
-  console.warn(`Font format not supported by satori: ${fontUrl}`);
+  console.warn(`[og-images]: font format not supported by satori: ${fontUrl}`);
   return null;
 }
 
@@ -117,7 +117,7 @@ async function generateOgImage(
   const fontFamily = fontData ? theme.font.family : 'sans-serif';
   
   const svg = await satori(
-    {
+    ({
       type: 'div',
       props: {
         style: {
@@ -181,7 +181,7 @@ async function generateOgImage(
           },
         ],
       },
-    },
+    }) as any,
     {
       width: 1200,
       height: 630,
@@ -215,12 +215,12 @@ async function main() {
   try {
     fontData = await loadFont();
     if (fontData) {
-      console.log('Loaded custom font for OG images');
+      console.log('[og-images]: loaded custom font');
     } else {
-      console.log('Using fallback font for OG images');
+      console.log('[og-images]: using fallback font');
     }
   } catch (error) {
-    console.warn('Failed to load font, using fallback:', error);
+    console.warn('[og-images]: failed to load font, using fallback:', error);
   }
 
   const siteTitle = config.site.title;
@@ -229,7 +229,7 @@ async function main() {
 
   // Generate OG image for homepage
   await generateOgImage(siteTitle, siteTagline, 'index', fontData);
-  console.log('Generated og/index.png');
+  console.log('[og-images]: generated og/index.png');
 
   // Generate OG images for pieces
   const piecesPath = path.join(generatedDir, 'index', 'pieces.json');
@@ -242,7 +242,7 @@ async function main() {
         : siteAuthor;
       await generateOgImage(piece.title, subtitle, piece.slug, fontData);
     }
-    console.log(`Generated ${pieces.length} piece OG images`);
+    console.log(`[og-images]: generated ${pieces.length} piece images`);
   }
 
   // Generate OG images for pages
@@ -253,10 +253,10 @@ async function main() {
     for (const page of pages) {
       await generateOgImage(page.title, siteTitle, `page-${page.slug}`, fontData);
     }
-    console.log(`Generated ${pages.length} page OG images`);
+    console.log(`[og-images]: generated ${pages.length} page images`);
   }
 
-  console.log('OG image generation complete');
+  console.log('[og-images]: generation complete');
 }
 
 main().catch(console.error);

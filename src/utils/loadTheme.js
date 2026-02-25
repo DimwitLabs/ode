@@ -14,7 +14,7 @@ export function loadTheme(config) {
   const defaultMode = config?.ui?.theme?.defaultMode || null;
 
   if (!themes.has(themeName)) {
-    console.warn(`Theme "${themeName}" not found. Falling back to "${defaultTheme}".`);
+    console.warn(`[theme]: "${themeName}" not found, falling back to "${defaultTheme}"`);
   }
 
   const baseTheme = themes.get(themeName) || themes.get(defaultTheme);

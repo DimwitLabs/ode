@@ -31,7 +31,7 @@ function BookViewer() {
         ]);
         
         if (!pagesRes.ok || !collectionsRes.ok || !piecesRes.ok) {
-          console.error('Failed to load index files');
+          console.error('[reader]: failed to load index files');
           return;
         }
 
@@ -44,7 +44,7 @@ function BookViewer() {
         setPiecesIndex(piecesData);
         setConfig(configData);
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('[reader]: error loading data:', error);
       } finally {
         setLoading(false);
       }

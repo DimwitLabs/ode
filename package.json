@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build:index && vite build",
-    "build:index": "vite-node build/ensure-defaults.ts && vite-node build/generate-502-page.ts && vite-node build/index-pieces.ts && vite-node build/index-pages.ts && vite-node build/paginate-pieces.ts && vite-node build/calculate-stats.ts && vite-node build/generate-rss.ts && vite-node build/generate-sitemap.ts && vite-node build/generate-body-of-work.ts",
+    "build:index": "vite-node build/ensure-defaults.ts && vite-node build/generate-502-page.ts && vite-node build/index-pieces.ts && vite-node build/index-pages.ts && vite-node build/paginate-pieces.ts && vite-node build/calculate-stats.ts && vite-node build/generate-rss.ts && vite-node build/generate-sitemap.ts && vite-node build/generate-body-of-work.ts && vite-node build/generate-og-images.ts && vite-node build/generate-meta-pages.ts",
     "build:pieces": "vite-node build/index-pieces.ts",
     "build:pages": "vite-node build/index-pages.ts",
     "build:paginate": "vite-node build/paginate-pieces.ts",
@@ -14,7 +14,8 @@
     "build:rss": "vite-node build/generate-rss.ts",
     "build:sitemap": "vite-node build/generate-sitemap.ts",
     "build:502": "vite-node build/generate-502-page.ts",
-    "build:meta": "vite-node build/generate-meta-images.ts",
+    "build:og": "vite-node build/generate-og-images.ts",
+    "build:meta": "vite-node build/generate-meta-pages.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },

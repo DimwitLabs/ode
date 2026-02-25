@@ -23,7 +23,7 @@ function Navigation() {
         setPieces(piecesData);
         setConfig(configData);
       })
-      .catch(error => console.error('Error loading data:', error));
+      .catch(error => console.error('[nav]: error loading data:', error));
   }, []);
 
   const handleRandomPiece = () => {

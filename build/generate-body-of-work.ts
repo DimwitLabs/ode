@@ -63,7 +63,7 @@ if (bodyOfWorkOrder !== 'ascending' && bodyOfWorkOrder !== 'descending') {
   throw new Error(`Invalid order "${bodyOfWorkOrder}" in config.yaml bodyOfWork.order. Must be "ascending" or "descending".`);
 }
 
-console.log(`Sorting body of work in ${bodyOfWorkOrder} order.`);
+console.log(`[body-of-work]: sorting in ${bodyOfWorkOrder} order`);
 
 const sortedKeys = Object.keys(grouped).sort((a, b) => {
   const dateA = new Date(a);
@@ -91,6 +91,4 @@ sortedKeys.forEach(monthYear => {
 
 fs.writeFileSync(bodyOfWorkPath, markdown);
 
-console.log(`Body of work page generated successfully at ${bodyOfWorkPath}`);
-console.log(`Total pieces: ${pieces.length}`);
-console.log(`Months covered: ${sortedKeys.length}`);
+console.log(`[body-of-work]: generated with ${pieces.length} pieces across ${sortedKeys.length} months`);

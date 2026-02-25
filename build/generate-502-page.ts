@@ -42,7 +42,7 @@ const themeName = config.theme || 'journal';
 const theme = loadTheme(themeName);
 
 if (!theme) {
-  console.error(`Could not load theme: ${themeName}`);
+  console.error(`[redeploy]: could not load theme: ${themeName}`);
   process.exit(1);
 }
 
@@ -88,4 +88,4 @@ function generate502Page(theme: ThemeConfig): string {
 
 const html = generate502Page(theme);
 fs.writeFileSync(path.join(generatedDir, '502.html'), html);
-console.log('Generated 502.html');
+console.log('[redeploy]: generated 502.html');
