@@ -26,21 +26,56 @@
       "destination": "/robots.txt"
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/index.html"
+    },
+    {
+      "source": "/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawl|spider|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|telegram|whatsapp|discord|slack).*"
+        }
+      ],
+      "destination": "/generated/meta/:slug.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/generated/meta-images/(.*)",
+      "source": "/generated/og/(.*)",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "image/svg+xml"
+          "value": "image/png"
         },
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/generated/meta/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
         }
       ]
     },
