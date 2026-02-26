@@ -10,6 +10,7 @@ ui:
     defaultMode:
     overrides:
   labels:
+    home: "Home"
     previous: "Previous"
     next: "Next"
     noContent: "No pieces found in this collection."

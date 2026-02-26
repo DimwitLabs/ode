@@ -6,6 +6,7 @@ site:
   description: "A personal writing space."
 ui:
   labels:
+    home: "Home"
     previous: "Previous"
     next: "Next"
     noContent: "No pieces found in this collection."

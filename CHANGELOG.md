@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Configurable Body of Work page: `bodyOfWork.title` and `bodyOfWork.slug` fields in `config.yaml`.
+- Configurable Home link label via `ui.labels.home` in `config.yaml`.
 
 ### Fixed
 
 - 502 error page now correctly uses theme from `ui.theme.preset` instead of defaulting to `journal`.
+- Close button label now correctly reads from `ui.labels.close` instead of `ui.close`.
 - Deployment script now polls host filesystem for 502 page instead of waiting for container build.
 
 ## [1.4.0] - 2026-02-26

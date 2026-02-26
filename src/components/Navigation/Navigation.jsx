@@ -37,7 +37,7 @@ function Navigation() {
   return (
     <nav>
       <NavLink key="home" to="/">
-        Home
+        {config?.ui?.labels?.home || 'Home'}
       </NavLink>
       {pages.map((page) => (
         <NavLink key={page.slug} to={`/${page.slug}`}>
