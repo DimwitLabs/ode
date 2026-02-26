@@ -34,6 +34,7 @@ interface Config {
     };
   };
   bodyOfWork?: {
+    slug?: string;
     description?: string;
   };
 }
@@ -171,7 +172,8 @@ function main() {
     for (const page of pages) {
       let description: string;
       
-      if (page.slug === 'body-of-work' && config.bodyOfWork?.description) {
+      const bodyOfWorkSlug = config.bodyOfWork?.slug || 'body-of-work';
+      if (page.slug === bodyOfWorkSlug && config.bodyOfWork?.description) {
         description = config.bodyOfWork.description;
       } else {
         const pageFilePath = path.join(publicDir, 'content', 'pages', `${page.slug}.md`);

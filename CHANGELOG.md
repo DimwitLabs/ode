@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-02-26
+
+### Added
+
+- Configurable Body of Work page: `bodyOfWork.title` and `bodyOfWork.slug` fields in `config.yaml`.
+
+### Fixed
+
+- 502 error page now correctly uses theme from `ui.theme.preset` instead of defaulting to `journal`.
+- Deployment script now polls host filesystem for 502 page instead of waiting for container build.
+
 ## [1.4.0] - 2026-02-26
 
 ### Added

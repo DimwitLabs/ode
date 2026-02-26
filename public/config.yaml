@@ -46,6 +46,8 @@ reader:
 rss:
   piecesLimit: 10
 bodyOfWork:
+  title: "Body of Work"
+  slug: "body-of-work"
   order: ascending
   description: "A chronological archive of all pieces, organized by month and year."
 redeployPage:

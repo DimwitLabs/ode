@@ -5,11 +5,12 @@ import yaml from 'js-yaml';
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesJsonPath = path.join(publicDir, 'generated', 'index', 'pieces.json');
 const collectionsJsonPath = path.join(publicDir, 'generated', 'index', 'pieces-collections.json');
-const bodyOfWorkPath = path.join(publicDir, 'content', 'pages', 'body-of-work.md');
 const configPath = path.join(publicDir, 'config.yaml');
 
 const config = yaml.load(fs.readFileSync(configPath, 'utf-8')) as {
   bodyOfWork?: {
+    title?: string;
+    slug?: string;
     order?: string;
   };
 };
@@ -71,9 +72,13 @@ const sortedKeys = Object.keys(grouped).sort((a, b) => {
   return bodyOfWorkOrder === 'ascending' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
 });
 
+const bodyOfWorkTitle = config?.bodyOfWork?.title || 'Body of Work';
+const bodyOfWorkSlug = config?.bodyOfWork?.slug || 'body-of-work';
+const bodyOfWorkFilePath = path.join(publicDir, 'content', 'pages', `${bodyOfWorkSlug}.md`);
+
 let markdown = '---\n';
-markdown += 'title: "Body of Work"\n';
-markdown += 'slug: "body-of-work"\n';
+markdown += `title: "${bodyOfWorkTitle}"\n`;
+markdown += `slug: "${bodyOfWorkSlug}"\n`;
 markdown += `date: ${new Date().toISOString()}\n`;
 markdown += '---\n\n';
 
@@ -89,6 +94,6 @@ sortedKeys.forEach(monthYear => {
   markdown += '\n';
 });
 
-fs.writeFileSync(bodyOfWorkPath, markdown);
+fs.writeFileSync(bodyOfWorkFilePath, markdown);
 
-console.log(`[body-of-work]: generated with ${pieces.length} pieces across ${sortedKeys.length} months`);
+console.log(`[body-of-work]: generated ${bodyOfWorkSlug}.md with ${pieces.length} pieces across ${sortedKeys.length} months`);
