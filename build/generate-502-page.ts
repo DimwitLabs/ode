@@ -16,10 +16,10 @@ interface Config {
     name?: string;
     title?: string;
   };
-  theme?: string;
   ui?: {
     lowercase?: boolean;
     theme?: {
+      preset?: string;
       defaultMode?: 'light' | 'dark';
     };
   };
@@ -38,7 +38,7 @@ const configPath = path.join(publicDir, 'config.yaml');
 const configContent = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configContent) as Config;
 
-const themeName = config.theme || 'journal';
+const themeName = config.ui?.theme?.preset || 'journal';
 const theme = loadTheme(themeName);
 
 if (!theme) {
