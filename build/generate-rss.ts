@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import fm from 'front-matter';
 import { marked } from 'marked';
+import { parseDateToRSSString } from './utils/parse-date.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -89,7 +90,7 @@ interface FrontMatter {
     
     for (const piece of piecesToInclude) {
       const pieceUrl = `${baseUrl}/${piece.slug}`;
-      const pubDate = piece.date ? new Date(piece.date).toUTCString() : buildDate;
+      const pubDate = parseDateToRSSString(piece.date, new Date());
 
       const mdPath = path.join(contentDir, `${piece.slug}.md`);
       let content = '';
