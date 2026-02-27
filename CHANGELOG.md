@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.3] - 2026-02-28
+
+### Changed
+
+- Ode will now move from [DeepanshKhurana/ode](https://github.com/DeepanshKhurana/ode) to [DimwitLabs/ode](https://github.com/DimwitLabs/ode). Please ensure you update your `docker-compose.yml` for the new url which will be under `ghcr.io/dimwitlabs/ode:<tag>`. This version functionally changes nothing except this information. `v1.4.4` is planned to be from the new url. In that case, `ghcr.io/deepanshkhurana/ode:latest` will point to `v1.4.3` while `ghcr.io/dimwitlabs/ode:latest` will continue to get updates.
+
 ## [1.4.2] - 2026-02-27
 
 ### Changed

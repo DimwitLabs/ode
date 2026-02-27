@@ -92,7 +92,7 @@ Create a `docker-compose.yml`:
 ```yaml
 services:
   ode:
-    image: ghcr.io/deepanshkhurana/ode:latest
+    image: ghcr.io/dimwitlabs/ode:latest
     ports:
       - "8080:4173"
     restart: unless-stopped

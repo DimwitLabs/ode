@@ -123,7 +123,7 @@ const config: Config = {
         {
           type: 'html',
           position: 'right',
-          value: '<span style="padding: 0.25rem 0.5rem; background: var(--ifm-color-primary); color: white; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">v1.4.2</span>',
+          value: '<span style="padding: 0.25rem 0.5rem; background: var(--ifm-color-primary); color: white; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">v1.4.3</span>',
         },
         {
           href: 'https://demo.ode.dimwit.me/',

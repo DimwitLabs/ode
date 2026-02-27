@@ -18,7 +18,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/deepanshkhurana/ode
+          images: ghcr.io/dimwitlabs/ode
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=raw,value=development,enable=${{ github.ref == 'refs/heads/development' }}
