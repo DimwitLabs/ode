@@ -207,6 +207,8 @@ async function generateOgImage(
 }
 
 async function main() {
+  console.log('[og-images]: starting generation...');
+  
   let fontData: ArrayBuffer | null = null;
   
   try {
@@ -224,16 +226,18 @@ async function main() {
   const siteAuthor = config.site.author;
   const siteTagline = config.site.tagline || '';
 
+  console.log('[og-images]: generating og/index.png');
   await generateOgImage(siteTitle, siteTagline, 'index', fontData);
-  console.log('[og-images]: generated og/index.png');
 
   const piecesPath = path.join(generatedDir, 'index', 'pieces.json');
   if (fs.existsSync(piecesPath)) {
     const pieces: Piece[] = JSON.parse(fs.readFileSync(piecesPath, 'utf-8'));
+    console.log(`[og-images]: generating ${pieces.length} piece images...`);
     
     for (let i = 0; i < pieces.length; i += BATCH_SIZE) {
       const batch = pieces.slice(i, i + BATCH_SIZE);
       for (const piece of batch) {
+        console.log(`[og-images]: generating og/${piece.slug}.png (${i + batch.indexOf(piece) + 1}/${pieces.length})`);
         const subtitle = piece.collections?.length 
           ? `${piece.collections[0]} · ${siteAuthor}`
           : siteAuthor;
@@ -249,10 +253,12 @@ async function main() {
   const pagesPath = path.join(generatedDir, 'index', 'pages.json');
   if (fs.existsSync(pagesPath)) {
     const pages: Page[] = JSON.parse(fs.readFileSync(pagesPath, 'utf-8'));
+    console.log(`[og-images]: generating ${pages.length} page images...`);
     
     for (let i = 0; i < pages.length; i += BATCH_SIZE) {
       const batch = pages.slice(i, i + BATCH_SIZE);
       for (const page of batch) {
+        console.log(`[og-images]: generating og/${page.slug}.png (${i + batch.indexOf(page) + 1}/${pages.length})`);
         await generateOgImage(page.title, siteTitle, page.slug, fontData);
       }
       if (i + BATCH_SIZE < pages.length) {
