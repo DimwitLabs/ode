@@ -196,15 +196,14 @@ jobs:
             STATIC_DIR="/var/www/${PROJECT_NAME}-static"
             [ ! -d "${STATIC_DIR}" ] && mkdir -p "${STATIC_DIR}"
             GENERATED_502="${APP_DIR}/generated/502.html"
-            echo "Waiting for 502 page to be generated..."
-            for i in {1..60}; do
+            echo "Waiting for 502 page..."
+            for i in {1..15}; do
               if [ -f "${GENERATED_502}" ]; then
                 cp "${GENERATED_502}" "${STATIC_DIR}/502.html"
                 echo "502 page copied successfully"
                 break
               fi
-              echo "Build in progress... ($i/60)"
-              sleep 2
+              sleep 1
             done
 ```
 

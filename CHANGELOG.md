@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2026-02-27
+
+### Changed
+
+- OG images now generate asynchronously in background after build completes, allowing site to start serving immediately.
+
+### Fixed
+
+- Cache headers for dynamic content (`config.yaml`, `content/`, `generated/index/`, `feed.xml`) in nginx and Vercel configs.
+- RSS feed now correctly handles date-only entries with local timezone.
+- Sidebar piece count now reflects actual count from `pieces.json`.
+
 ## [1.4.1] - 2026-02-26
 
 ### Added
