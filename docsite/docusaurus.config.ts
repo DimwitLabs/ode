@@ -53,7 +53,7 @@ const config: Config = {
       );
 
       processed = processed.replace(
-        /\[([^\]]+)\]\((?:\.\/|https:\/\/github\.com\/DeepanshKhurana\/ode\/blob\/main\/)?(README\.md|ETHOS\.md|WRITING\.md|THEMING\.md|REFERENCES\.md|CHANGELOG\.md|LICENSE)\)/g,
+        /\[([^\]]+)\]\((?:\.\/|https:\/\/github\.com\/DeepanshKhurana\/ode\/blob\/main\/)?(README\.md|ETHOS\.md|WRITING\.md|THEMING\.md|SHOWCASE\.md|REFERENCES\.md|CHANGELOG\.md|LICENSE)\)/g,
         (match, text, file) => {
           const slug = file.toLowerCase().replace('.md', '');
           const route = slug === 'readme' ? '/' : `/${slug}`;
@@ -123,7 +123,7 @@ const config: Config = {
         {
           type: 'html',
           position: 'right',
-          value: '<span style="padding: 0.25rem 0.5rem; background: var(--ifm-color-primary); color: white; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">v1.4.3</span>',
+          value: '<span style="padding: 0.25rem 0.5rem; background: var(--ifm-color-primary); color: white; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">v1.4.4</span>',
         },
         {
           href: 'https://demo.ode.dimwit.me/',
@@ -146,6 +146,7 @@ const config: Config = {
             { label: 'Ethos', to: '/ethos' },
             { label: 'Writing', to: '/writing' },
             { label: 'Theming', to: '/theming' },
+            { label: 'Showcase', to: '/showcase' },
           ],
         },
         {
