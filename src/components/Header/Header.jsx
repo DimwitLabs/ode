@@ -26,7 +26,7 @@ function Header({ config }) {
   const isCollection = location.pathname.startsWith("/reader/");
 
   const collection = isCollection 
-    ? location.pathname.split('/reader/')[1] 
+    ? decodeURIComponent(location.pathname.split('/reader/')[1]) 
     : params.collection;
 
   let titleClass = "site-title";
