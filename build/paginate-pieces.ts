@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import fm from "front-matter";
 import yaml from 'js-yaml';
-import { chunkContent } from './utils/markdown-chunker';
+import { chunkContent, getCharsPerPage, PaginationConfig } from './utils/markdown-chunker';
+import { loadTheme } from './utils/theme-loader';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesPath = path.join(publicDir, 'content', 'pieces');
@@ -12,7 +13,20 @@ const configPath = path.join(publicDir, 'config.yaml');
 
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
-const CHARS_PER_PAGE = config?.reader?.charsPerPage ?? 2200;
+
+const themeName = config?.ui?.theme?.preset || config?.theme || 'journal';
+const theme = loadTheme(themeName);
+const themeScaleOverride = config?.ui?.theme?.overrides?.font?.scale;
+const themeScale = themeScaleOverride ?? theme?.font?.scale ?? 1;
+
+const paginationConfig: PaginationConfig = {
+  columns: config?.reader?.columns ?? 2,
+  pagination: config?.reader?.pagination,
+};
+
+const CHARS_PER_PAGE = getCharsPerPage(paginationConfig, themeScale);
+
+console.log(`[pagination]: theme=${themeName}, scale=${themeScale}, charsPerPage=${CHARS_PER_PAGE}`);
 
 type PiecePage = {
   pieceSlug: string;

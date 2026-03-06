@@ -6,6 +6,7 @@ export interface ThemeConfig {
     family: string;
     url: string;
     fallback: string;
+    scale?: number;
   };
   colors: {
     light: {

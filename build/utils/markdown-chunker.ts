@@ -1,9 +1,13 @@
-export const SCALE_FACTORS = {
-  list: 1.4,
-  code: 1.3,
-  blockquote: 1.2,
-  heading: 1.0,
-  paragraph: 1.0,
+export type PaginationConfig = {
+  columns: 1 | 2;
+  charsPerPage?: number;
+  pagination?: {
+    columnWidth?: number;
+    columnHeight?: number;
+    lineHeight?: number;
+    avgCharWidth?: number;
+    safetyMargin?: number;
+  };
 };
 
 export type BlockType = 'list' | 'code' | 'blockquote' | 'heading' | 'paragraph';
@@ -11,103 +15,145 @@ export type BlockType = 'list' | 'code' | 'blockquote' | 'heading' | 'paragraph'
 export type Block = {
   type: BlockType;
   content: string;
-  effectiveLength: number;
 };
 
-export function parseMarkdownBlocks(content: string): Block[] {
+const DEFAULTS = {
+  columns: 2 as const,
+  columnWidth: 330,
+  columnHeight: 540,
+  lineHeight: 24,
+  avgCharWidth: 8,
+  safetyMargin: 0.85,
+  blockOverhead: 50,
+};
+
+export function getCharsPerPage(config: PaginationConfig, themeScale: number = 1): number {
+  if (config.charsPerPage) {
+    return config.charsPerPage;
+  }
+
+  const p = config.pagination ?? {};
+  const columnWidth = p.columnWidth ?? DEFAULTS.columnWidth;
+  const columnHeight = p.columnHeight ?? DEFAULTS.columnHeight;
+  const lineHeight = p.lineHeight ?? DEFAULTS.lineHeight;
+  const avgCharWidth = p.avgCharWidth ?? DEFAULTS.avgCharWidth;
+  const safetyMargin = p.safetyMargin ?? DEFAULTS.safetyMargin;
+  const columns = config.columns ?? DEFAULTS.columns;
+
+  const adjustedLineHeight = lineHeight * themeScale;
+  const adjustedCharWidth = avgCharWidth * themeScale;
+
+  const linesPerColumn = Math.floor(columnHeight / adjustedLineHeight);
+  const charsPerLine = Math.floor(columnWidth / adjustedCharWidth);
+  const charsPerPage = Math.floor(linesPerColumn * charsPerLine * columns * safetyMargin);
+
+  return charsPerPage;
+}
+
+function parseBlocks(content: string): Block[] {
   const blocks: Block[] = [];
   const lines = content.split('\n');
-  
-  let currentBlock: { type: BlockType; lines: string[] } | null = null;
+
+  let current: { type: BlockType; lines: string[] } | null = null;
   let inCodeBlock = false;
-  
-  const pushCurrentBlock = () => {
-    if (currentBlock && currentBlock.lines.length > 0) {
-      const blockContent = currentBlock.lines.join('\n');
-      const scale = SCALE_FACTORS[currentBlock.type];
-      blocks.push({
-        type: currentBlock.type,
-        content: blockContent,
-        effectiveLength: Math.ceil(blockContent.length * scale),
-      });
+
+  const push = () => {
+    if (current && current.lines.length > 0) {
+      blocks.push({ type: current.type, content: current.lines.join('\n') });
     }
-    currentBlock = null;
+    current = null;
   };
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    
+
+  for (const line of lines) {
     if (line.trim().startsWith('```')) {
       if (inCodeBlock) {
-        if (currentBlock) {
-          currentBlock.lines.push(line);
-        }
-        pushCurrentBlock();
+        current?.lines.push(line);
+        push();
         inCodeBlock = false;
-        continue;
       } else {
-        pushCurrentBlock();
+        push();
         inCodeBlock = true;
-        currentBlock = { type: 'code', lines: [line] };
-        continue;
+        current = { type: 'code', lines: [line] };
       }
+      continue;
     }
-    
+
     if (inCodeBlock) {
-      if (currentBlock) {
-        currentBlock.lines.push(line);
-      }
+      current?.lines.push(line);
       continue;
     }
-    
+
     if (line.trim() === '') {
-      pushCurrentBlock();
+      push();
       continue;
     }
-    
-    const listMatch = line.match(/^(\s*)([-*+]|\d+\.)\s/);
-    const blockquoteMatch = line.match(/^>\s?/);
-    const headingMatch = line.match(/^#{1,6}\s/);
-    
-    if (listMatch) {
-      if (currentBlock?.type === 'list') {
-        currentBlock.lines.push(line);
+
+    if (line.match(/^(\s*)([-*+]|\d+\.)\s/)) {
+      if (current?.type === 'list') {
+        current.lines.push(line);
       } else {
-        pushCurrentBlock();
-        currentBlock = { type: 'list', lines: [line] };
+        push();
+        current = { type: 'list', lines: [line] };
       }
-    } else if (blockquoteMatch) {
-      if (currentBlock?.type === 'blockquote') {
-        currentBlock.lines.push(line);
+    } else if (line.match(/^>\s?/)) {
+      if (current?.type === 'blockquote') {
+        current.lines.push(line);
       } else {
-        pushCurrentBlock();
-        currentBlock = { type: 'blockquote', lines: [line] };
+        push();
+        current = { type: 'blockquote', lines: [line] };
       }
-    } else if (headingMatch) {
-      pushCurrentBlock();
-      currentBlock = { type: 'heading', lines: [line] };
-      pushCurrentBlock();
+    } else if (line.match(/^#{1,6}\s/)) {
+      push();
+      blocks.push({ type: 'heading', content: line });
     } else {
-      if (currentBlock?.type === 'list' && line.match(/^\s+/)) {
-        currentBlock.lines.push(line);
-      } else if (currentBlock?.type === 'paragraph') {
-        currentBlock.lines.push(line);
+      if (current?.type === 'list' && line.match(/^\s+/)) {
+        current.lines.push(line);
+      } else if (current?.type === 'blockquote') {
+        current.lines.push(line);
+      } else if (current?.type === 'paragraph') {
+        current.lines.push(line);
       } else {
-        pushCurrentBlock();
-        currentBlock = { type: 'paragraph', lines: [line] };
+        push();
+        current = { type: 'paragraph', lines: [line] };
       }
     }
   }
-  
-  pushCurrentBlock();
+
+  push();
   return blocks;
 }
 
-export function splitList(block: Block, remainingBudget: number): [string, string] {
+function findSplitPoint(text: string, maxLen: number): number {
+  if (text.length <= maxLen) return text.length;
+
+  const sentenceBreaks = ['. ', '? ', '! '];
+  for (const brk of sentenceBreaks) {
+    const idx = text.lastIndexOf(brk, maxLen);
+    if (idx > maxLen * 0.3) return idx + brk.length;
+  }
+
+  const clauseBreaks = [', ', '; ', ': '];
+  for (const brk of clauseBreaks) {
+    const idx = text.lastIndexOf(brk, maxLen);
+    if (idx > maxLen * 0.3) return idx + brk.length;
+  }
+
+  const spaceIdx = text.lastIndexOf(' ', maxLen);
+  if (spaceIdx > maxLen * 0.3) return spaceIdx + 1;
+
+  return maxLen;
+}
+
+function splitParagraph(block: Block, budget: number): [string, string] {
+  const splitAt = findSplitPoint(block.content, budget);
+  return [block.content.slice(0, splitAt).trim(), block.content.slice(splitAt).trim()];
+}
+
+function splitList(block: Block, budget: number): [string, string] {
   const lines = block.content.split('\n');
   const items: string[][] = [];
   let currentItem: string[] = [];
-  
+
   for (const line of lines) {
     if (line.match(/^(\s*)([-*+]|\d+\.)\s/) && currentItem.length > 0) {
       items.push(currentItem);
@@ -116,171 +162,177 @@ export function splitList(block: Block, remainingBudget: number): [string, strin
       currentItem.push(line);
     }
   }
-  if (currentItem.length > 0) {
-    items.push(currentItem);
-  }
-  
-  let usedLength = 0;
-  let splitIndex = 0;
-  
+  if (currentItem.length > 0) items.push(currentItem);
+
+  let used = 0;
+  let splitIdx = 0;
+
   for (let i = 0; i < items.length; i++) {
-    const itemContent = items[i].join('\n');
-    const itemEffectiveLength = Math.ceil(itemContent.length * SCALE_FACTORS.list);
-    
-    if (usedLength + itemEffectiveLength > remainingBudget && i > 0) {
-      break;
-    }
-    usedLength += itemEffectiveLength;
-    splitIndex = i + 1;
+    const itemLen = items[i].join('\n').length + DEFAULTS.blockOverhead;
+    if (used + itemLen > budget && i > 0) break;
+    used += itemLen;
+    splitIdx = i + 1;
   }
-  
-  if (splitIndex === 0) {
-    splitIndex = 1;
-  }
-  
-  const firstPart = items.slice(0, splitIndex).map(item => item.join('\n')).join('\n');
-  const secondPart = items.slice(splitIndex).map(item => item.join('\n')).join('\n');
-  
-  return [firstPart, secondPart];
+
+  if (splitIdx === 0) splitIdx = 1;
+
+  const first = items.slice(0, splitIdx).map(i => i.join('\n')).join('\n');
+  const second = items.slice(splitIdx).map(i => i.join('\n')).join('\n');
+  return [first, second];
 }
 
-export function splitCodeBlock(block: Block, remainingBudget: number): [string, string] {
+function splitCode(block: Block, budget: number): [string, string] {
   const lines = block.content.split('\n');
-  
   const isFenced = lines[0]?.trim().startsWith('```');
-  const fence = isFenced ? lines[0].match(/^(\s*```\w*)/)?.[1] || '```' : '';
-  
-  let usedLength = 0;
-  let splitIndex = 0;
-  
+  const fence = isFenced ? lines[0] : '```';
+
   const startIdx = isFenced ? 1 : 0;
   const endIdx = isFenced && lines[lines.length - 1]?.trim() === '```' ? lines.length - 1 : lines.length;
-  
+
+  let used = fence.length * 2;
+  let splitIdx = startIdx;
+
   for (let i = startIdx; i < endIdx; i++) {
-    const lineLength = Math.ceil(lines[i].length * SCALE_FACTORS.code);
-    if (usedLength + lineLength > remainingBudget && i > startIdx) {
-      break;
-    }
-    usedLength += lineLength;
-    splitIndex = i + 1;
+    if (used + lines[i].length > budget && i > startIdx) break;
+    used += lines[i].length;
+    splitIdx = i + 1;
   }
-  
-  if (splitIndex <= startIdx) {
-    splitIndex = startIdx + 1;
+
+  if (splitIdx <= startIdx) splitIdx = startIdx + 1;
+
+  const firstLines = isFenced
+    ? [fence, ...lines.slice(startIdx, splitIdx), '```']
+    : lines.slice(0, splitIdx);
+  const secondLines = splitIdx < endIdx
+    ? (isFenced ? [fence, ...lines.slice(splitIdx, endIdx), '```'] : lines.slice(splitIdx))
+    : [];
+
+  return [firstLines.join('\n'), secondLines.join('\n')];
+}
+
+function splitBlockquote(block: Block, budget: number): [string, string] {
+  const rawContent = block.content
+    .split('\n')
+    .map(l => l.replace(/^>\s?/, ''))
+    .join(' ')
+    .trim();
+
+  const splitAt = findSplitPoint(rawContent, budget);
+  const firstText = rawContent.slice(0, splitAt).trim();
+  const secondText = rawContent.slice(splitAt).trim();
+
+  const first = firstText ? '> ' + firstText : '';
+  const second = secondText ? '> ' + secondText : '';
+
+  return [first, second];
+}
+
+function splitBlock(block: Block, budget: number): [string, string] {
+  switch (block.type) {
+    case 'list':
+      return splitList(block, budget);
+    case 'code':
+      return splitCode(block, budget);
+    case 'blockquote':
+      return splitBlockquote(block, budget);
+    case 'paragraph':
+    default:
+      return splitParagraph(block, budget);
   }
-  
-  let firstPart: string;
-  let secondPart: string;
-  
-  if (isFenced) {
-    firstPart = [lines[0], ...lines.slice(1, splitIndex), '```'].join('\n');
-    secondPart = splitIndex < endIdx 
-      ? [fence, ...lines.slice(splitIndex, endIdx), '```'].join('\n')
-      : '';
-  } else {
-    firstPart = lines.slice(0, splitIndex).join('\n');
-    secondPart = lines.slice(splitIndex).join('\n');
-  }
-  
-  return [firstPart, secondPart];
 }
 
 export function chunkContent(content: string, charsPerPage: number): string[] {
-  const blocks = parseMarkdownBlocks(content);
+  const blocks = parseBlocks(content);
   const chunks: string[] = [];
-  
+
   let currentChunk = '';
-  let currentEffectiveLength = 0;
-  
+  let currentLen = 0;
+
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i];
-    
-    if (currentEffectiveLength + block.effectiveLength <= charsPerPage) {
+    const blockLen = block.content.length + DEFAULTS.blockOverhead;
+
+    if (currentLen + blockLen <= charsPerPage) {
       currentChunk += (currentChunk ? '\n\n' : '') + block.content;
-      currentEffectiveLength += block.effectiveLength;
+      currentLen += blockLen;
       continue;
     }
-    
-    const remainingBudget = charsPerPage - currentEffectiveLength;
-    
-    if (block.type === 'list' && block.effectiveLength > charsPerPage * 0.3) {
-      const [firstPart, secondPart] = splitList(block, remainingBudget);
-      
-      if (firstPart && remainingBudget > charsPerPage * 0.2) {
-        currentChunk += (currentChunk ? '\n\n' : '') + firstPart;
-        chunks.push(currentChunk.trim());
-        currentChunk = '';
-        currentEffectiveLength = 0;
-        
-        if (secondPart) {
-          const remainingBlock: Block = {
-            type: 'list',
-            content: secondPart,
-            effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.list),
-          };
-          blocks.splice(i + 1, 0, remainingBlock);
-        }
-      } else {
-        if (currentChunk.trim()) {
-          chunks.push(currentChunk.trim());
-        }
-        currentChunk = '';
-        currentEffectiveLength = 0;
-        i--;
-      }
-    } else if (block.type === 'code' && block.effectiveLength > charsPerPage) {
-      if (currentChunk.trim()) {
-        chunks.push(currentChunk.trim());
-        currentChunk = '';
-        currentEffectiveLength = 0;
-      }
-      
-      const [firstPart, secondPart] = splitCodeBlock(block, charsPerPage);
-      chunks.push(firstPart.trim());
-      
-      if (secondPart) {
-        const remainingBlock: Block = {
-          type: 'code',
-          content: secondPart,
-          effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.code),
-        };
-        blocks.splice(i + 1, 0, remainingBlock);
-      }
-    } else if (block.type === 'paragraph' && block.effectiveLength > charsPerPage) {
-      if (currentChunk.trim()) {
-        chunks.push(currentChunk.trim());
-        currentChunk = '';
-        currentEffectiveLength = 0;
-      }
-      
-      const sentences = block.content.match(/[^.!?]+[.!?]+/g) || [block.content];
-      for (const sentence of sentences) {
-        const sentenceLength = sentence.length;
-        if (currentEffectiveLength + sentenceLength > charsPerPage && currentChunk.trim()) {
-          chunks.push(currentChunk.trim());
-          currentChunk = sentence;
-          currentEffectiveLength = sentenceLength;
-        } else {
-          currentChunk += sentence;
-          currentEffectiveLength += sentenceLength;
-        }
-      }
-    } else {
-      if (currentChunk.trim()) {
+
+    if (block.type === 'heading') {
+      if (currentChunk) {
         chunks.push(currentChunk.trim());
       }
       currentChunk = block.content;
-      currentEffectiveLength = block.effectiveLength;
+      currentLen = blockLen;
+      continue;
+    }
+
+    const remainingBudget = charsPerPage - currentLen - DEFAULTS.blockOverhead;
+    
+    if (remainingBudget > 100 && block.type !== 'heading') {
+      const [first, second] = splitBlock(block, remainingBudget);
+      
+      if (first && first.trim()) {
+        currentChunk += (currentChunk ? '\n\n' : '') + first;
+        chunks.push(currentChunk.trim());
+        currentChunk = '';
+        currentLen = 0;
+        
+        if (second && second.trim()) {
+          let remaining = second;
+          let remainingType = block.type;
+          
+          while (remaining.length > 0) {
+            const remLen = remaining.length + DEFAULTS.blockOverhead;
+            if (remLen <= charsPerPage) {
+              currentChunk = remaining;
+              currentLen = remLen;
+              break;
+            }
+            const [part, rest] = splitBlock({ type: remainingType, content: remaining }, charsPerPage);
+            if (part) chunks.push(part.trim());
+            remaining = rest;
+            if (!remaining) break;
+          }
+        }
+        continue;
+      }
+    }
+    
+    if (currentChunk) {
+      chunks.push(currentChunk.trim());
+    }
+    
+    if (blockLen <= charsPerPage) {
+      currentChunk = block.content;
+      currentLen = blockLen;
+    } else {
+      currentChunk = '';
+      currentLen = 0;
+
+      let remaining = block.content;
+      let remainingType = block.type;
+
+      while (remaining.length > 0) {
+        const [first, second] = splitBlock({ type: remainingType, content: remaining }, charsPerPage);
+
+        if (first) {
+          chunks.push(first.trim());
+        }
+
+        remaining = second;
+        if (!remaining) break;
+      }
     }
   }
-  
+
   if (currentChunk.trim()) {
     chunks.push(currentChunk.trim());
   }
-  
+
   if (chunks.length === 0) {
     chunks.push(content);
   }
-  
+
   return chunks;
 }

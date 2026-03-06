@@ -5,16 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.6] - 2026-03-06
+## [1.5.0] - 2026-03-06
 
 ### Added
 
-- Configurable characters per page in reader mode via `reader.charsPerPage` in `config.yaml`. Users may not need to change this at all. But the idea is to keep it configurable in case there are some visual artifacts in the reader mode. This is responsible for splitting the pages for the reader mode.
+- Configurable pagination parameters via `reader.pagination` in `config.yaml` with `columnWidth`, `columnHeight`, `lineHeight`, `avgCharWidth`, and `safetyMargin` options.
+
+### Changed
+
+- **Breaking**: Rewrote pagination algorithm from line-based to character-based for more accurate page breaks.
+- CSS columns now allow content to break inside blocks (`break-inside: auto`) for natural text flow.
+- Theme scale overrides (`ui.theme.overrides.font.scale`) now affect pagination calculations.
 
 ### Fixed
 
-- Reader mode now correctly paginates lists, code blocks, and blockquotes instead of truncating them mid-element.
-- Body of Work page now appears on first deploy when using a custom slug; reliably.
+- Theme config path now correctly reads `ui.theme.preset` instead of top-level `theme`.
+- Reader mode no longer overflows or cuts off content at column boundaries.
+- Blockquotes and lists split mid-content when needed instead of jumping entirely to next column.
+- Body of Work page now appears on first deploy when using a custom slug.
 
 ## [1.4.5] - 2026-03-05
 

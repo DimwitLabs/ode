@@ -72,8 +72,8 @@
   }
 
   blockquote, pre, ul, ol, h1, h2, h3, h4, h5, h6 {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   p, blockquote, pre, ul, ol, h1, h2, h3, h4, h5, h6 {
@@ -84,13 +84,6 @@
   p {
     break-inside: auto;
     page-break-inside: auto;
-  }
-
-  &.allow-breaks {
-    blockquote, pre, ul, ol {
-      break-inside: auto;
-      page-break-inside: auto;
-    }
   }
 
   .piece-header {
