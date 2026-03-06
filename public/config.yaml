@@ -41,7 +41,13 @@ exclude:
   pieces:
     -
 reader:
-  charsPerPage: 2200
+  columns: 2
+  pagination:
+    columnWidth: 330
+    columnHeight: 540
+    lineHeight: 24
+    avgCharWidth: 8
+    safetyMargin: 0.85
   order:
     default: descending
     Metamorphosis: ascending

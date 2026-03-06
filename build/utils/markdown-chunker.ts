@@ -1,9 +1,13 @@
-export const SCALE_FACTORS = {
-  list: 1.4,
-  code: 1.3,
-  blockquote: 1.2,
-  heading: 1.0,
-  paragraph: 1.0,
+export type PaginationConfig = {
+  columns: 1 | 2;
+  linesPerPage?: number;
+  pagination?: {
+    columnWidth?: number;
+    columnHeight?: number;
+    lineHeight?: number;
+    avgCharWidth?: number;
+    safetyMargin?: number;
+  };
 };
 
 export type BlockType = 'list' | 'code' | 'blockquote' | 'heading' | 'paragraph';
@@ -11,32 +15,131 @@ export type BlockType = 'list' | 'code' | 'blockquote' | 'heading' | 'paragraph'
 export type Block = {
   type: BlockType;
   content: string;
-  effectiveLength: number;
+  estimatedLines: number;
 };
 
-export function parseMarkdownBlocks(content: string): Block[] {
+const DEFAULTS = {
+  columns: 2 as const,
+  columnWidth: 330,
+  columnHeight: 540,
+  lineHeight: 24,
+  avgCharWidth: 8,
+  safetyMargin: 0.85,
+};
+
+export function getLinesPerPage(config: PaginationConfig, themeScale: number = 1): number {
+  if (config.linesPerPage) {
+    return config.linesPerPage;
+  }
+
+  const p = config.pagination ?? {};
+  const columnWidth = p.columnWidth ?? DEFAULTS.columnWidth;
+  const columnHeight = p.columnHeight ?? DEFAULTS.columnHeight;
+  const lineHeight = p.lineHeight ?? DEFAULTS.lineHeight;
+  const safetyMargin = p.safetyMargin ?? DEFAULTS.safetyMargin;
+  const columns = config.columns ?? DEFAULTS.columns;
+
+  const adjustedLineHeight = lineHeight * themeScale;
+  const linesPerColumn = Math.floor(columnHeight / adjustedLineHeight);
+  const linesPerPage = Math.floor(linesPerColumn * columns * safetyMargin);
+
+  return linesPerPage;
+}
+
+export function getCharsPerLine(config: PaginationConfig, themeScale: number = 1): number {
+  const p = config.pagination ?? {};
+  const columnWidth = p.columnWidth ?? DEFAULTS.columnWidth;
+  const avgCharWidth = p.avgCharWidth ?? DEFAULTS.avgCharWidth;
+
+  const adjustedCharWidth = avgCharWidth * themeScale;
+  return Math.floor(columnWidth / adjustedCharWidth);
+}
+
+function estimateParagraphLines(content: string, charsPerLine: number): number {
+  return Math.ceil(content.length / charsPerLine);
+}
+
+function estimateHeadingLines(content: string, charsPerLine: number): number {
+  const headingCharsPerLine = Math.floor(charsPerLine * 0.7);
+  return Math.ceil(content.length / headingCharsPerLine) + 1;
+}
+
+function estimateListLines(content: string, charsPerLine: number): number {
+  const lines = content.split('\n');
+  let totalLines = 0;
+
+  for (const line of lines) {
+    const effectiveChars = charsPerLine - 4;
+    totalLines += Math.max(1, Math.ceil(line.length / effectiveChars));
+  }
+
+  return totalLines;
+}
+
+function estimateCodeLines(content: string, charsPerLine: number): number {
+  const lines = content.split('\n');
+  let totalLines = 0;
+  const codeCharsPerLine = Math.floor(charsPerLine * 0.85);
+
+  for (const line of lines) {
+    totalLines += Math.max(1, Math.ceil(line.length / codeCharsPerLine));
+  }
+
+  return totalLines;
+}
+
+function estimateBlockquoteLines(content: string, charsPerLine: number): number {
+  const quoteCharsPerLine = Math.floor(charsPerLine * 0.9);
+  const lines = content.split('\n');
+  let totalLines = 0;
+
+  for (const line of lines) {
+    totalLines += Math.max(1, Math.ceil(line.length / quoteCharsPerLine));
+  }
+
+  return totalLines + 1;
+}
+
+export function estimateBlockLines(block: Block, charsPerLine: number): number {
+  switch (block.type) {
+    case 'heading':
+      return estimateHeadingLines(block.content, charsPerLine);
+    case 'list':
+      return estimateListLines(block.content, charsPerLine);
+    case 'code':
+      return estimateCodeLines(block.content, charsPerLine);
+    case 'blockquote':
+      return estimateBlockquoteLines(block.content, charsPerLine);
+    case 'paragraph':
+    default:
+      return estimateParagraphLines(block.content, charsPerLine);
+  }
+}
+
+export function parseMarkdownBlocks(content: string, charsPerLine: number): Block[] {
   const blocks: Block[] = [];
   const lines = content.split('\n');
-  
+
   let currentBlock: { type: BlockType; lines: string[] } | null = null;
   let inCodeBlock = false;
-  
+
   const pushCurrentBlock = () => {
     if (currentBlock && currentBlock.lines.length > 0) {
       const blockContent = currentBlock.lines.join('\n');
-      const scale = SCALE_FACTORS[currentBlock.type];
-      blocks.push({
+      const block: Block = {
         type: currentBlock.type,
         content: blockContent,
-        effectiveLength: Math.ceil(blockContent.length * scale),
-      });
+        estimatedLines: 0,
+      };
+      block.estimatedLines = estimateBlockLines(block, charsPerLine);
+      blocks.push(block);
     }
     currentBlock = null;
   };
-  
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    
+
     if (line.trim().startsWith('```')) {
       if (inCodeBlock) {
         if (currentBlock) {
@@ -52,23 +155,23 @@ export function parseMarkdownBlocks(content: string): Block[] {
         continue;
       }
     }
-    
+
     if (inCodeBlock) {
       if (currentBlock) {
         currentBlock.lines.push(line);
       }
       continue;
     }
-    
+
     if (line.trim() === '') {
       pushCurrentBlock();
       continue;
     }
-    
+
     const listMatch = line.match(/^(\s*)([-*+]|\d+\.)\s/);
     const blockquoteMatch = line.match(/^>\s?/);
     const headingMatch = line.match(/^#{1,6}\s/);
-    
+
     if (listMatch) {
       if (currentBlock?.type === 'list') {
         currentBlock.lines.push(line);
@@ -98,16 +201,16 @@ export function parseMarkdownBlocks(content: string): Block[] {
       }
     }
   }
-  
+
   pushCurrentBlock();
   return blocks;
 }
 
-export function splitList(block: Block, remainingBudget: number): [string, string] {
+function splitListByLines(block: Block, remainingLines: number, charsPerLine: number): [string, string] {
   const lines = block.content.split('\n');
   const items: string[][] = [];
   let currentItem: string[] = [];
-  
+
   for (const line of lines) {
     if (line.match(/^(\s*)([-*+]|\d+\.)\s/) && currentItem.length > 0) {
       items.push(currentItem);
@@ -119,144 +222,151 @@ export function splitList(block: Block, remainingBudget: number): [string, strin
   if (currentItem.length > 0) {
     items.push(currentItem);
   }
-  
-  const safetyBuffer = 0.8;
-  const safeBudget = remainingBudget * safetyBuffer;
-  
-  let usedLength = 0;
+
+  let usedLines = 0;
   let splitIndex = 0;
-  
+  const effectiveChars = charsPerLine - 4;
+
   for (let i = 0; i < items.length; i++) {
-    const itemContent = items[i].join('\n');
-    const itemEffectiveLength = Math.ceil(itemContent.length * SCALE_FACTORS.list);
-    
-    if (usedLength + itemEffectiveLength > safeBudget) {
+    let itemLines = 0;
+    for (const line of items[i]) {
+      itemLines += Math.max(1, Math.ceil(line.length / effectiveChars));
+    }
+
+    if (usedLines + itemLines > remainingLines && i > 0) {
       break;
     }
-    usedLength += itemEffectiveLength;
+    usedLines += itemLines;
     splitIndex = i + 1;
   }
-  
+
   const firstPart = items.slice(0, splitIndex).map(item => item.join('\n')).join('\n');
   const secondPart = items.slice(splitIndex).map(item => item.join('\n')).join('\n');
-  
+
   return [firstPart, secondPart];
 }
 
-export function splitCodeBlock(block: Block, remainingBudget: number): [string, string] {
+function splitCodeByLines(block: Block, remainingLines: number, charsPerLine: number): [string, string] {
   const lines = block.content.split('\n');
-  
   const isFenced = lines[0]?.trim().startsWith('```');
   const fence = isFenced ? lines[0].match(/^(\s*```\w*)/)?.[1] || '```' : '';
-  
-  let usedLength = 0;
+
+  const codeCharsPerLine = Math.floor(charsPerLine * 0.85);
+  let usedLines = 0;
   let splitIndex = 0;
-  
+
   const startIdx = isFenced ? 1 : 0;
   const endIdx = isFenced && lines[lines.length - 1]?.trim() === '```' ? lines.length - 1 : lines.length;
-  
+
   for (let i = startIdx; i < endIdx; i++) {
-    const lineLength = Math.ceil(lines[i].length * SCALE_FACTORS.code);
-    if (usedLength + lineLength > remainingBudget && i > startIdx) {
+    const lineCount = Math.max(1, Math.ceil(lines[i].length / codeCharsPerLine));
+    if (usedLines + lineCount > remainingLines && i > startIdx) {
       break;
     }
-    usedLength += lineLength;
+    usedLines += lineCount;
     splitIndex = i + 1;
   }
-  
+
   if (splitIndex <= startIdx) {
     splitIndex = startIdx + 1;
   }
-  
+
   let firstPart: string;
   let secondPart: string;
-  
+
   if (isFenced) {
     firstPart = [lines[0], ...lines.slice(1, splitIndex), '```'].join('\n');
-    secondPart = splitIndex < endIdx 
+    secondPart = splitIndex < endIdx
       ? [fence, ...lines.slice(splitIndex, endIdx), '```'].join('\n')
       : '';
   } else {
     firstPart = lines.slice(0, splitIndex).join('\n');
     secondPart = lines.slice(splitIndex).join('\n');
   }
-  
+
   return [firstPart, secondPart];
 }
 
-export function chunkContent(content: string, charsPerPage: number): string[] {
-  const blocks = parseMarkdownBlocks(content);
+export function chunkContent(
+  content: string,
+  linesPerPage: number,
+  charsPerLine: number
+): string[] {
+  const blocks = parseMarkdownBlocks(content, charsPerLine);
   const chunks: string[] = [];
-  
+
   let currentChunk = '';
-  let currentEffectiveLength = 0;
-  
+  let currentLines = 0;
+
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i];
-    
-    if (currentEffectiveLength + block.effectiveLength <= charsPerPage) {
+
+    if (currentLines + block.estimatedLines <= linesPerPage) {
       currentChunk += (currentChunk ? '\n\n' : '') + block.content;
-      currentEffectiveLength += block.effectiveLength;
+      currentLines += block.estimatedLines;
       continue;
     }
-    
-    if (block.type === 'list' || block.type === 'blockquote' || block.type === 'code') {
+
+    if (block.type === 'list' || block.type === 'code') {
       if (currentChunk.trim()) {
         chunks.push(currentChunk.trim());
       }
-      
-      if (block.effectiveLength <= charsPerPage) {
+
+      if (block.estimatedLines <= linesPerPage) {
         currentChunk = block.content;
-        currentEffectiveLength = block.effectiveLength;
+        currentLines = block.estimatedLines;
       } else {
+        const remainingLines = linesPerPage;
+
         if (block.type === 'list') {
-          const [firstPart, secondPart] = splitList(block, charsPerPage);
-          chunks.push(firstPart.trim());
-          if (secondPart) {
+          const [firstPart, secondPart] = splitListByLines(block, remainingLines, charsPerLine);
+          if (firstPart.trim()) {
+            chunks.push(firstPart.trim());
+          }
+          if (secondPart.trim()) {
             const remainingBlock: Block = {
               type: 'list',
               content: secondPart,
-              effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.list),
+              estimatedLines: estimateBlockLines({ type: 'list', content: secondPart, estimatedLines: 0 }, charsPerLine),
             };
             blocks.splice(i + 1, 0, remainingBlock);
           }
           currentChunk = '';
-          currentEffectiveLength = 0;
+          currentLines = 0;
         } else if (block.type === 'code') {
-          const [firstPart, secondPart] = splitCodeBlock(block, charsPerPage);
-          chunks.push(firstPart.trim());
-          if (secondPart) {
+          const [firstPart, secondPart] = splitCodeByLines(block, remainingLines, charsPerLine);
+          if (firstPart.trim()) {
+            chunks.push(firstPart.trim());
+          }
+          if (secondPart.trim()) {
             const remainingBlock: Block = {
               type: 'code',
               content: secondPart,
-              effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.code),
+              estimatedLines: estimateBlockLines({ type: 'code', content: secondPart, estimatedLines: 0 }, charsPerLine),
             };
             blocks.splice(i + 1, 0, remainingBlock);
           }
           currentChunk = '';
-          currentEffectiveLength = 0;
-        } else {
-          currentChunk = block.content;
-          currentEffectiveLength = block.effectiveLength;
+          currentLines = 0;
         }
       }
-    } else if (block.type === 'paragraph' && block.effectiveLength > charsPerPage) {
+    } else if (block.type === 'paragraph' && block.estimatedLines > linesPerPage) {
       if (currentChunk.trim()) {
         chunks.push(currentChunk.trim());
         currentChunk = '';
-        currentEffectiveLength = 0;
+        currentLines = 0;
       }
-      
+
       const sentences = block.content.match(/[^.!?]+[.!?]+/g) || [block.content];
       for (const sentence of sentences) {
-        const sentenceLength = sentence.length;
-        if (currentEffectiveLength + sentenceLength > charsPerPage && currentChunk.trim()) {
+        const sentenceLines = Math.ceil(sentence.length / charsPerLine);
+        if (currentLines + sentenceLines > linesPerPage && currentChunk.trim()) {
           chunks.push(currentChunk.trim());
           currentChunk = sentence;
-          currentEffectiveLength = sentenceLength;
+          currentLines = sentenceLines;
         } else {
           currentChunk += sentence;
-          currentEffectiveLength += sentenceLength;
+          currentLines += sentenceLines;
         }
       }
     } else {
@@ -264,17 +374,17 @@ export function chunkContent(content: string, charsPerPage: number): string[] {
         chunks.push(currentChunk.trim());
       }
       currentChunk = block.content;
-      currentEffectiveLength = block.effectiveLength;
+      currentLines = block.estimatedLines;
     }
   }
-  
+
   if (currentChunk.trim()) {
     chunks.push(currentChunk.trim());
   }
-  
+
   if (chunks.length === 0) {
     chunks.push(content);
   }
-  
+
   return chunks;
 }

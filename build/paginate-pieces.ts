@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import fm from "front-matter";
 import yaml from 'js-yaml';
-import { chunkContent } from './utils/markdown-chunker';
+import { chunkContent, getLinesPerPage, getCharsPerLine, PaginationConfig } from './utils/markdown-chunker';
+import { loadTheme } from './utils/theme-loader';
 
 const publicDir = path.join(__dirname, '..', 'public');
 const piecesPath = path.join(publicDir, 'content', 'pieces');
@@ -12,7 +13,23 @@ const configPath = path.join(publicDir, 'config.yaml');
 
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
-const CHARS_PER_PAGE = config?.reader?.charsPerPage ?? 2200;
+
+// Load theme scale
+const themeName = config?.theme || 'journal';
+const theme = loadTheme(themeName);
+const themeScale = theme?.font?.scale ?? 1;
+
+// Build pagination config
+const paginationConfig: PaginationConfig = {
+  columns: config?.reader?.columns ?? 2,
+  linesPerPage: config?.reader?.linesPerPage,
+  pagination: config?.reader?.pagination,
+};
+
+const LINES_PER_PAGE = getLinesPerPage(paginationConfig, themeScale);
+const CHARS_PER_LINE = getCharsPerLine(paginationConfig, themeScale);
+
+console.log(`[pagination]: theme=${themeName}, scale=${themeScale}, linesPerPage=${LINES_PER_PAGE}, charsPerLine=${CHARS_PER_LINE}`);
 
 type PiecePage = {
   pieceSlug: string;
@@ -46,7 +63,7 @@ piecesIndex.forEach((piece: any) => {
   const parsed = fm(raw);
   const content = parsed.body;
   
-  const chunks = chunkContent(content, CHARS_PER_PAGE);
+  const chunks = chunkContent(content, LINES_PER_PAGE, CHARS_PER_LINE);
   const totalPages = chunks.length;
   
   const pages: PiecePage[] = chunks.map((chunk, index) => ({
