@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.6] - 2026-03-06
+
+### Added
+
+- Configurable characters per page in reader mode via `reader.charsPerPage` in `config.yaml`. Users may not need to change this at all. But the idea is to keep it configurable in case there are some visual artifacts in the reader mode. This is responsible for splitting the pages for the reader mode.
+
+### Fixed
+
+- Reader mode now correctly paginates lists, code blocks, and blockquotes instead of truncating them mid-element.
+- Body of Work page now appears on first deploy when using a custom slug; reliably.
+
 ## [1.4.5] - 2026-03-05
 
 ### Fixed
