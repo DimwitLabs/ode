@@ -120,6 +120,9 @@ export function splitList(block: Block, remainingBudget: number): [string, strin
     items.push(currentItem);
   }
   
+  const safetyBuffer = 0.8;
+  const safeBudget = remainingBudget * safetyBuffer;
+  
   let usedLength = 0;
   let splitIndex = 0;
   
@@ -127,15 +130,11 @@ export function splitList(block: Block, remainingBudget: number): [string, strin
     const itemContent = items[i].join('\n');
     const itemEffectiveLength = Math.ceil(itemContent.length * SCALE_FACTORS.list);
     
-    if (usedLength + itemEffectiveLength > remainingBudget && i > 0) {
+    if (usedLength + itemEffectiveLength > safeBudget) {
       break;
     }
     usedLength += itemEffectiveLength;
     splitIndex = i + 1;
-  }
-  
-  if (splitIndex === 0) {
-    splitIndex = 1;
   }
   
   const firstPart = items.slice(0, splitIndex).map(item => item.join('\n')).join('\n');
@@ -201,50 +200,45 @@ export function chunkContent(content: string, charsPerPage: number): string[] {
       continue;
     }
     
-    const remainingBudget = charsPerPage - currentEffectiveLength;
-    
-    if (block.type === 'list' && block.effectiveLength > charsPerPage * 0.3) {
-      const [firstPart, secondPart] = splitList(block, remainingBudget);
-      
-      if (firstPart && remainingBudget > charsPerPage * 0.2) {
-        currentChunk += (currentChunk ? '\n\n' : '') + firstPart;
-        chunks.push(currentChunk.trim());
-        currentChunk = '';
-        currentEffectiveLength = 0;
-        
-        if (secondPart) {
-          const remainingBlock: Block = {
-            type: 'list',
-            content: secondPart,
-            effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.list),
-          };
-          blocks.splice(i + 1, 0, remainingBlock);
-        }
-      } else {
-        if (currentChunk.trim()) {
-          chunks.push(currentChunk.trim());
-        }
-        currentChunk = '';
-        currentEffectiveLength = 0;
-        i--;
-      }
-    } else if (block.type === 'code' && block.effectiveLength > charsPerPage) {
+    if (block.type === 'list' || block.type === 'blockquote' || block.type === 'code') {
       if (currentChunk.trim()) {
         chunks.push(currentChunk.trim());
-        currentChunk = '';
-        currentEffectiveLength = 0;
       }
       
-      const [firstPart, secondPart] = splitCodeBlock(block, charsPerPage);
-      chunks.push(firstPart.trim());
-      
-      if (secondPart) {
-        const remainingBlock: Block = {
-          type: 'code',
-          content: secondPart,
-          effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.code),
-        };
-        blocks.splice(i + 1, 0, remainingBlock);
+      if (block.effectiveLength <= charsPerPage) {
+        currentChunk = block.content;
+        currentEffectiveLength = block.effectiveLength;
+      } else {
+        if (block.type === 'list') {
+          const [firstPart, secondPart] = splitList(block, charsPerPage);
+          chunks.push(firstPart.trim());
+          if (secondPart) {
+            const remainingBlock: Block = {
+              type: 'list',
+              content: secondPart,
+              effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.list),
+            };
+            blocks.splice(i + 1, 0, remainingBlock);
+          }
+          currentChunk = '';
+          currentEffectiveLength = 0;
+        } else if (block.type === 'code') {
+          const [firstPart, secondPart] = splitCodeBlock(block, charsPerPage);
+          chunks.push(firstPart.trim());
+          if (secondPart) {
+            const remainingBlock: Block = {
+              type: 'code',
+              content: secondPart,
+              effectiveLength: Math.ceil(secondPart.length * SCALE_FACTORS.code),
+            };
+            blocks.splice(i + 1, 0, remainingBlock);
+          }
+          currentChunk = '';
+          currentEffectiveLength = 0;
+        } else {
+          currentChunk = block.content;
+          currentEffectiveLength = block.effectiveLength;
+        }
       }
     } else if (block.type === 'paragraph' && block.effectiveLength > charsPerPage) {
       if (currentChunk.trim()) {
