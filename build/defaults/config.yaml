@@ -34,6 +34,7 @@ exclude:
   pieces:
     -
 reader:
+  charsPerPage: 2200
   order:
     default: descending
 rss:
