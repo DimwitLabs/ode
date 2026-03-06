@@ -15,6 +15,8 @@ const config = yaml.load(fs.readFileSync(configPath, 'utf-8')) as {
   };
 };
 
+const bodyOfWorkSlug = config?.bodyOfWork?.slug || 'body-of-work';
+
 type Piece = {
   slug: string;
   title: string;
@@ -73,7 +75,6 @@ const sortedKeys = Object.keys(grouped).sort((a, b) => {
 });
 
 const bodyOfWorkTitle = config?.bodyOfWork?.title || 'Body of Work';
-const bodyOfWorkSlug = config?.bodyOfWork?.slug || 'body-of-work';
 const bodyOfWorkFilePath = path.join(publicDir, 'content', 'pages', `${bodyOfWorkSlug}.md`);
 
 let markdown = '---\n';
