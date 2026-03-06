@@ -4,7 +4,7 @@
 
 > An ode to those who love the craft, an ode to the old internet, an ode to a time before numbers and figures dominated writing, an ode to a time where readers remembered their favourite writers, and an ode to the hope that all of it is still present, somewhere.
 
-Ode is for writers who want to publish in an aesthetically pleasing website, who ignore the bells and whistles of the modern internet, and who want to create a better experience for their readers. It is opinionated, minimal, and easy to use, guided by its own [ethos](https://github.com/DeepanshKhurana/ode/blob/main/ETHOS.md).
+Ode is for writers who want to publish in an aesthetically pleasing website, who ignore the bells and whistles of the modern internet, and who want to create a better experience for their readers. It is opinionated, minimal, and easy to use, guided by its own [ethos](https://github.com/DeepanshKhurana/ode/blob/main/docs/ETHOS.md).
 
 ## Inspiration
 
@@ -22,16 +22,17 @@ You can find a live demo of the app [here](https://demo.ode.dimwit.me/).
 ## Documentation
 
 - **[README.md](https://github.com/DeepanshKhurana/ode/blob/main/README.md)**: Overview, features, and getting started
-- **[ETHOS.md](https://github.com/DeepanshKhurana/ode/blob/main/ETHOS.md)**: Core principles and philosophy behind Ode
-- **[WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)**: Content repository, auto-deployment, and GitHub Actions
-- **[THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)**: Theme presets, customization, local fonts, and visual examples
+- **[CONFIGURATION.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/CONFIGURATION.md)**: Full config.yaml reference
+- **[ETHOS.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/ETHOS.md)**: Core principles and philosophy behind Ode
+- **[WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/WRITING.md)**: Content repository, auto-deployment, and GitHub Actions
+- **[THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/THEMING.md)**: Theme presets, customization, local fonts, and visual examples
 - **[CHANGELOG.md](https://github.com/DeepanshKhurana/ode/blob/main/CHANGELOG.md)**: Version history and release notes
-- **[REFERENCES.md](https://github.com/DeepanshKhurana/ode/blob/main/REFERENCES.md)**: Credits and inspirations
+- **[REFERENCES.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/REFERENCES.md)**: Credits and inspirations
 
 ## Screenshots
 
 > [!NOTE]
-> For theme-specific screenshots, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
+> For theme-specific screenshots, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/THEMING.md)
 
 ### Homepage
 ![Homepage - Light Mode](.github/media/homepage_light.png)
@@ -70,7 +71,7 @@ https://github.com/user-attachments/assets/222af674-11f0-4b5a-8232-a31aca8a61b1
 ## Getting Started
 
 > [!TIP]
-> For detailed notes on how to setup a **content repository** with sync, look into the [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)
+> For detailed notes on how to setup a **content repository** with sync, look into the [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/WRITING.md)
 
 ### Docker Compose (Recommended)
 
@@ -141,7 +142,7 @@ If you are coming from WordPress, you can use the awesome [lonekorean/wordpress-
 ## Writing Content
 
 > [!TIP]
-> A longer guide is in [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/WRITING.md)
+> A longer guide is in [WRITING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/WRITING.md)
 
 ### Pieces
 
@@ -177,7 +178,7 @@ Tell everyone everything!
 ## Theming
 
 > [!NOTE]
-> For complete theming documentation, including all available presets, customization options, and local font support, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/THEMING.md)
+> For complete theming documentation, including all available presets, customization options, and local font support, see [THEMING.md](https://github.com/DeepanshKhurana/ode/blob/main/docs/THEMING.md)
 
 Ode comes with 10 built-in themes that you can use and customize. Switch between presets, override colors and fonts, or build your own theme from scratch.
 
