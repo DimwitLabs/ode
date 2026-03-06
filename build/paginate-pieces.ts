@@ -14,9 +14,10 @@ const configPath = path.join(publicDir, 'config.yaml');
 const configRaw = fs.readFileSync(configPath, 'utf-8');
 const config = yaml.load(configRaw) as any;
 
-const themeName = config?.theme || 'journal';
+const themeName = config?.ui?.theme?.preset || config?.theme || 'journal';
 const theme = loadTheme(themeName);
-const themeScale = theme?.font?.scale ?? 1;
+const themeScaleOverride = config?.ui?.theme?.overrides?.font?.scale;
+const themeScale = themeScaleOverride ?? theme?.font?.scale ?? 1;
 
 const paginationConfig: PaginationConfig = {
   columns: config?.reader?.columns ?? 2,
